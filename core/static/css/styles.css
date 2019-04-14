@@ -1,0 +1,40 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  background-color: white;
+  z-index: 3;
+}
+
+.logo {
+    height: 100%;
+    width: 5%;
+}
+
+.logo-font {
+    font-size: 30px
+}
+
+.header-font {
+    font-family: 'Libre Baskerville', serif;
+    cursor: pointer;
+}
+
+.image-holder {
+    display:inline-block;
+    position: relative;
+}
+.image-holder:after {
+    content:'';
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 90.7%;
+    display: block;
+    position: absolute;
+    background: black;
+    opacity: 0.7;
+}

@@ -1,0 +1,12 @@
+{
+    "private": true,
+    "devDependencies": {
+        "browserify": "^16.2.3",
+        "watchify": "^3.11.1"
+    },
+    "scripts": {
+        "watch": "watchify core/static/js/main.js --debug -v -o core/static/build/bundle.js",
+        "build-dev": "browserify core/static/js/main.js --debug -o core/static/build/bundle.js",
+        "build": "browserify core/static/js/main.js -o core/static/build/bundle.js"
+    }
+}

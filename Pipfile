@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+prospector = "*"
+
+[packages]
+django = "*"
+django-debug-toolbar = "*"
+psycopg2 = "*"
+gunicorn = "*"
+pillow = "*"
+django-heroku = "*"
+
+[requires]
+python_version = "3.7"
