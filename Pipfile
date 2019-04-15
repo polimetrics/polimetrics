@@ -13,6 +13,8 @@ psycopg2 = "*"
 gunicorn = "*"
 pillow = "*"
 django-heroku = "*"
+pyopenssl = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
