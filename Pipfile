@@ -13,6 +13,7 @@ psycopg2 = "*"
 gunicorn = "*"
 pillow = "*"
 django-heroku = "*"
+tweepy = "*"
 pyopenssl = "*"
 psycopg2-binary = "*"
 
