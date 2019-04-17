@@ -2,8 +2,96 @@
 {% load staticfiles %}
 
 {% block content %}
-<img src="static/img/about-image.jpeg"/>
+<div class="flex flex-wrap">
+    <div id="about-image">
+        <img src="{% static '/img/about-image.jpeg' %}" alt="An image of a building in a city flying a U.S. flag."/>
+    </div>
+    <div id="box">
+        <div id="about" class="flex justify-end pa4 pt4 mr2">
+            <h1>About.</h1>
+        </div>
+    </div>
+</div>
+<div>
+    <p class="body-content body-structure">
+    Technology changed the way we live our lives, so why haven't our political polls changed? 🤔 
+    <br>
+    <br>
+    In a world of daily robocalls, constant stimulus, and infrequent trips to the mailbox, traditional avenues of collecting opinion poll data has yielded a declining response rate for the past decade. The result of the 2016 presidential election only raises further questions about the accuracy of opinion polling given that the majority predicted Hillary Clinton would win the election. Despite a growing body of hard questions, pollsters have not made a concerted effort to adjust their means of collecting and evaluating poll data.
+    <br>
+    <br>
+    Growing reports from academic circles argue that analysis of social media data is a strong, and in many cases more accurate, predictor of real world outcomes such as the stock market, Brexit, and the 2016 presidential election. 
+    <br>
+    <br>
+    Polmetrics aims to bring these academic insights to the general public by creating an opinion poll that uses the mood sentiment of Tweets.  
+    </p>
+    <h2 class="tc body-headers pa3">Caveats</h2>
+    <div>
+        <p class="body-content body-structure">
+        Like all opinion polls, our data isn't perfect. The reality is that not all voters use Twitter. More specifically, the age groups that make up the United States population are not portionate to the age groups that use Twitter. Our solution is to weight the results of our sentiment analysis. In an effort to provide the most insight to our users, we have made weighted and unweighted analysis available on the application. 
 
-<h1>About.</h1>
+        </p>
+    </div>
+</div>
+<div class="tc">
+    <h3 class="body-headers pa3">Team</h2>
+</div>
+<div class="flex">
+    <div class="headshot-box">
+        <div class="tc black">
+            <div class="body-headers mt7">Bailey Costin</div>
+            <p class="sub-header i">Political science nerd, outdoors enthusiast, software developer</p>
+            <p class="body-content pr5 pl5">Lorem ipsum dolor sit amet, his ei modo unum liber. Cu modo invidunt eos, per alienum laboramus cu, an per probo omnes saepe. Te quas admodum patrioque qui, nibh autem per at, te vero sonet utinam qui. Et est timeam impedit fuisset. Falli tritani accommodare sed id, velit impedit vel ex. Cu vim indoctum corrumpit constituto, euismod recteque consequat eum et. Dicunt principes urbanitas sed ut, an impedit suscipit vis, ad pri adhuc veniam.</p>
+            <p class="body-content i">Only album I'd take to a deserted island:</p>
+            <p class="bio-answer">good kid, m.A.A.d city - Kendrick Lamar</p>
+            <p class="body-content i">Prefers coffee:</p>
+            <p class="bio-answer">black</p>
+            <p class="body-content i">Favorite president:</p>
+            <p class="bio-answer">Theodore Roosevelt </p>
+            <a href="https://github.com/bdcostin"><img class="github" src="{% static '/img/GitHub.png' %}" alt="An image of the GitHub logo."/></a>
+            <a href="https://www.linkedin.com/in/bailey-costin-7745b8179/"><img class="linked-in" src="{% static '/img/linked-in.png' %}" alt="An image of the Linked-In logo."/></a>
+        </div>
+    </div>
+    <div class="headshot">
+        <a href="https://www.linkedin.com/in/bailey-costin-7745b8179/"><img src="{% static '/img/bailey-costin.jpg' %}" alt="An image of Bailey Costin."/></a>
+    </div>
+</div>
+<div class="flex">
+    <div class="headshot">
+        <a href="https://www.linkedin.com/in/david-kirk-525813181/"><img src="{% static '/img/david-kirk.jpg' %}" alt="An image of David Kirk."/></a>
+    </div>
+    <div class="headshot-box tc black">
+        <div class="body-headers mt7">David Kirk</div>
+        <p class="sub-header i">, , software developer</p>
+        <p class="bio-answer pr5 pl5">Lorem ipsum dolor sit amet, his ei modo unum liber. Cu modo invidunt eos, per alienum laboramus cu, an per probo omnes saepe. Te quas admodum patrioque qui, nibh autem per at, te vero sonet utinam qui. Et est timeam impedit fuisset. Falli tritani accommodare sed id, velit impedit vel ex. Cu vim indoctum corrumpit constituto, euismod recteque consequat eum et. Dicunt principes urbanitas sed ut, an impedit suscipit vis, ad pri adhuc veniam.</p>
+            <p class="body-content i">Only album I'd take to a deserted island:</p>
+            <p class="bio-answer"></p>
+            <p class="body-content i">Prefers coffee:</p>
+            <p class="bio-answer"></p>
+            <p class="body-content i">Favorite president:</p>
+            <p class="bio-answer"></p>
+            <a href="https://github.com/davidiskirk"><img class="github" src="{% static '/img/GitHub.png' %}" alt="An image of the GitHub logo."/></a>
+            <a href="https://www.linkedin.com/in/david-kirk-525813181/"><img class="linked-in" src="{% static '/img/linked-in.png' %}" alt="An image of the Linked-In logo."/></a>
+    </div>
+</div>
+<div class="flex">
+    <div class="headshot-box tc black">
+        <div class="body-headers mt7">Daniel Peterson</div>
+        <p class="sub-header i">, , software developer</p>
+        <p class="bio-answer pr5 pl5">Lorem ipsum dolor sit amet, his ei modo unum liber. Cu modo invidunt eos, per alienum laboramus cu, an per probo omnes saepe. Te quas admodum patrioque qui, nibh autem per at, te vero sonet utinam qui. Et est timeam impedit fuisset. Falli tritani accommodare sed id, velit impedit vel ex. Cu vim indoctum corrumpit constituto, euismod recteque consequat eum et. Dicunt principes urbanitas sed ut, an impedit suscipit vis, ad pri adhuc veniam.</p>
+            <p class="body-content i">Only album I'd take to a deserted island:</p>
+            <p class="body-content i">Only album I'd take to a deserted island:</p>
+            <p class="bio-answer"></p>
+            <p class="body-content i">Prefers coffee:</p>
+            <p class="bio-answer"></p>
+            <p class="body-content i">Favorite president:</p>
+            <p class="bio-answer"></p>
+            <a href="https://github.com/dmpeterson317"><img class="github" src="{% static '/img/GitHub.png' %}" alt="An image of the GitHub logo."/></a>
+            <a href="https://www.linkedin.com/in/daniel-peterson-a66330181/"><img class="linked-in" src="{% static '/img/linked-in.png' %}" alt="An image of the Linked-In logo."/></a>
+    </div>
+    <div class="headshot">
+        <a href="https://www.linkedin.com/in/daniel-peterson-a66330181/"><img src="{% static '/img/daniel-peterson.jpeg' %}" alt="An image of Daniel Peterson."/></a>
+    </div>
+</div>
 
 {% endblock %}

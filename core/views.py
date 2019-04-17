@@ -1,9 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from core.models import Candidate
 
 # Create your views here.
 
 def index(request):
     return render(request, "index.html")
+
+
+# def candidate(request, slug):
+#     candidate = get_object_or_404(Candidate, slug=slug)
+#     return render(request, "candidate.html")
+
 
 
 def candidates(request):
@@ -19,6 +26,3 @@ def tags(request):
 
 def about(request):
     return render(request, "about.html")
-
-
-

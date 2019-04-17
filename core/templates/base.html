@@ -13,10 +13,14 @@
 </head>
 <header>
     <nav class="nav">
-        <ul class="flex list">
-            <img class="logo" src="{% static '/img/logo.png' %}" alt="An artist rendering of a vertical U.S. flag; the first four lines have variating line length that reflects a bar graph."/>
-            <div class="logo-font mt2 header-font pa2 hover-white dib">polimetrics</div>
-            <div class="w-100 flex justify-end pa4">
+        <ul class="flex">
+           <a href="{% url 'index' %}">
+                <img class="logo" src="{% static '/img/logo.png' %}" alt="An artist rendering of a vertical U.S. flag; the first four lines have variating line length that reflects a bar graph."/>
+            </a>
+            <a class="link" href="{% url 'index' %}">
+                <div class="logo-font black mt2 ml2 header-font hover-white dib">polimetrics</div>
+            </a>
+            <div class="w-100 flex list justify-end pa3">
                 <li class="header-font ml1 link hover-red dib">compare</li>
                 <li class="header-font ml1">-</li>
                 <li class="header-font ml1 hover-dark-blue dib">trends</li>
@@ -25,7 +29,7 @@
                 <li class="header-font ml1">-</li>
                 <li class="header-font ml1 hover-dark-blue dib">#tags</li>
                 <li class="header-font ml1">-</li>
-                <li class="header-font ml1 mr4 hover-red dib">about</li>
+                <li><a class="header-font black link ml1 mr4 hover-red dib" href="{% url 'about' %}">about</a></li>
             </div>
         </ul>
     </nav>
