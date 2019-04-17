@@ -16,6 +16,8 @@ django-heroku = "*"
 tweepy = "*"
 pyopenssl = "*"
 psycopg2-binary = "*"
+textblob = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.7"
