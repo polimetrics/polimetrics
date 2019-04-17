@@ -5,7 +5,7 @@
   width: 100%;
   height: 15%;
   background-color: white;
-  z-index: 3;
+  z-index: 2;
 }
 
 .logo {
@@ -25,16 +25,133 @@
 .image-holder {
     display:inline-block;
     position: relative;
+    
 }
 .image-holder:after {
     content:'';
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 1;
     width: 100%;
     height: 90.7%;
-    display: block;
+    display: inline-block;
     position: absolute;
     background: black;
     opacity: 0.7;
 }
+ /* code below is on the candidates.html */
+.pict {
+    border: all;
+    border-style: solid;
+    border-radius: 100%;
+    border-color: cornflowerblue;
+    width: 15%;
+    height: 15%;
+    border-width: .5rem;
+    margin-right: 2%; 
+    
+    z-index: 2;
+    align-self: stretch;
+    float: left;
+   
+     
+}
+.pict2 {
+    border: all;
+    border-style: solid;
+    border-radius: 100%;
+    border-color: cornflowerblue;
+    width: 15%;
+    height: 15%;
+    border-width: .5rem;
+    margin-right: 2%;
+    margin-left: 2%;  
+    z-index: 2;
+    align-self: stretch;
+    float: right;
+   
+     
+}
+
+.pict:hover {
+    /* border-color: red; */
+    transform: scale(1.2);
+    transition: all 300ms;
+    
+}
+.pict2:hover {
+    /* border-color: red; */
+    transform: scale(1.2);
+    transition: all 300ms;
+    
+}
+
+.pictcontainer {
+   border-style: solid;
+   border-color:white;
+    width: 90%;
+   /* max-height: 5%; */
+   /* height:30%; */
+   margin-left: 6rem;
+   margin-bottom: 2rem;
+   border-radius: 1rem;
+   z-index: 1;
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+   padding: 1%;
+   
+
+   
+ 
+   
+}
+
+.pictcontainer2 {
+    border-style: solid;
+    border-color:white;
+     width: 90%;
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1%;
+    text-align: right;
+    
+ 
+    
+  
+    
+ }
+
+.textbox {
+    color: black;
+    z-index: -1;
+    height: 6rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: left;
+    
+
+
+    
+}
+
+.textbox2 {
+    color: black;
+    z-index: -1;
+    height: 6rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: right;
+
+    
+}
+
+
+
+
+
