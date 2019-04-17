@@ -46,7 +46,7 @@ class SentimentAnalysis:
                 b = tweet.id_str
                 c = tweet.created_at
                 d = TextBlob(tweet.text).sentiment
-                e = tweet.geo
+                e = tweet.user.location
 
                 if not file_exists:
                     writer.writeheader()
