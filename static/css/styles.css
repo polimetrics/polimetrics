@@ -1,20 +1,25 @@
+a {
+    outline : 0 !important;
+}
+
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 15%;
+  height: 12%;
   background-color: white;
   z-index: 3;
 }
 
 .logo {
     height: 100%;
-    width: 5%;
+    width: 60px;
 }
 
 .logo-font {
-    font-size: 30px
+    font-size: 30px;
+    margin-left: 0;
 }
 
 .header-font {
@@ -23,7 +28,7 @@
 }
 
 .image-holder {
-    display:inline-block;
+    display: inline-block;
     position: relative;
 }
 .image-holder:after {
@@ -32,9 +37,100 @@
     left: 0;
     z-index: 2;
     width: 100%;
-    height: 90.7%;
+    height: 750px;
     display: block;
     position: absolute;
     background: black;
     opacity: 0.7;
+}
+
+#about-image {
+    margin-top: 10%;
+    width: 50%;
+    height: 484px;
+    display: inline-block;
+    position: relative;
+}
+
+#about-image:after {
+    content:'';
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 484px;
+    display: block;
+    position: absolute;
+    background: black;
+    opacity: 0.7;
+}
+
+#box {
+    margin-top: 10%;
+    width: 50%;
+    height: 484px;
+    background: #ED2024;
+}
+
+#about {
+    font-family: 'Libre Baskerville', serif;
+    color: white;
+    margin-top: 50%;
+}
+
+.body-headers {
+    font-family: 'Libre Baskerville', serif;
+    color: black;
+    font-size: 32px;
+}
+
+.name-header {
+    font-family: 'Libre Baskerville', serif;
+    color: black;
+    font-size: 24px;
+}
+
+.body-content {
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    line-height: 2rem;
+}
+
+.body-structure {
+    max-width: 38rem;
+    padding: 2rem;
+    margin: auto;
+}
+
+.headshot {
+    width: 50%;
+}
+
+.headshot-box {
+    width: 50%;
+    color: white;
+}
+
+.sub-header {
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    line-height: 1rem;
+    color: black;
+
+}
+
+.bio-answer {
+    font-family: 'Lato', sans-serif;
+    font-size: 24px;
+    line-height: 1rem;
+    color: black;
+
+}
+
+.github{
+    width: 5%
+}
+
+.linked-in {
+        width: 6%
 }
