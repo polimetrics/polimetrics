@@ -7,10 +7,12 @@ def index(request):
     return render(request, "index.html")
 
 
-# def candidate(request, slug):
+# def candidates(request, slug):
 #     candidate = get_object_or_404(Candidate, slug=slug)
-#     return render(request, "candidate.html")
+#     return render(request, "candidates.html")
 
+def candidates(request):
+    return render(request, "candidates.html")
 
 def tags(request):
     return render(request, "tags.html")
