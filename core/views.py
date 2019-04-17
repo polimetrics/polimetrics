@@ -9,6 +9,9 @@ def index(request):
 def candidates(request):
     return render( request, "candidates.html")
 
+def candidateDetail(request):
+    return render(request, "candidateDetail.html")
+
 
 def tags(request):
     return render(request, "tags.html")
