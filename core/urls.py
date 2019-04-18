@@ -3,9 +3,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<slug:slug>/', views.candidates, name='candidates'),
+    # path('<slug:slug>/', views.candidates, name='candidate'),
+    path('candidates/', views.candidates, name='candidates'),
     path('', views.tags, name='tags'),
-    path('', views.about, name='about')
+    path('about/', views.about, name='about')
 ]
 
 # model - candidate needs "candidate-detail page"
