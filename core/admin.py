@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Candidate
+from .models import Candidate, Tweet
 
 # Register your models here.
 
@@ -8,6 +8,6 @@ class CandidateAdmin(admin.ModelAdmin):
     list_display = ('name', 'party', 'about', 'image')
     exclude = ('slug',)
 
-# @admin.register(Sentiment)
-# class SnippetAdmin(admin.ModelAdmin):
-#     list_display = ('candidate', 'average', 'positive', 'negative', 'highest', 'lowest')
+@admin.register(Tweet)
+class TweetAdmin(admin.ModelAdmin):
+    list_display = ('candidate', 'id_str', 'created_at', 'polarity', 'subjectivity', 'location')
