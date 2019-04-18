@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 from core.api_key import access_secret, access_token, consumer_key, consumer_secret
 from textblob import TextBlob
 from core.models import Tweet, Candidate
+from django.conf import settings
 import tweepy
 
 class Command(BaseCommand):
@@ -12,10 +13,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # Variables that contains the user credentials to access Twitter API 
-        ACCESS_TOKEN = access_token
-        ACCESS_SECRET = access_secret
-        CONSUMER_KEY = consumer_key
-        CONSUMER_SECRET = consumer_secret
+
+        ACCESS_TOKEN = settings.ACCESS_TOKEN
+        ACCESS_SECRET = settings.ACCESS_SECRET
+        CONSUMER_KEY = settings.CONSUMER_KEY
+        CONSUMER_SECRET = settings.CONSUMER_SECRET
 
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
