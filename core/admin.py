@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Candidate, Sentiment
+from .models import Candidate
 
 # Register your models here.
 
 @admin.register(Candidate)
-class SnippetAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'party', 'about', 'image')
+class CandidateAdmin(admin.ModelAdmin):
+    list_display = ('name', 'party', 'about', 'image')
     exclude = ('slug',)
 
 # @admin.register(Sentiment)
