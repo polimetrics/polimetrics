@@ -6,8 +6,7 @@ from django.urls import reverse
 
 class Candidate(models.Model):
     '''This model represents a candidate'''
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
+    name = models.CharField(max_length=32)
     party = models.CharField(max_length=32)
     about = models.TextField(max_length=1000, null=True, blank=True)
     image = models.ImageField(upload_to='core/static/img', blank=True)
@@ -27,14 +26,15 @@ class Candidate(models.Model):
         return reverse('candidate-detail', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return self.last_name
+        return self.name
 
-class Sentiment(models.Model):
-    '''This model represents the sentiment '''
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    average = models.IntegerField(null=True, blank=True)
-    positive = models.IntegerField(null=True, blank=True)
-    negative = models.IntegerField(null=True, blank=True)
-    highest = models.IntegerField(null=True, blank=True)
-    lowest = models.IntegerField(null=True, blank=True)
-    
+class Tweet(models.Model):
+    '''
+    This model represents the specific info from our DB.
+    '''
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE,)
+    id_str = models.CharField(max_length=100)
+    created_at = models.CharField(max_length=50)
+    polarity = models.DecimalField(max_digits=10, decimal_places=9)
+    subjectivity = models.DecimalField(max_digits=10, decimal_places=9)
+    location = models.CharField(max_length=50)
