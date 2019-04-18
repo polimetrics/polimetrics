@@ -1,4 +1,5 @@
-from api_key import access_secret, access_token, consumer_key, consumer_secret
+# from api_key import access_secret, access_token, consumer_key, consumer_secret
+
 try:
     import json
 except ImportError:
