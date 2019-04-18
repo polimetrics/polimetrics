@@ -3,12 +3,20 @@ from django.core.management.base import BaseCommand
 from textblob import TextBlob
 from core.models import Tweet, Candidate
 import tweepy
+import re 
 
 class Command(BaseCommand):
 
     def __init__(self):
         self.tweets = []
         self.candidate = []
+
+    def clean_tweet(self, tweet): 
+            ''' 
+            Utility function to clean tweet text by removing links, special characters 
+            using simple regex statements. 
+            '''
+            return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
     def handle(self, *args, **kwargs):
         # Variables that contains the user credentials to access Twitter API 
@@ -31,12 +39,13 @@ class Command(BaseCommand):
         new_candidate, _ = Candidate.objects.get_or_create(name=self.candidate)
 
         for tweet in self.tweets:
-
             tweet = Tweet.objects.create(
                 candidate = new_candidate,
                 id_str = tweet.id_str,
                 created_at = tweet.created_at,
-                polarity = TextBlob(tweet.text).sentiment.polarity,
-                subjectivity = TextBlob(tweet.text).sentiment.subjectivity,
-                location = tweet.user.location,
+                polarity = TextBlob(self.clean_tweet(tweet.text)).sentiment.polarity,
+                subjectivity = TextBlob(self.clean_tweet(tweet.text)).sentiment.subjectivity,
+                location = tweet.user.location
+                
             )
+
