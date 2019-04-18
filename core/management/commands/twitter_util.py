@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from core.api_key import access_secret, access_token, consumer_key, consumer_secret
+# from core.api_key import access_secret, access_token, consumer_key, consumer_secret
 from textblob import TextBlob
 from core.models import Tweet, Candidate
 import tweepy
