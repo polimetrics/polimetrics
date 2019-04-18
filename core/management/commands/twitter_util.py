@@ -39,8 +39,6 @@ class Command(BaseCommand):
         new_candidate, _ = Candidate.objects.get_or_create(name=self.candidate)
 
         for tweet in self.tweets:
-            
-            print(self.clean_tweet(tweet.text))
             tweet = Tweet.objects.create(
                 candidate = new_candidate,
                 id_str = tweet.id_str,
