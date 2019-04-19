@@ -129,6 +129,7 @@ USE_L10N = True
 USE_TZ = True
 
 if DEBUG:
+    from core.api_key import access_secret, access_token, consumer_key, consumer_secret
     ACCESS_TOKEN = access_token
     ACCESS_SECRET = access_secret
     CONSUMER_KEY = consumer_key
