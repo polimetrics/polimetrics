@@ -6,9 +6,10 @@ from django.urls import reverse
 
 class Candidate(models.Model):
     '''This model represents a candidate'''
-    name = models.CharField(max_length=32)
+    firstName = models.CharField(max_length=32)
+    lastName = models.CharField(max_length=32)
     party = models.CharField(max_length=32)
-    about = models.TextField(max_length=1000, null=True, blank=True)
+    description = models.TextField(max_length=1000, null=True, blank=True)
     image = models.ImageField(upload_to='core/static/img', blank=True)
     slug = models.SlugField()
 
@@ -32,9 +33,20 @@ class Tweet(models.Model):
     '''
     This model represents the specific info from our DB.
     '''
-    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE,)
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
+    text = models.CharField(max_length=400)
+    followers = models.PositiveIntegerField()
     id_str = models.CharField(max_length=100)
-    created_at = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
     polarity = models.DecimalField(max_digits=10, decimal_places=9)
     subjectivity = models.DecimalField(max_digits=10, decimal_places=9)
     location = models.CharField(max_length=50)
+
+class CandidatePolarityAverage(models.Model):
+    '''
+    This model represents the polarity average for candidates at a certain time.
+    '''
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
+    positivePolarityAverage = models.DecimalField(max_digits=10, decimal_places=9)
+    negativePolarityAverage = models.DecimalField(max_digits=10, decimal_places=9)
+    created_at = models.DateTimeField(auto_now_add=True)
