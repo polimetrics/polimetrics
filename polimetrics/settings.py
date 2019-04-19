@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
-from core.api_key import access_secret, access_token, consumer_key, consumer_secret
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -130,6 +128,7 @@ USE_L10N = True
 USE_TZ = True
 
 if DEBUG:
+    from core.api_key import access_secret, access_token, consumer_key, consumer_secret
     ACCESS_TOKEN = access_token
     ACCESS_SECRET = access_secret
     CONSUMER_KEY = consumer_key
