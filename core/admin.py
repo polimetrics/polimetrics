@@ -5,7 +5,7 @@ from .models import Candidate, Tweet, CandidatePolarityAverage
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ('firstName', 'lastName', 'party', 'description', 'image')
+    list_display = ('first_name', 'last_name', 'party', 'description', 'image')
     exclude = ('slug',)
 
 @admin.register(Tweet)

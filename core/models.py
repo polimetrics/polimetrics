@@ -6,8 +6,8 @@ from django.urls import reverse
 
 class Candidate(models.Model):
     '''This model represents a candidate'''
-    firstName = models.CharField(max_length=32, null=True, blank=True)
-    lastName = models.CharField(max_length=32, blank=False)
+    first_name = models.CharField(max_length=32, null=True, blank=True)
+    last_name = models.CharField(max_length=32, blank=False)
     party = models.CharField(max_length=32)
     description = models.TextField(max_length=1000, null=True, blank=True)
     image = models.ImageField(upload_to='core/static/img', blank=True)
