@@ -50,3 +50,15 @@ class CandidatePolarityAverage(models.Model):
     positivePolarityAverage = models.DecimalField(max_digits=10, decimal_places=9)
     negativePolarityAverage = models.DecimalField(max_digits=10, decimal_places=9)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class Developer(models.Model):
+    '''
+    This model represents the project's developers
+    '''
+    name = models.CharField(max_length=50)
+    header = models.CharField(max_length=100)
+    bio = models.TextField(max_length=1000)    
+    image = models.ImageField(upload_to='core/static/img', blank=True)
+    fav_album = models.CharField(max_length=75)
+    fav_coffee = models.CharField(max_length=50)
+    fav_president = models.CharField(max_length=50)
