@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
-# from core.api_key import access_secret, access_token, consumer_key, consumer_secret
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
