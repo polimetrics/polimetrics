@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
+from core.api_key import access_secret, access_token, consumer_key, consumer_secret
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -128,17 +129,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-# if DEBUG:
-#     from core.api_key import access_secret, access_token, consumer_key, consumer_secret
-#     ACCESS_TOKEN = access_token
-#     ACCESS_SECRET = access_secret
-#     CONSUMER_KEY = consumer_key
-#     CONSUMER_SECRET = consumer_secret
-# else:
-#     ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-#     ACCESS_SECRET = os.environ['ACCESS_SECRET']
-#     CONSUMER_KEY = os.environ['CONSUMER_KEY']
-#     CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+if DEBUG:
+    ACCESS_TOKEN = access_token
+    ACCESS_SECRET = access_secret
+    CONSUMER_KEY = consumer_key
+    CONSUMER_SECRET = consumer_secret
+else:
+    ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+    ACCESS_SECRET = os.environ['ACCESS_SECRET']
+    CONSUMER_KEY = os.environ['CONSUMER_KEY']
+    CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
 
 
 # Static files (CSS, JavaScript, Images)
