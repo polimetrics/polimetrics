@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Candidate, Tweet, CandidatePolarityAverage
+from .models import Candidate, Tweet, CandidatePolarityAverage, Developer
 
 # Register your models here.
 
@@ -15,3 +15,7 @@ class TweetAdmin(admin.ModelAdmin):
 @admin.register(CandidatePolarityAverage)
 class CandidatePolarityAverageAdmin(admin.ModelAdmin):
     list_display = ('candidate', 'positivePolarityAverage', 'negativePolarityAverage', 'created_at')
+
+@admin.register(Developer)
+class DeveloperAdmin(admin.ModelAdmin):
+    list_display = ('image', 'name', 'header', 'bio', 'fav_album', 'fav_coffee', 'fav_president')
