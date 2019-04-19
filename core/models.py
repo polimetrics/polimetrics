@@ -6,8 +6,8 @@ from django.urls import reverse
 
 class Candidate(models.Model):
     '''This model represents a candidate'''
-    firstName = models.CharField(max_length=32)
-    lastName = models.CharField(max_length=32)
+    firstName = models.CharField(max_length=32, null=True, blank=True)
+    lastName = models.CharField(max_length=32, blank=False)
     party = models.CharField(max_length=32)
     description = models.TextField(max_length=1000, null=True, blank=True)
     image = models.ImageField(upload_to='core/static/img', blank=True)
@@ -34,8 +34,8 @@ class Tweet(models.Model):
     This model represents the specific info from our DB.
     '''
     candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
-    text = models.CharField(max_length=400)
-    followers = models.PositiveIntegerField()
+    text = models.CharField(max_length=400, null=True)
+    followers = models.PositiveIntegerField(null=True)
     id_str = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     polarity = models.DecimalField(max_digits=10, decimal_places=9)

@@ -32,22 +32,24 @@ class Command(BaseCommand):
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
         # input for term to be searched and how many tweets to search
-        self.candidate = input("Enter Keyword/Tag/Name to search about: ")
+        self.candidate = input("Enter first and last name of candidate: ")
         num_terms = int(input("Enter how many tweets to search: "))
+
+        temp_candidate = self.candidate.split()
 
         # searching for tweets
         self.tweets = tweepy.Cursor(api.search, q=self.candidate, lang = "en").items(num_terms)
-
-        new_candidate, _ = Candidate.objects.get_or_create(name=self.candidate)
+        
+        new_candidate, _ = Candidate.objects.get_or_create(firstName=temp_candidate[0].lower(), lastName=temp_candidate[1].lower())
 
         for tweet in self.tweets:
             tweet = Tweet.objects.create(
                 candidate = new_candidate,
+                text = tweet.text,
+                followers = tweet.user.followers_count,
                 id_str = tweet.id_str,
                 created_at = tweet.created_at,
                 polarity = TextBlob(self.clean_tweet(tweet.text)).sentiment.polarity,
                 subjectivity = TextBlob(self.clean_tweet(tweet.text)).sentiment.subjectivity,
                 location = tweet.user.location
-                
             )
-
