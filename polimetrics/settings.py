@@ -13,19 +13,13 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import environ
 import os
 import django_heroku
-# from core.api_key import access_secret, access_token, consumer_key, consumer_secret
 
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'
 
 env = environ.Env(DEBUG=(bool, False),) # set default values and casting
 environ.Env.read_env() # reading .env file
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 SECRET_KEY = env('SECRET_KEY')
 
@@ -88,10 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'polimetrics.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -101,10 +91,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -121,10 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'US/Eastern'
@@ -134,21 +116,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# if DEBUG:
-#     ACCESS_TOKEN = access_token
-#     ACCESS_SECRET = access_secret
-#     CONSUMER_KEY = consumer_key
-#     CONSUMER_SECRET = consumer_secret
-# else:
-    # ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-    # ACCESS_SECRET = os.environ['ACCESS_SECRET']
-    # CONSUMER_KEY = os.environ['CONSUMER_KEY']
-    # CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
