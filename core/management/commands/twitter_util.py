@@ -39,7 +39,7 @@ class Command(BaseCommand):
 
         # searching for tweets
         self.tweets = tweepy.Cursor(api.search, q=self.candidate, lang = "en").items(num_terms)
-        
+        print(self.tweets)
         new_candidate, _ = Candidate.objects.get_or_create(first_name=temp_candidate[0].lower(), last_name=temp_candidate[1].lower())
 
         for tweet in self.tweets:
