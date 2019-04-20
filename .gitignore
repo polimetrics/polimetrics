@@ -133,3 +133,5 @@ dmypy.json
 
 node_modules/
 static/build/
+
+.DS_Store
