@@ -27,7 +27,7 @@ class Candidate(models.Model):
         return reverse('candidate-detail', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return self.name
+        return self.last_name
 
 class Tweet(models.Model):
     '''

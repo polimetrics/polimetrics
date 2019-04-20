@@ -13,11 +13,11 @@ class Command(BaseCommand):
         self.candidate = []
 
     def clean_tweet(self, tweet): 
-            ''' 
-            Utility function to clean tweet text by removing links, special characters 
-            using simple regex statements. 
-            '''
-            return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+        ''' 
+        Utility function to clean tweet text by removing links, special characters 
+        using simple regex statements. 
+        '''
+        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
     def handle(self, *args, **kwargs):
         # Variables that contains the user credentials to access Twitter API 
@@ -41,7 +41,6 @@ class Command(BaseCommand):
         self.tweets = tweepy.Cursor(api.search, q=self.candidate, lang = "en").items(num_terms)
         
         new_candidate, _ = Candidate.objects.get_or_create(first_name=temp_candidate[0].lower(), last_name=temp_candidate[1].lower())
-
         for tweet in self.tweets:
             tweet = Tweet.objects.create(
                 candidate = new_candidate,
