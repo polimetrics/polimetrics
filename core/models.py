@@ -37,19 +37,10 @@ class Tweet(models.Model):
     text = models.CharField(max_length=400, null=True)
     followers = models.PositiveIntegerField(null=True)
     id_str = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField()
     polarity = models.DecimalField(max_digits=10, decimal_places=9)
     subjectivity = models.DecimalField(max_digits=10, decimal_places=9)
     location = models.CharField(max_length=50)
-
-class CandidatePolarityAverage(models.Model):
-    '''
-    This model represents the polarity average for candidates at a certain time.
-    '''
-    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
-    positivePolarityAverage = models.DecimalField(max_digits=10, decimal_places=9)
-    negativePolarityAverage = models.DecimalField(max_digits=10, decimal_places=9)
-    created_at = models.DateTimeField(auto_now_add=True)
 
 class Developer(models.Model):
     '''
