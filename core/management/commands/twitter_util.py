@@ -26,7 +26,8 @@ class Command(BaseCommand):
         ACCESS_SECRET = settings.ACCESS_SECRET
         CONSUMER_KEY = settings.CONSUMER_KEY
         CONSUMER_SECRET = settings.CONSUMER_SECRET
-=        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+
+        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
@@ -40,7 +41,7 @@ class Command(BaseCommand):
         self.tweets = tweepy.Cursor(api.search, q=self.candidate, lang = "en").items(num_terms)
         
         new_candidate, _ = Candidate.objects.get_or_create(first_name=temp_candidate[0].lower(), last_name=temp_candidate[1].lower())
-
+        print(new_candidate)
         for tweet in self.tweets:
             print(tweet.text)
             tweet = Tweet.objects.create(
