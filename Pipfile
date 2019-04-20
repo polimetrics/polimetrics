@@ -18,6 +18,7 @@ psycopg2-binary = "*"
 textblob = "*"
 pandas = "*"
 gunicorn = "*"
+django-environ = "*"
 
 [requires]
 python_version = "3.7"
