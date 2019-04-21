@@ -43,14 +43,20 @@ class Command(BaseCommand):
         
         new_candidate, _ = Candidate.objects.get_or_create(first_name=temp_candidate[0].lower(), last_name=temp_candidate[1].lower())
         for tweet in self.tweets:
-            print(tweet.created_at)
+            textBlob = TextBlob(self.clean_tweet(tweet.text))
+            temp_polarity = textBlob.sentiment.polarity
+            temp_subjectivity = textBlob.sentiment.polarity
+            temp_sentiment = temp_polarity * (1-temp_subjectivity/2)
             tweet = Tweet.objects.create(
                 candidate = new_candidate,
                 text = tweet.text,
                 followers = tweet.user.followers_count,
                 id_str = tweet.id_str,
                 created_at = make_aware(tweet.created_at),
-                polarity = TextBlob(self.clean_tweet(tweet.text)).sentiment.polarity,
-                subjectivity = TextBlob(self.clean_tweet(tweet.text)).sentiment.subjectivity,
-                location = tweet.user.location
+                polarity = temp_polarity,
+                subjectivity = temp_subjectivity,
+                location = tweet.user.location,
+                sentiment = temp_sentiment,
+                retweet_count = tweet.retweet_count,
+                favorite_count = tweet.favorite_count
             )
