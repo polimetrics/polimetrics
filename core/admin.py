@@ -10,7 +10,7 @@ class CandidateAdmin(admin.ModelAdmin):
 
 @admin.register(Tweet)
 class TweetAdmin(admin.ModelAdmin):
-    list_display = ('candidate', 'text', 'followers', 'id_str', 'created_at', 'polarity', 'subjectivity', 'location')
+    list_display = ('candidate', 'text', 'followers', 'created_at', 'polarity', 'subjectivity', 'location', 'sentiment', 'retweet_count', 'favorite_count', 'tweet_id', 'retweeted_id')
 
 @admin.register(Developer)
 class DeveloperAdmin(admin.ModelAdmin):
