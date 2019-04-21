@@ -40,7 +40,10 @@ class Tweet(models.Model):
     created_at = models.DateTimeField()
     polarity = models.DecimalField(max_digits=10, decimal_places=9)
     subjectivity = models.DecimalField(max_digits=10, decimal_places=9)
-    location = models.CharField(max_length=50)
+    location = models.CharField(max_length=100)
+    sentiment = models.DecimalField(max_digits=10, decimal_places=9)
+    retweet_count = models.PositiveIntegerField(null=True)
+    favorite_count = models.PositiveIntegerField(null=True)
 
 class Developer(models.Model):
     '''
