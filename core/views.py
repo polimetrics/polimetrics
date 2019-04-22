@@ -35,6 +35,8 @@ def candidates(request):
 def tags(request):
     return render(request, "tags.html")
 
+def methodology(request):
+    return render(request, "methodology.html")
 
 def about(request):
     return render(request, "about.html")
