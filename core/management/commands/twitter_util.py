@@ -45,18 +45,19 @@ class Command(BaseCommand):
         for tweet in self.tweets:
             textBlob = TextBlob(self.clean_tweet(tweet.text))
             temp_polarity = textBlob.sentiment.polarity
-            temp_subjectivity = textBlob.sentiment.polarity
+            temp_subjectivity = textBlob.sentiment.subjectivity
             temp_sentiment = temp_polarity * (1-temp_subjectivity/2)
             tweet = Tweet.objects.create(
                 candidate = new_candidate,
                 text = tweet.text,
                 followers = tweet.user.followers_count,
-                id_str = tweet.id_str,
                 created_at = make_aware(tweet.created_at),
                 polarity = temp_polarity,
                 subjectivity = temp_subjectivity,
                 location = tweet.user.location,
                 sentiment = temp_sentiment,
                 retweet_count = tweet.retweet_count,
-                favorite_count = tweet.favorite_count
+                favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else 0,
+                tweet_id = tweet.id_str,
+                retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') else None
             )
