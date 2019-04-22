@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 a {
     outline : 0 !important;
 }
@@ -30,6 +32,7 @@ a {
 .image-holder {
     display: inline-block;
     position: relative;
+    
     
 }
 .image-holder:after {
@@ -231,4 +234,16 @@ a {
 .center-graph{
     display: flex;
     justify-content: center;
+}
+
+#particles-js{
+  height: auto;
+  max-width:100%;
+  background-image: url("white-house3.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+   
+  
+  
 }
