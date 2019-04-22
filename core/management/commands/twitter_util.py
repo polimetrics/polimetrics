@@ -47,12 +47,6 @@ class Command(BaseCommand):
             temp_polarity = textBlob.sentiment.polarity
             temp_subjectivity = textBlob.sentiment.subjectivity
             temp_sentiment = temp_polarity * (1-temp_subjectivity/2)
-            # temp_favorite_count = 0
-            # if hasattr(tweet, 'retweeted_status'):
-            #     temp_favorite_count = tweet.retweeted_status.favorite_count
-
-            # temp_favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else 0
-
             tweet = Tweet.objects.create(
                 candidate = new_candidate,
                 text = tweet.text,
