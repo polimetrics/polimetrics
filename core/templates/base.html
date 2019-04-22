@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville:700" rel="stylesheet">
     <script src="{% static 'build/bundle.js' %}"></script>
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" rel="stylesheet" type="text/css">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
+    {{ script | safe }}
 </head>
 <header>
     <nav class="nav">
@@ -21,19 +26,20 @@
                 <div class="logo-font black mt2 ml2 header-font hover-white dib">polimetrics</div>
             </a>
             <div class="w-100 flex list justify-end pa3">
-                <li class="header-font ml1 link hover-red dib">compare</li>
+                <li ><a class="header-font black link ml1 hover-red dib" href="{% url 'candidates' %}">candidates</li></a>
                 <li class="header-font ml1">-</li>
-                <li class="header-font ml1 hover-dark-blue dib">trends</li>
+                <li class="header-font ml1 link hover-dark-blue dib">compare</li>
                 <li class="header-font ml1">-</li>
-                <li class="header-font ml1 hover-red dib"><a href="{% url 'candidates' %}">candidates</li></a>
+                <li class="header-font ml1 hover-dark-red dib">trends</li>
                 <li class="header-font ml1">-</li>
-                <li class="header-font ml1 hover-dark-blue dib">#tags</li>
+                <li><a class="header-font black link ml1 hover-dark-blue dib" href="{% url 'methodology' %}">methodology</a></li>
                 <li class="header-font ml1">-</li>
                 <li><a class="header-font black link ml1 mr4 hover-red dib" href="{% url 'about' %}">about</a></li>
             </div>
         </ul>
     </nav>
 </header>
+
 <body>
     {% block content %}{% endblock %}
 </body>

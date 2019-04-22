@@ -6,10 +6,10 @@ from django.urls import reverse
 
 class Candidate(models.Model):
     '''This model represents a candidate'''
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
+    first_name = models.CharField(max_length=32, null=True, blank=True)
+    last_name = models.CharField(max_length=32, blank=False)
     party = models.CharField(max_length=32)
-    about = models.TextField(max_length=1000, null=True, blank=True)
+    description = models.TextField(max_length=1000, null=True, blank=True)
     image = models.ImageField(upload_to='core/static/img', blank=True)
     slug = models.SlugField()
 
@@ -29,12 +29,31 @@ class Candidate(models.Model):
     def __str__(self):
         return self.last_name
 
-class Sentiment(models.Model):
-    '''This model represents the sentiment '''
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    average = models.IntegerField(null=True, blank=True)
-    positive = models.IntegerField(null=True, blank=True)
-    negative = models.IntegerField(null=True, blank=True)
-    highest = models.IntegerField(null=True, blank=True)
-    lowest = models.IntegerField(null=True, blank=True)
-    
+class Tweet(models.Model):
+    '''
+    This model represents the specific info from our DB.
+    '''
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
+    text = models.CharField(max_length=400, null=True)
+    followers = models.PositiveIntegerField(null=True)
+    created_at = models.DateTimeField()
+    polarity = models.DecimalField(max_digits=10, decimal_places=9)
+    subjectivity = models.DecimalField(max_digits=10, decimal_places=9)
+    location = models.CharField(max_length=100)
+    sentiment = models.DecimalField(max_digits=10, decimal_places=9)
+    retweet_count = models.PositiveIntegerField(default=0)
+    favorite_count = models.PositiveIntegerField(default=0)
+    tweet_id = models.CharField(max_length=100)
+    retweeted_id = models.CharField(max_length=100, null=True)
+
+class Developer(models.Model):
+    '''
+    This model represents the project's developers
+    '''
+    name = models.CharField(max_length=50)
+    header = models.CharField(max_length=100)
+    bio = models.TextField(max_length=1000)    
+    image = models.ImageField(upload_to='core/static/img', blank=True)
+    fav_album = models.CharField(max_length=75)
+    fav_coffee = models.CharField(max_length=50)
+    fav_president = models.CharField(max_length=50)
