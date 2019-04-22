@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 a {
     outline : 0 !important;
 }
@@ -31,6 +33,7 @@ a {
     display: inline-block;
     position: relative;
     
+    
 }
 .image-holder:after {
     content:'';
@@ -38,7 +41,7 @@ a {
     left: 0;
     z-index: 1;
     width: 100%;
-    height: 750px;
+    height: 100%;
     display: block;
     position: absolute;
     background: black;
@@ -141,9 +144,7 @@ a {
 }
 
 #about-image {
-    margin-top: 10%;
-    width: 50%;
-    height: 484px;
+    margin-top: 100px;
     display: inline-block;
     position: relative;
 }
@@ -154,7 +155,7 @@ a {
     left: 0;
     z-index: 1;
     width: 100%;
-    height: 484px;
+    height: 100%;
     display: block;
     position: absolute;
     background: black;
@@ -162,10 +163,10 @@ a {
 }
 
 #box {
-    margin-top: 10%;
+    max-width: 50%;
     width: 50%;
-    height: 484px;
     background: #ED2024;
+    display: inline-block;
 }
 
 #about {
@@ -229,4 +230,21 @@ a {
 
 .linked-in {
         width: 6%
+}
+
+.center-graph{
+    display: flex;
+    justify-content: center;
+}
+
+#particles-js{
+  height: auto;
+  max-width:100%;
+  background-image: url("white-house3.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+   
+  
+  
 }

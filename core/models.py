@@ -36,20 +36,15 @@ class Tweet(models.Model):
     candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
     text = models.CharField(max_length=400, null=True)
     followers = models.PositiveIntegerField(null=True)
-    id_str = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField()
     polarity = models.DecimalField(max_digits=10, decimal_places=9)
     subjectivity = models.DecimalField(max_digits=10, decimal_places=9)
-    location = models.CharField(max_length=50)
-
-class CandidatePolarityAverage(models.Model):
-    '''
-    This model represents the polarity average for candidates at a certain time.
-    '''
-    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
-    positivePolarityAverage = models.DecimalField(max_digits=10, decimal_places=9)
-    negativePolarityAverage = models.DecimalField(max_digits=10, decimal_places=9)
-    created_at = models.DateTimeField(auto_now_add=True)
+    location = models.CharField(max_length=100)
+    sentiment = models.DecimalField(max_digits=10, decimal_places=9)
+    retweet_count = models.PositiveIntegerField(default=0)
+    favorite_count = models.PositiveIntegerField(default=0)
+    tweet_id = models.CharField(max_length=100)
+    retweeted_id = models.CharField(max_length=100, null=True)
 
 class Developer(models.Model):
     '''

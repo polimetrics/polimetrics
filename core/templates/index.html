@@ -3,9 +3,17 @@
 
 {% block content %}
 
+<div id="particles-js">
 
-<div class="image-holder">
-    <img src="static/img/white-house2.jpeg"/>
+   
+    
+    
+    
+</div>
+
+
+
+
 <h1 class="body-headers mt5 tc">poli-whatric?</h1>
 <p class="tc body-content body-structure">
     Polimetrics is a web application that performs sentiment analysis on Tweets to generate opinion polls for 2020 presidential primary candidates.
@@ -14,4 +22,13 @@
     <a class="header-font black link hover-red dib" href="{% url 'about' %}">Learn more</a>
 </div>
 <h2 class="body-headers mt5 tc">Latest Poll:</h2>
+<div class="center-graph">
+{{ div | safe }}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+    particlesJS.load('particles-js', 'static/js/particles.json', function(){
+        console.log('particles.json loaded....');
+    });
+    </script>
 {% endblock %}
