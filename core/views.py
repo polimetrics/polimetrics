@@ -29,8 +29,19 @@ def index(request):
     script, div = components(plot)
     return render_to_response( "index.html", {'script' : script, 'div' : div} )
 
+# def candidates(request):
+#     return render(request, "candidates.html")
+
+
 def candidates(request):
-    return render(request, "candidates.html")
+    candidates = Candidate.objects.all()
+
+    return render( request, "candidates.html", context={'candidates':candidates})
+
+def candidateDetail(request, slug):
+    candidate = Candidate.objects.get(slug=slug)
+    return render(request, "candidateDetail.html", context={candidate:'candidate'})
+
 
 def tags(request):
     return render(request, "tags.html")

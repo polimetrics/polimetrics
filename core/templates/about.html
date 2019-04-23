@@ -2,7 +2,9 @@
 {% load staticfiles %}
 
 {% block content %}
+<div class="aboutbox">
 <div class="flex flex-wrap">
+  
     <div class="w-50">
         <div id="about-image">
             <img src="{% static '/img/about-image.jpeg' %}" alt="An image of a building in a city flying a U.S. flag."/>
@@ -14,6 +16,8 @@
         </div>
     </div>
 </div>
+</div>
+
 <div>
     <p class="body-content body-structure">
     Technology changed the way we live our lives, so why haven't our political polls changed? 🤔 
@@ -89,5 +93,7 @@
         <a href="https://www.linkedin.com/in/daniel-peterson-a66330181/"><img src="{% static '/img/daniel-peterson.jpeg' %}" alt="An image of Daniel Peterson."/></a>
     </div>
 </div>
+<script src="js/scrollmagic/uncompressed/ScrollMagic.js"></script>
+<script src="js/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
 
 {% endblock %}
