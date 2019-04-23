@@ -6,8 +6,11 @@ from django.conf import settings
 import tweepy
 import re 
 from django.utils.timezone import make_aware
+import pytz
 
 class Command(BaseCommand):
+
+    
 
     def __init__(self):
         self.tweets = []
@@ -43,6 +46,8 @@ class Command(BaseCommand):
         
         new_candidate, _ = Candidate.objects.get_or_create(first_name=temp_candidate[0].lower(), last_name=temp_candidate[1].lower())
         for tweet in self.tweets:
+            print(tweet.created_at)
+            print(tweet)
             textBlob = TextBlob(self.clean_tweet(tweet.text))
             temp_polarity = textBlob.sentiment.polarity
             temp_subjectivity = textBlob.sentiment.subjectivity
@@ -57,7 +62,7 @@ class Command(BaseCommand):
                 location = tweet.user.location,
                 sentiment = temp_sentiment,
                 retweet_count = tweet.retweet_count,
-                favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else 0,
+                favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else tweet.favorite_count,
                 tweet_id = tweet.id_str,
                 retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') else None
             )
