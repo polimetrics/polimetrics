@@ -14,7 +14,8 @@ $(document).ready(function(){
     .addTo(controller);
 
 });
-// test
+
+
 
 let deadline = new Date(`feb 3, 2020 00:01:00`).getTime()
 

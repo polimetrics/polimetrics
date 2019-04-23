@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="mt5">This is a div</div>
+<div class="mt6">
+    <h1> Candidate Name: {{ candidate.first_name }} {{ candidate.last_name }}</h1>
+</div>
+<div>
+    Description: {{ candidate.description }} 
+</div>
+<div class="flex justify-center ma2 pa3 ">
+{{ div | safe }}
+</div>
+{% endblock %}
