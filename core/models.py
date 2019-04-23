@@ -13,6 +13,9 @@ class Candidate(models.Model):
     image = models.ImageField(upload_to='core/static/img', blank=True, max_length=100)
     slug = models.SlugField(max_length=500)
 
+    class Meta:
+        ordering = ['last_name']
+    
     def set_slug(self):
         '''Creates a unique slug for every candidate'''
         if self.slug:
@@ -24,7 +27,7 @@ class Candidate(models.Model):
         super().save(*args, **kwargs)
         
     def get_absolute_url(self):
-        return reverse('candidate-detail', kwargs={'slug': self.slug})
+        return reverse('candidateDetail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.last_name

@@ -38,8 +38,8 @@ def candidates(request):
 
     return render( request, "candidates.html", context={'candidates':candidates})
 
-def candidateDetail(request, slug):
-    candidate = Candidate.objects.get(slug=slug)
+def candidateDetail(request):
+    candidate = Candidate.objects.get
     return render(request, "candidateDetail.html", context={candidate:'candidate'})
 
 
