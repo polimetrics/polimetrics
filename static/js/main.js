@@ -1,4 +1,20 @@
-// test
+var $ = require('jQuery');
+var $ = require('ScrollMagic');
+
+$(document).ready(function(){
+
+    var controller = new ScrollMagic.Controller();
+
+    var pinAboutBox = new ScrollMagic.Scene({
+        triggerelement: '#aboutbox',
+        triggerHook: 0
+
+    })
+    .setPin('#aboutbox')
+    .addTo(controller);
+
+});
+
 
 let deadline = new Date(`feb 3, 2020 00:01:00`).getTime()
 
