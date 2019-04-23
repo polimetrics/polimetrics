@@ -6,12 +6,12 @@ from django.urls import reverse
 
 class Candidate(models.Model):
     '''This model represents a candidate'''
-    first_name = models.CharField(max_length=32, null=True, blank=True)
-    last_name = models.CharField(max_length=32, blank=False)
-    party = models.CharField(max_length=32)
-    description = models.TextField(max_length=1000, null=True, blank=True)
-    image = models.ImageField(upload_to='core/static/img', blank=True)
-    slug = models.SlugField()
+    first_name = models.CharField(max_length=150, null=True, blank=True)
+    last_name = models.CharField(max_length=150, blank=False)
+    party = models.CharField(max_length=150)
+    description = models.TextField(max_length=1500, null=True, blank=True)
+    image = models.ImageField(upload_to='core/static/img', blank=True, max_length=100)
+    slug = models.SlugField(max_length=500)
 
     def set_slug(self):
         '''Creates a unique slug for every candidate'''

@@ -141,14 +141,6 @@ a {
     text-align: right;   
 }
 
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> master
 #about-image {
     margin-top: 100px;
     display: inline-block;
@@ -235,8 +227,6 @@ a {
 .linked-in {
         width: 6%
 }
-<<<<<<< HEAD
-=======
 
 .center-graph{
     display: flex;
@@ -250,4 +240,3 @@ a {
   background-attachment: fixed;
   background-size: cover;
 }
->>>>>>> master
