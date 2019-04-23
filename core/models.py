@@ -46,6 +46,18 @@ class Tweet(models.Model):
     tweet_id = models.CharField(max_length=100)
     retweeted_id = models.CharField(max_length=100, null=True)
 
+class CandidateMeanSentiment(models.Model):
+    '''
+    This model represents the mean sentiment per candidate on a given time-slice
+    for all unique tweets and only account for retweets once.  
+    Also, weights are applied to sentiment based on total retweet and favorite counts.  
+    '''
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
+    mean_sentiment = models.DecimalField(max_digits=10, decimal_places=9)
+    from_date_time = models.DateTimeField()
+    to_date_time = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
 class Developer(models.Model):
     '''
     This model represents the project's developers
