@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div>
+    <h1 class="tc mt6 body-headers tc">Methodology</h1>
+    <p class="tc body-content body-structure">Tweets + Sentiment Analysis = Polimetrics</p>
+    <div class="body-content body-structure">
+        <p>Our methodology is divided into five steps:</p>
+        <div>1. <a class="black link hover-red dib pointer" href="">Data collection</a></div>
+        <div>2. <a class="black link hover-dark-blue dib pointer" href="">Data cleaning</a></div>
+        <div>3. <a class="black link hover-red dib pointer" href="">Polarity and sentiment evaluation</a></div>
+        <div>4. <a class="black link hover-dark-blue dib pointer" href="">Data weighting</a></div>
+        <div>5. <a class="black link hover-red dib pointer" href="">Graph rendering</a></div>
+    </div>
+    <h2 class="tc body-headers pa3">Data Collection</h2>
+    <div class="body-content body-structure">
+        <p>We begin our process by collecting Tweets with Twitter's Standard search API. This allows us to specify, and return Tweets about, each candidate. Our search parameters consist of the last name of the candidate</p>
+    </div>
+    <h3 class="tc body-headers pa3">Data Cleaning</h3>
+        <p></p
+    <h4 class="tc body-headers pa3">Polarity and Sentiment Evaluation</h4>
+
+    <h5 class="tc body-headers pa3">Data Weighting</h5>
+    <p>~ 1/3 of a penny per follower</p>
+    <h6 class="tc body-headers pa3">Graph Rendering</h6>
+
+    <div class="tc body-headers pa3">Caveats</div>
+        <div>
+            <p class="body-content body-structure">
+            Like all opinion polls, our data isn't perfect. The reality is that not all voters use Twitter. More specifically, the age groups that make up the United States population are not portionate to the age groups that use Twitter. Our solution is to weight the results of our sentiment analysis. In an effort to provide the most insight to our users, we have made weighted and unweighted analysis available on the application. 
+            </p>
+</div>
+
+{% endblock %}

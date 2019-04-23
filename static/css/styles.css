@@ -11,7 +11,7 @@ a {
   width: 100%;
   height: 12%;
   background-color: white;
-  z-index: 2;
+  z-index: 50;
 }
 
 .logo {
@@ -30,10 +30,8 @@ a {
 }
 
 .image-holder {
-    display: inline-block;
     position: relative;
-    
-    
+    overflow: auto;
 }
 .image-holder:after {
     content:'';
@@ -77,8 +75,6 @@ a {
     z-index: 2;
     align-self: stretch;
     float: right;
-   
-     
 }
 
 .pict:hover {
@@ -195,7 +191,6 @@ a {
 
 .body-structure {
     max-width: 38rem;
-    padding: 2rem;
     margin: auto;
 }
 
@@ -221,7 +216,6 @@ a {
     font-size: 24px;
     line-height: 2rem;
     color: black;
-
 }
 
 .github{
@@ -238,13 +232,44 @@ a {
 }
 
 #particles-js{
-  height: auto;
   max-width:100%;
-  background-image: url("white-house3.jpg");
+  background-image: url("white-house2.jpeg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center;
-   
-  
-  
+  background-size: cover;
+}
+
+ #clockdiv{ 
+    font-family: 'Lato', sans-serif;
+    font-size: 30px; 
+    color: white; 
+    display: inline-block; 
+    text-align: center; 
+    z-index: 40;
+    position: absolute;
+    width: 100%;
+    margin-top: 20%;
+} 
+#clockdiv > div{ 
+    padding: 10px; 
+    border-radius: 3px; 
+    background: black; 
+    display: inline-block; 
+    opacity: 0.7;
+} 
+#clockdiv div > span{ 
+    padding: 15px; 
+    border-radius: 3px; 
+    background: black; 
+    display: inline-block; 
+} 
+.smalltext{ 
+    padding-top: 5px; 
+    font-size: 16px; 
+} 
+
+.clock-header {
+    color: white;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 32px;
 }
