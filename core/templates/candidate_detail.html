@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="mt5">This is a div</div>
-<div class="mt6">
-    <h1> Candidate Name: {{ candidate.first_name }} {{ candidate.last_name }}</h1>
-</div>
-<div>
-    Description: {{ candidate.description }} 
-</div>
+ <div class="pictcontainerdetail mt6  mr6    ">
+                
+                      
+                             
+                           
+                        <img src="{{ candidate.image.url }}" class="pictdetail">
+                              
+                               
+                
+                        <div class="textboxdetail">
+                                <text class="name  mt4 f-headline  "> {{ candidate.first_name }} {{ candidate.last_name }}
+                                </text>
+                                <br>
+                                <text class=" f3 tc      "> {{ candidate.description }}. <text class="f5"> {credit:https://wikipedia.com}</text></text>
+                        </div>
+  
+                    </div>                        
 <div class="flex justify-center ma2 pa3 ">
 {{ div | safe }}
 </div>

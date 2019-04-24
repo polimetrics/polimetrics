@@ -102,6 +102,7 @@ a {
    flex-direction: column;
    flex-grow: 1;
    padding: 1%; 
+   overflow: auto;
 }
 
 .pictcontainer2 {
@@ -316,4 +317,45 @@ a {
     left: 4%;
     bottom: 0;
     right: 35%;
+}
+
+.pictcontainerdetail {
+    font-family: 'Libre Baskerville', serif;
+    border-style: solid;
+    border-color:white;
+    
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+  
+    
+    padding: 1%;
+    text-align: right;  
+    overflow: hidden; 
+    padding-right: 15%; 
+    overflow: auto;
+}
+.pictdetail {
+    border: all;
+    border-style: solid;
+    border-radius: 100%;
+    border-color: white;
+    width: 30%;
+    height: 30%;
+    border-width: .5rem;
+    margin-right: 2%;     
+    z-index: 2;
+    align-self: stretch;
+    float: left;
+}
+
+.textboxdetail {
+    color: black;
+    z-index: -1;
+    height: rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: center;  
 }
