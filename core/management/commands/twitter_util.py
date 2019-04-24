@@ -77,5 +77,6 @@ class Command(BaseCommand):
                 retweet_count = tweet.retweet_count,
                 favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else tweet.favorite_count,
                 tweet_id = tweet.id_str,
-                retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') else None
+                retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') and len(tweet.retweeted_status.id_str) < 100 else None
             )
+            
