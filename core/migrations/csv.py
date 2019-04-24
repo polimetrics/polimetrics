@@ -41,7 +41,7 @@ def load_candidate_data(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0010_auto_20190423_0941'),
+        ('core', '0010_candidatemeansentiment'),
     ]
 
     operations = [migrations.RunPython(load_candidate_data)]
