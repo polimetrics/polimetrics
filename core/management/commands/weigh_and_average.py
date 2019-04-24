@@ -25,7 +25,7 @@ class Command(BaseCommand):
         self.tweets = {}
 
         utc_date = options['date']
-
+        print(utc_date)
         if 'daily' in options['command']:
 
             for candidate in self.candidates:
@@ -57,12 +57,14 @@ class Command(BaseCommand):
 
                 # add them together to compute "total engagement" for the candidate
                 total_engagement = daily_favorites + daily_retweets
-
+                print(total_engagement)
                 # Computed weighted sentiment value for each unique tweet
                 # Store them in a list called weighted_sentiments
+                print(self.tweets.values())
                 for vals in self.tweets.values():
-                    weighted_sentiments.append(vals[2] * (vals[0] + vals[1])/total_engagement)
-                
+                    if (total_engagement != 0):
+                        weighted_sentiments.append(vals[2] * (vals[0] + vals[1])/total_engagement)
+
                 # sum the entire list to compute the mean daily sentiment for the candidate
                 mean_daily_sentiment = sum(weighted_sentiments)
 
