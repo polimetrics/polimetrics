@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
+from django.utils import timezone
 
 # Create your models here.
 
@@ -12,6 +13,7 @@ class Candidate(models.Model):
     description = models.TextField(max_length=1500, null=True, blank=True)
     image = models.ImageField(upload_to='core/static/img', blank=True, max_length=100)
     slug = models.SlugField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['last_name']
