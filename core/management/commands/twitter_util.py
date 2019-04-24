@@ -44,7 +44,6 @@ class Command(BaseCommand):
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 
         utc_date_str = (options['date'] + timedelta(days=1)).strftime("%Y-%m-%d")
-        print(utc_date_str)
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
         # input for term to be searched and how many tweets to search
