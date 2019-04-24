@@ -57,8 +57,7 @@ class Command(BaseCommand):
         
         new_candidate, _ = Candidate.objects.get_or_create(
             first_name=temp_candidate[0].lower(), 
-            last_name=temp_candidate[1].lower(),
-            created_at=datetime.now(timezone.utc)
+            last_name=temp_candidate[1].lower()
         )
 
         for tweet in self.tweets:
