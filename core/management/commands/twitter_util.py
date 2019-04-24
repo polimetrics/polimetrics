@@ -5,8 +5,7 @@ from core.models import Tweet, Candidate
 from django.conf import settings
 import tweepy
 import re 
-from datetime import timezone
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import argparse
 
 class Command(BaseCommand):
@@ -44,7 +43,7 @@ class Command(BaseCommand):
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 
-        utc_date_str = options['date'].strftime("%Y-%m-%d")
+        utc_date_str = (options['date'] + timedelta(days=1)).strftime("%Y-%m-%d")
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
         # input for term to be searched and how many tweets to search
