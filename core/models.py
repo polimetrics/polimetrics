@@ -51,6 +51,9 @@ class Tweet(models.Model):
     tweet_id = models.CharField(max_length=100)
     retweeted_id = models.CharField(max_length=100, null=True)
 
+    class Meta:
+        ordering = ['-created_at']
+
 class CandidateMeanSentiment(models.Model):
     '''
     This model represents the mean sentiment per candidate on a given time-slice
