@@ -15,6 +15,9 @@ class Candidate(models.Model):
     slug = models.SlugField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['last_name']
+    
     def set_slug(self):
         '''Creates a unique slug for every candidate'''
         if self.slug:
