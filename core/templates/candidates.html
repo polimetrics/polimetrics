@@ -6,11 +6,15 @@
 <body class="canbody">
         <br>
         <br>
+        <br>
+        <br>
+        <br>
+        <br>
       
      
                 {% for candidate in candidates %}
         <div class="pictcontainer mb5 ">
-                <a href="" class="link">
+                <a href="{% url 'candidate_detail' pk=candidate.pk %}" class="link">
                       <div>
                               {% if candidate.image %}
                            
