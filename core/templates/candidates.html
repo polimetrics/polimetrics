@@ -10,23 +10,22 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+      
+     
                 {% for candidate in candidates %}
-        <div class="pictcontainer mb3 ">
-                <a href="" class="link">
-                        <img src="{{ candidate.image }}" class="pict2">
+        <div class="pictcontainer mb5 ">
+                <a href="{% url 'candidate_detail' pk=candidate.pk %}" class="link">
+                      <div>
+                              {% if candidate.image %}
+                           
+                        <img src="{{ candidate.image.url }}" class="pict">
+                              
+                                {% endif %}
+                </div>
                         <div class="textbox2">
-                                <text class="name  avenir"> {{ candidate.first_name }} {{ candidate.last_name }}
+                                <text class="name avenir mt4 "> {{ candidate.first_name }} {{ candidate.last_name }}
                                 </text>
-                                <text class="avenir f5 "> {{ candidate.description }}.</text>
+                                <text class="avenir f5 "> {{ candidate.description }}. {credit:https://wikipedia.com}</text>
                         </div>
                 </a>
         </div>
