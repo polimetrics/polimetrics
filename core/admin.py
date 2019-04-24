@@ -16,6 +16,6 @@ class TweetAdmin(admin.ModelAdmin):
 class DeveloperAdmin(admin.ModelAdmin):
     list_display = ('image', 'name', 'header', 'bio', 'fav_album', 'fav_coffee', 'fav_president')
 
-@admin.register(Developer)
+@admin.register(CandidateMeanSentiment)
 class CandidateMeanSentiment(admin.ModelAdmin):
     list_display = ('candidate', 'mean_sentiment', 'from_date_time', 'to_date_time', 'created_at')
