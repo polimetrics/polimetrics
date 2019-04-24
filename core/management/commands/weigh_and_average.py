@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from core.models import Tweet, Candidate, CandidateMeanSentiment
 from datetime import datetime, timezone
 import argparse
-from django.utils.timezone import make_aware
+from django.db.models import Sum
 
 class Command(BaseCommand):
 
@@ -17,26 +17,23 @@ class Command(BaseCommand):
                 raise argparse.ArgumentTypeError(msg)
 
         parser.add_argument('command', nargs='?', choices=['daily', 'total'], default='daily')
-        parser.add_argument('-d', '--date', help='The Date at which to calculate - format YYYY-MM-DD', type=valid_date)
+        parser.add_argument('-d', '--date', help='The Date at which to calculate - format YYYY-MM-DD', type=valid_date, default=datetime.utcnow())
 
     def handle(self, *args, **options):
 
         self.candidates = Candidate.objects.all()
         self.tweets = {}
-        
-        current_utc = datetime.utcnow()
-        day = current_utc.day
-        month = current_utc.month
-        year = current_utc.year
+
+        utc_date = options['date']
 
         if 'daily' in options['command']:
 
             for candidate in self.candidates:
-                total_favorites = 0
-                total_retweets = 0
+                daily_favorites = 0
+                daily_retweets = 0
                 weighted_sentiments = []
-                from_dt = datetime(year, month, day, tzinfo=timezone.utc)
-                to_dt = datetime(year, month, day+1, tzinfo=timezone.utc)
+                from_dt = datetime(utc_date.year, utc_date.month, utc_date.day, tzinfo=timezone.utc)
+                to_dt = datetime(utc_date.year, utc_date.month, utc_date.day + 1, tzinfo=timezone.utc)
                 temp_tweets = Tweet.objects.filter(
                     candidate=candidate, 
                     created_at__gte=from_dt,
@@ -55,11 +52,11 @@ class Command(BaseCommand):
                 # Loop through the unique retweeted_id tweet_id values in the dictionary from above
                 # and sum the favorites and retweet counts for each in a running total
                 for vals in self.tweets.values():
-                    total_favorites += vals[0]
-                    total_retweets += vals[1]
+                    daily_favorites += vals[0]
+                    daily_retweets += vals[1]
 
                 # add them together to compute "total engagement" for the candidate
-                total_engagement = total_favorites + total_retweets
+                total_engagement = daily_favorites + daily_retweets
 
                 # Computed weighted sentiment value for each unique tweet
                 # Store them in a list called weighted_sentiments
@@ -76,10 +73,16 @@ class Command(BaseCommand):
                 cms = CandidateMeanSentiment.objects.create(
                     candidate = candidate,
                     mean_sentiment = mean_daily_sentiment,
-                    from_date_time = make_aware(datetime(year, month, day)),
-                    to_date_time = make_aware(datetime(year, month, day+1))
+                    from_date_time = from_dt,
+                    to_date_time = to_dt,
+                    total_favorites = daily_favorites,
+                    total_retweets = daily_retweets
                 )
 
         if 'total' in options['command']:
-            # do something else
-            pass
+            print("got total here")
+
+            for candidate in self.candidates:
+                sums = CandidateMeanSentiment.objects.filter(candidate=candidate).aggregate(x=Sum('total_favorites'), y=Sum('total_retweets'))
+            z = sums['x'] + sums['y']
+            print(z)

@@ -6,8 +6,21 @@ from django.conf import settings
 import tweepy
 import re 
 from datetime import timezone
+from datetime import datetime, timezone
+import argparse
 
 class Command(BaseCommand):
+
+    def add_arguments(self, parser):
+        def valid_date(s):
+            try:
+                return datetime.strptime(s, "%Y-%m-%d")
+            except ValueError:
+                msg = "Not a valid date: '{0}'.".format(s)
+                raise argparse.ArgumentTypeError(msg)
+
+        parser.add_argument('-d', '--date', help='The Date at which to calculate - format YYYY-MM-DD', type=valid_date, default=datetime.utcnow())
+
 
     def __init__(self):
         self.tweets = []
@@ -20,7 +33,7 @@ class Command(BaseCommand):
         '''
         return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
 
-    def handle(self, *args, **kwargs):
+    def handle(self, *args, **options):
         # Variables that contains the user credentials to access Twitter API 
 
         ACCESS_TOKEN = settings.ACCESS_TOKEN
@@ -30,6 +43,9 @@ class Command(BaseCommand):
 
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
+
+        utc_date_str = options['date'].strftime("%Y-%m-%d")
+        print(utc_date_str)
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
         # input for term to be searched and how many tweets to search
@@ -39,12 +55,10 @@ class Command(BaseCommand):
         temp_candidate = self.candidate.split()
 
         # searching for tweets
-        self.tweets = tweepy.Cursor(api.search, q=self.candidate, lang = "en").items(num_terms)
+        self.tweets = tweepy.Cursor(api.search, q=self.candidate, until=utc_date_str, lang = "en").items(num_terms)
         
         new_candidate, _ = Candidate.objects.get_or_create(first_name=temp_candidate[0].lower(), last_name=temp_candidate[1].lower())
         for tweet in self.tweets:
-            print(tweet)
-            print(tweet.created_at)
             textBlob = TextBlob(self.clean_tweet(tweet.text))
             temp_polarity = textBlob.sentiment.polarity
             temp_subjectivity = textBlob.sentiment.subjectivity
