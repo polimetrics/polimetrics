@@ -7,6 +7,7 @@ import tweepy
 import re 
 from datetime import datetime, timezone, timedelta
 import argparse
+from django.db.utils import DataError
 
 class Command(BaseCommand):
 
@@ -65,18 +66,21 @@ class Command(BaseCommand):
             temp_polarity = textBlob.sentiment.polarity
             temp_subjectivity = textBlob.sentiment.subjectivity
             temp_sentiment = temp_polarity * (1-temp_subjectivity/2)
-            tweet = Tweet.objects.create(
-                candidate = new_candidate,
-                text = tweet.text,
-                followers = tweet.user.followers_count,
-                created_at = tweet.created_at.replace(tzinfo=timezone.utc),
-                polarity = temp_polarity,
-                subjectivity = temp_subjectivity,
-                location = tweet.user.location,
-                sentiment = temp_sentiment,
-                retweet_count = tweet.retweet_count,
-                favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else tweet.favorite_count,
-                tweet_id = tweet.id_str,
-                retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') and len(tweet.retweeted_status.id_str) < 100 else None
-            )
             
+            try:
+                Tweet.objects.create(
+                    candidate = new_candidate,
+                    text = tweet.text,
+                    followers = tweet.user.followers_count,
+                    created_at = tweet.created_at.replace(tzinfo=timezone.utc),
+                    polarity = temp_polarity,
+                    subjectivity = temp_subjectivity,
+                    location = tweet.user.location[:100],
+                    sentiment = temp_sentiment,
+                    retweet_count = tweet.retweet_count,
+                    favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else tweet.favorite_count,
+                    tweet_id = tweet.id_str,
+                    retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') else None
+                )
+            except DataError:
+                pass
