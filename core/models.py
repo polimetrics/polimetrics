@@ -12,6 +12,7 @@ class Candidate(models.Model):
     description = models.TextField(max_length=1500, null=True, blank=True)
     image = models.ImageField(upload_to='core/static/img', blank=True, max_length=100)
     slug = models.SlugField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def set_slug(self):
         '''Creates a unique slug for every candidate'''
