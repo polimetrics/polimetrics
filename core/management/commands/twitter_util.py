@@ -5,12 +5,9 @@ from core.models import Tweet, Candidate
 from django.conf import settings
 import tweepy
 import re 
-from django.utils.timezone import make_aware
-import pytz
+from datetime import timezone
 
 class Command(BaseCommand):
-
-    
 
     def __init__(self):
         self.tweets = []
@@ -46,8 +43,8 @@ class Command(BaseCommand):
         
         new_candidate, _ = Candidate.objects.get_or_create(first_name=temp_candidate[0].lower(), last_name=temp_candidate[1].lower())
         for tweet in self.tweets:
-            print(tweet.created_at)
             print(tweet)
+            print(tweet.created_at)
             textBlob = TextBlob(self.clean_tweet(tweet.text))
             temp_polarity = textBlob.sentiment.polarity
             temp_subjectivity = textBlob.sentiment.subjectivity
@@ -56,7 +53,7 @@ class Command(BaseCommand):
                 candidate = new_candidate,
                 text = tweet.text,
                 followers = tweet.user.followers_count,
-                created_at = make_aware(tweet.created_at),
+                created_at = tweet.created_at.replace(tzinfo=timezone.utc),
                 polarity = temp_polarity,
                 subjectivity = temp_subjectivity,
                 location = tweet.user.location,
