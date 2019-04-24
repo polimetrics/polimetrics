@@ -13,7 +13,7 @@ class Candidate(models.Model):
     description = models.TextField(max_length=1500, null=True, blank=True)
     image = models.ImageField(upload_to='core/static/img', blank=True, max_length=100)
     slug = models.SlugField(max_length=500)
-    created_at = models.DateTimeField(auto_now_add=True, default=timezone.now)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def set_slug(self):
         '''Creates a unique slug for every candidate'''
@@ -48,9 +48,6 @@ class Tweet(models.Model):
     tweet_id = models.CharField(max_length=100)
     retweeted_id = models.CharField(max_length=100, null=True)
 
-    class Meta:
-        ordering = ['-created_at']
-
 class CandidateMeanSentiment(models.Model):
     '''
     This model represents the mean sentiment per candidate on a given time-slice
@@ -63,7 +60,7 @@ class CandidateMeanSentiment(models.Model):
     total_retweets = models.PositiveIntegerField(default=0)
     from_date_time = models.DateTimeField()
     to_date_time = models.DateTimeField()
-    created_at = models.DateTimeField(auto_now_add=True, default=datetime.utcnow())
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Developer(models.Model):
     '''
