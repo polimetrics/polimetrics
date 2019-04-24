@@ -31,10 +31,18 @@
 <div class="tc">
     <a class="mt4 header-font black link hover-red dib" href="{% url 'methodology' %}">Learn more</a>
 </div>
-<h2 class="body-headers mt5 tc">Latest Poll:</h2>
+<h3 class="body-headers mt5 tc">Latest Poll:</h3>
 <div class="center-graph">
 {{ div | safe }}
 </div>
+<h4 class="body-headers mt5 tc">Candidates:</h4>
+{% for candidate in candidates %}
+    <div>
+        {% if candidate.first_name %}
+            {{ candidate.first_name }}
+        {% endif %}
+    </div>
+{% endfor %}
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
     particlesJS.load('particles-js', 'static/js/particles.json', function(){
