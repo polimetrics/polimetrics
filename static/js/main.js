@@ -1,7 +1,7 @@
 var $ = require('jQuery');
 var $ = require('ScrollMagic');
 
-$(document).ready(function(){
+$(document).ready(function () {
 
     var controller = new ScrollMagic.Controller();
 
