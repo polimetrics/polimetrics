@@ -19,12 +19,12 @@ class Command(BaseCommand):
                 msg = "Not a valid date: '{0}'.".format(s)
                 raise argparse.ArgumentTypeError(msg)
 
+        parser.add_argument('candidate', nargs=2, help='The candidate to search')
+        parser.add_argument('-c', '--count', help='The number of tweets to fetch', type=int, default=10)
         parser.add_argument('-d', '--date', help='The Date at which to calculate - format YYYY-MM-DD', type=valid_date, default=datetime.utcnow())
-
 
     def __init__(self):
         self.tweets = []
-        self.candidate = []
 
     def clean_tweet(self, tweet): 
         ''' 
@@ -44,17 +44,15 @@ class Command(BaseCommand):
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 
+        # 
         utc_date_str = (options['date'] + timedelta(days=1)).strftime("%Y-%m-%d")
+        temp_candidate = options['candidate']
+        num_terms = options['count']
+
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
-        # input for term to be searched and how many tweets to search
-        self.candidate = input("Enter first and last name of candidate: ")
-        num_terms = int(input("Enter how many tweets to search: "))
-
-        temp_candidate = self.candidate.split()
-
         # searching for tweets
-        self.tweets = tweepy.Cursor(api.search, q=self.candidate, until=utc_date_str, lang = "en").items(num_terms)
+        self.tweets = tweepy.Cursor(api.search, q=temp_candidate, until=utc_date_str, lang = "en").items(num_terms)
         
         new_candidate, _ = Candidate.objects.get_or_create(
             first_name=temp_candidate[0].lower(), 
