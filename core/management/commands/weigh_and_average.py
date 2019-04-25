@@ -57,10 +57,8 @@ class Command(BaseCommand):
 
                 # add them together to compute "total engagement" for the candidate
                 total_engagement = daily_favorites + daily_retweets
-                print(total_engagement)
                 # Computed weighted sentiment value for each unique tweet
                 # Store them in a list called weighted_sentiments
-                print(self.tweets.values())
                 for vals in self.tweets.values():
                     if (total_engagement != 0):
                         weighted_sentiments.append(vals[2] * (vals[0] + vals[1])/total_engagement)

@@ -7,6 +7,7 @@ import tweepy
 import re 
 from datetime import datetime, timezone, timedelta
 import argparse
+from django.db.utils import DataError
 
 class Command(BaseCommand):
 
@@ -18,12 +19,12 @@ class Command(BaseCommand):
                 msg = "Not a valid date: '{0}'.".format(s)
                 raise argparse.ArgumentTypeError(msg)
 
+        parser.add_argument('candidate', nargs=2, help='The candidate to search')
+        parser.add_argument('-c', '--count', help='The number of tweets to fetch', type=int, default=10)
         parser.add_argument('-d', '--date', help='The Date at which to calculate - format YYYY-MM-DD', type=valid_date, default=datetime.utcnow())
-
 
     def __init__(self):
         self.tweets = []
-        self.candidate = []
 
     def clean_tweet(self, tweet): 
         ''' 
@@ -43,17 +44,15 @@ class Command(BaseCommand):
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 
+        # 
         utc_date_str = (options['date'] + timedelta(days=1)).strftime("%Y-%m-%d")
+        temp_candidate = options['candidate']
+        num_terms = options['count']
+
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
 
-        # input for term to be searched and how many tweets to search
-        self.candidate = input("Enter first and last name of candidate: ")
-        num_terms = int(input("Enter how many tweets to search: "))
-
-        temp_candidate = self.candidate.split()
-
         # searching for tweets
-        self.tweets = tweepy.Cursor(api.search, q=self.candidate, until=utc_date_str, lang = "en").items(num_terms)
+        self.tweets = tweepy.Cursor(api.search, q=temp_candidate, until=utc_date_str, lang = "en").items(num_terms)
         
         new_candidate, _ = Candidate.objects.get_or_create(
             first_name=temp_candidate[0].lower(), 
@@ -65,17 +64,21 @@ class Command(BaseCommand):
             temp_polarity = textBlob.sentiment.polarity
             temp_subjectivity = textBlob.sentiment.subjectivity
             temp_sentiment = temp_polarity * (1-temp_subjectivity/2)
-            tweet = Tweet.objects.create(
-                candidate = new_candidate,
-                text = tweet.text,
-                followers = tweet.user.followers_count,
-                created_at = tweet.created_at.replace(tzinfo=timezone.utc),
-                polarity = temp_polarity,
-                subjectivity = temp_subjectivity,
-                location = tweet.user.location,
-                sentiment = temp_sentiment,
-                retweet_count = tweet.retweet_count,
-                favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else tweet.favorite_count,
-                tweet_id = tweet.id_str,
-                retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') else None
-            )
+            
+            try:
+                Tweet.objects.create(
+                    candidate = new_candidate,
+                    text = tweet.text,
+                    followers = tweet.user.followers_count,
+                    created_at = tweet.created_at.replace(tzinfo=timezone.utc),
+                    polarity = temp_polarity,
+                    subjectivity = temp_subjectivity,
+                    location = tweet.user.location[:100],
+                    sentiment = temp_sentiment,
+                    retweet_count = tweet.retweet_count,
+                    favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else tweet.favorite_count,
+                    tweet_id = tweet.id_str,
+                    retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') else None
+                )
+            except DataError:
+                pass
