@@ -61,12 +61,9 @@ class CandidateMeanSentiment(models.Model):
     Also, weights are applied to sentiment based on total retweet and favorite counts.  
     '''
     candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE)
-    overall_mean_sentiment = models.DecimalField(max_digits=10, decimal_places=9)
-    total_engagement = models.PositiveIntegerField(default=0)
-    positive_mean_sentiment = models.DecimalField(max_digits=10, decimal_places=9)recei
-    positive_engagement = models.IntegerField(default=0)
-    negative_mean_sentiment = models.DecimalField(max_digits=10, decimal_places=9)
-    negative_engagement = models.IntegerField(default=0)
+    mean_sentiment = models.DecimalField(max_digits=10, decimal_places=9)
+    total_favorites = models.PositiveIntegerField(default=0)
+    total_retweets = models.PositiveIntegerField(default=0)
     from_date_time = models.DateTimeField()
     to_date_time = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
