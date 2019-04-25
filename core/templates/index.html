@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block content %}
-<div class="image-holder">
+<div class="image-holder project" id="project01">
     <div class="mt7" id="clockdiv"> 
         <h1 class="clock-header">Countdown to the <br> 2020 Iowa Democratic Caucuses</h1>
         <div> 
@@ -32,7 +32,7 @@
     <a class="mt4 header-font black link hover-red dib" href="{% url 'methodology' %}">Learn more</a>
 </div>
 <h2 class="body-headers mt5 tc">Latest Poll:</h2>
-<div class="center-graph">
+<div class="center-graph project" id="project02">
 {{ div | safe }}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>

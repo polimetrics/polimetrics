@@ -383,3 +383,14 @@ a {
     font-family: "futura-pt-light", sans-serif;
     
 }
+
+.project {
+    opacity: 0;
+    /* transform: translateY(50px); */
+    transition: all .5s ease-out;
+
+}
+.project.fade-in {
+    opacity: 1;
+    /* transform: translateY(0); */
+}
