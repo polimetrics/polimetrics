@@ -68,7 +68,7 @@ def candidate_detail_view(request, pk):
     data = {'date': candidate_mean_sentiment_date,
             'sentiment': candidate_mean_sentiment_data}
     source = ColumnDataSource(data)
-    plot = figure(x_axis_label='Date of Tweet',
+    plot = figure(x_axis_label='Date of sentiment',
                   x_axis_type='datetime',
                   y_axis_label='Sentiment',
                   plot_width=1000,
