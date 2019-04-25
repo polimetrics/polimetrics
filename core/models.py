@@ -67,6 +67,10 @@ class CandidateMeanSentiment(models.Model):
     from_date_time = models.DateTimeField()
     to_date_time = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
+    positive_mean_sentiment = models.DecimalField(max_digits=10, decimal_places=9, default=0)
+    positive_engagement = models.IntegerField(default=0)
+    negative_mean_sentiment = models.DecimalField(max_digits=10, decimal_places=9, default=0)
+    negative_engagement = models.IntegerField(default=0)    
 
 class Developer(models.Model):
     '''
