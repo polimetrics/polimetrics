@@ -1,24 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
 
- <div class="pictcontainerdetail mt6  mr6    ">
-                
-                      
-                             
-                           
-                        <img src="{{ candidate.image.url }}" class="pictdetail">
-                              
-                               
-                
-                        <div class="textboxdetail">
-                                <text class="name  mt4 f-headline  "> {{ candidate.first_name }} {{ candidate.last_name }}
-                                </text>
-                                <br>
-                                <text class=" f3 tc      "> {{ candidate.description }}. <text class="f5"> {credit:https://wikipedia.com}</text></text>
-                        </div>
-  
-                    </div>                        
+<div class="pictcontainerdetail mt6  mr6    ">
+
+
+
+
+    <img src="{{ candidate.image.url }}" class="pictdetail">
+
+
+
+    <div class="textboxdetail">
+        <text class="name  mt4 f-headline b   "> {{ candidate.first_name }} {{ candidate.last_name }}
+        </text>
+        <br>
+        <text class=" f3 tc fw1 detaildes"> {{ candidate.description }}. <text class="f5">
+                {credit:https://wikipedia.com}
+            </text></text>
+    </div>
+
+</div>
+<div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
 <div class="flex justify-center ma2 pa3 ">
-{{ div | safe }}
+    {{ div | safe }}
 </div>
 {% endblock %}
