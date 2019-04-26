@@ -1,48 +1,32 @@
-{
-    % load staticfiles %
-}
+{% load staticfiles %}
 
 @font-face {
     font-family: 'futura-pt-light';
-    src: url('/static/fonts/futura-pt-light.ttf') format("truetype"),
-        local('futura-pt-light');
+    src: url('/static/fonts/futura-pt-light.ttf')  format("truetype"),
+         local('futura-pt-light');
 }
 
-
-
-
-
-
 a {
-    outline : 0 !important;
-    
+    outline: 0 !important;
+}
+
+footer {
+    position: absolute;
+    width: 1500px;
+    background-color: black;
+    padding: 60px 0px;
+    margin-top: 10%;
 }
 
 .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5rem;
-  background-color: rgba(13, 93, 215, 0.448);
-  z-index: 50;
-  transition: all .2s ease-out;
-  color:white;
-  
-
-}
-
-.nav.fade-in {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
     background-color: white;
-    color: black;
-    
-
+    z-index: 50;
 }
-
-
-
-
-
 
 .logo {
     height: 100%;
@@ -68,7 +52,7 @@ a {
     content: '';
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 10;
     width: 100%;
     height: 100%;
     display: block;
@@ -77,34 +61,25 @@ a {
     opacity: 0.6;
 }
 
-/* code below is on the candidates.html */
-.pict {
-    border: all;
-    border-style: solid;
-    border-radius: 100%;
-    border-color: white;
-    width: 15%;
-    height: 15%;
-    border-width: .5rem;
-    margin-right: 2%;
-    z-index: 2;
-    align-self: stretch;
-    float: left;
+.candidates {
+    position: absolute;
+    z-index: 95;
 }
 
-.pict2 {
-    border: all;
-    border-style: solid;
-    border-radius: 100%;
-    border-color: cornflowerblue;
+.candidates-image {
+    border-radius: 75%;
+    border-width: .5rem;
+    z-index: 2;
+    flex: 1 0 25%;
     width: 15%;
     height: 15%;
-    border-width: .5rem;
-    margin-right: 2%;
-    margin-left: 2%;
-    z-index: 2;
+    max-width: 15%;
+    max-height: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    cursor: pointer;
     align-self: stretch;
-    float: right;
 }
 
 .pict:hover {
@@ -154,6 +129,14 @@ a {
     text-align: right;
 }
 
+.rep-candidates-underline {
+    background-color: #ED2024;
+}
+
+.dem-candidates-underline {
+    background-color: #415CAA;
+}
+
 .textbox {
     color: black;
     z-index: -1;
@@ -192,11 +175,24 @@ a {
     opacity: 0.7;
 }
 
-#box {
+#about-box {
     max-width: 50%;
     width: 50%;
     background: #ED2024;
     display: inline-block;
+}
+
+.blue-box {
+    width: 80%;
+    height: 100%;
+    background: #212121;
+    margin: 0 auto;
+    padding: 50px;
+    z-index: 5;
+}
+
+#candidates-header {
+    margin-left: 680px;
 }
 
 #about {
@@ -267,14 +263,28 @@ a {
 }
 
 #particles-js {
-    max-width: 100%;
-    background-image: url("white-house2.jpeg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+  max-width: 100%;
+  background-image: url("white-house2.jpeg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-#clockdiv {
+#particles-js2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -670;
+    top: 0px;
+    left: 0px;
+    background-color: #ffffff;
+}
+
+#white-box {
+    background-color: #ffffff;
+}
+
+ #clockdiv { 
     font-family: 'Century Gothic', sans-serif;
     font-size: 30px;
     color: white;
@@ -359,6 +369,13 @@ a {
     right: 35%;
 }
 
+.party-logo {
+    width: 15%;
+    height: 15%;
+    max-width: 15%;
+    max-height: 15%;
+    margin: 0 auto;
+}
 .pictcontainerdetail {
     font-family: 'Century Gothic', sans-serif;
     border-style: solid;
@@ -407,27 +424,9 @@ a {
 
 .detaildes {
     font-family: "futura-pt-light", sans-serif;
-<<<<<<< HEAD
-    
-}
-
-.project {
-    opacity: 0;
-    /* transform: translateY(50px); */
-    transition: all .5s ease-out;
-
-}
-.project.fade-in {
-    opacity: 1;
-    /* transform: translateY(0); */
-}
-
-
-=======
 
 }
 
 .capitalize {
     text-transform: capitalize
 }
->>>>>>> master

@@ -4,7 +4,7 @@
 {% block content %}
 <div class="image-holder">
     <div class="mt7" id="clockdiv"> 
-        <h1 class="clock-header">Countdown to the <br> 2020 Iowa Democratic Caucuses</h1>
+        <h1 class="clock-header">Countdown to Election Season</h1>
         <div> 
             <span class="days" id="day"></span> 
             <div class="smalltext" id="navel">Days</div> 
@@ -24,20 +24,55 @@
     </div>
     <div id="particles-js"></div>
 </div>
-<h2 class="body-headers mt5 tc">poli-whatric?</h2>
-<p class="tc body-content body-structure">
-    Polimetrics is a web application that performs sentiment analysis on Tweets to generate opinion polls for 2020 presidential primary candidates.
-</p>
-<div class="tc">
-    <a class="mt4 header-font black link hover-red dib" href="{% url 'methodology' %}">Learn more</a>
+<div id="white-box">
+    <h2 class="body-headers mt0 pt5 tc">poli-whatric?</h2>
+    <p class="tc pt3 body-content body-structure">
+        Polimetrics is a web application that performs sentiment analysis on Tweets to generate opinion polls for 2020 presidential primary candidates.
+    </p>
+    <div class="tc">
+        <a class="mt4 header-font black link hover-red dib" href="{% url 'methodology' %}">Learn more</a>
+    </div>
+    <h3 class="body-headers mt5 tc">Latest Poll</h3>
+    <div class="center-graph">
+    {{ div | safe }}
+    </div>
+    <h4 class="body-headers mt5 mb0 pa5 tc">Candidates:</h4>
 </div>
-<h2 class="body-headers mt5 tc">Latest Poll:</h2>
-<div class="center-graph project" id="project02">
-{{ div | safe }}
+<div id="particles-js2"></div>
+<div class="blue-box">
+    <div class="party-logo">
+        <img src="{% static '/img/republican_logo.png' %}">
+    </div>
+    <div class="tc">
+        {% for candidate in candidate %}
+            {% if candidate.party == "republican" %}
+                <a class="no-underline dim rep-candidates-underline" href="{% url 'candidate_detail' slug=candidate.slug %}">
+                    <img class="candidates-image" src="{{ candidate.image.url }}">
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="mt5 party-logo">
+        <img src="{% static '/img/democrat_logo.png' %}">
+    </div>
+    <div class="tc mt1">
+        {% for candidate in candidate %}
+            {% if candidate.party == "democrat" %}
+                <a class="no-underline dim dem-candidates-underline" href="{% url 'candidate_detail' slug=candidate.slug %}">
+                    <img class="candidates-image" src="{{ candidate.image.url }}">
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 <script>
     particlesJS.load('particles-js', 'static/js/particles.json', function(){
+        console.log('particles.json loaded....');
+    });
+</script>
+<script>
+    particlesJS.load('particles-js2', 'static/js/particles2.json', function(){
         console.log('particles.json loaded....');
     });
 </script>

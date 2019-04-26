@@ -10,6 +10,8 @@ from math import pi
 
 def index(request):
     candidates = CandidateMeanSentiment.objects.all()
+    # candidate = Candidate.objects.all()
+    
     sentiment_list = []
     candidates_list = []
     for candidate in candidates:
@@ -18,22 +20,20 @@ def index(request):
             # candidate.first_name + candidate.last_name)
             candidates_list.append(str(
                 candidate.candidate.first_name + " " + candidate.candidate.last_name))
-    # for candidate in candidates:
+    candidate = Candidate.objects.all()
+    # data = {'Candidates': candidates_list,
+    #         'Sentiment': sentiment_list}
 
-        # data = {'Candidates': candidates_list,
-        #         'Sentiment': sentiment_list}
-
-        # source = ColumnDataSource(data)
+    # source = ColumnDataSource(data)
     plot = figure(x_range=candidates_list, y_range=(-1, 1),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
                   plot_height=350, plot_width=400, title="Mean Sentiment Per Candidate")
 
     plot.vbar(x=candidates_list, top=sentiment_list, width=0.4)
-
     plot.xgrid.grid_line_color = None
     plot.y_range.start = -1
     script, div = components(plot)
-    context = {'script': script, 'div': div}
+    context = {'script': script, 'div': div, 'candidate':candidate}
     return render_to_response('index.html', context=context)
 
 
@@ -44,8 +44,8 @@ def candidates(request):
                   context={'candidates': candidates})
 
 
-def candidate_detail_view(request, pk):
-    candidate = get_object_or_404(Candidate, pk=pk)
+def candidate_detail(request, slug):
+    candidate = get_object_or_404(Candidate, slug=slug)
     # candidate = Candidate.objects.get(Candidate, id=id)
 
     candidate_mean_sentiment = CandidateMeanSentiment.objects.all()
@@ -99,14 +99,8 @@ def candidate_detail_view(request, pk):
     #     context = {'script': script, 'div': div, 'candidate': candidate}
     #     return render_to_response('candidate_detail.html', context=context)
 
-
-def tags(request):
-    return render(request, "tags.html")
-
-
 def methodology(request):
     return render(request, "methodology.html")
-
 
 def about(request):
     return render(request, "about.html")
