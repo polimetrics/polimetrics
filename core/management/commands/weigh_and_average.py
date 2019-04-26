@@ -16,73 +16,75 @@ class Command(BaseCommand):
                 msg = "Not a valid date: '{0}'.".format(s)
                 raise argparse.ArgumentTypeError(msg)
 
-        parser.add_argument('command', nargs='?', choices=['daily', 'total'], default='daily')
+        parser.add_argument('-o', '--overall', action='store_true', default=False)
         parser.add_argument('-d', '--date', help='The Date at which to calculate - format YYYY-MM-DD', type=valid_date, default=datetime.utcnow())
+
+    def calculate_weighted_sentiments(self, tweets, total_engagement):
+        weighted_sentiment = 0
+        for tweet in tweets:
+            engagement = tweet.favorite_count + tweet.retweet_count
+            engagement = 1 if engagement == 0 else engagement + 1 # engagement is at least 1
+            weighted_sentiment += tweet.sentiment * engagement/total_engagement
+        return weighted_sentiment
 
     def handle(self, *args, **options):
 
-        self.candidates = Candidate.objects.all()
-        self.tweets = {}
-
         utc_date = options['date']
-        print(utc_date)
-        if 'daily' in options['command']:
+        from_dt = datetime(utc_date.year, utc_date.month, utc_date.day, tzinfo=timezone.utc)
+        if options['overall']:
+            tweet = Tweet.objects.earliest('created_at')
+            from_dt = tweet.created_at
 
-            for candidate in self.candidates:
-                daily_favorites = 0
-                daily_retweets = 0
-                weighted_sentiments = []
-                from_dt = datetime(utc_date.year, utc_date.month, utc_date.day, tzinfo=timezone.utc)
-                to_dt = datetime(utc_date.year, utc_date.month, utc_date.day + 1, tzinfo=timezone.utc)
-                temp_tweets = Tweet.objects.filter(
-                    candidate=candidate, 
-                    created_at__gte=from_dt,
-                    created_at__lte=to_dt
-                )
+        to_dt = datetime(utc_date.year, utc_date.month, utc_date.day + 1, tzinfo=timezone.utc)
 
-                # clean out unique retweeted_ids to hold only one record per. 
-                # If retweeted_id doesn't exist (i.e. tweet wasn't retweeted) then
-                # store the tweet_id with the same values.  (favorite_count, retweet_count, sentiment)
-                for tweet in temp_tweets:
-                    if tweet.retweeted_id:
-                        self.tweets[tweet.retweeted_id] = [tweet.favorite_count, tweet.retweet_count, tweet.sentiment]
-                    else:
-                        self.tweets[tweet.tweet_id] = [tweet.favorite_count, tweet.retweet_count, tweet.sentiment]
-                
-                # Loop through the unique retweeted_id tweet_id values in the dictionary from above
-                # and sum the favorites and retweet counts for each in a running total
-                for vals in self.tweets.values():
-                    daily_favorites += vals[0]
-                    daily_retweets += vals[1]
+        for candidate in Candidate.objects.all():
 
-                # add them together to compute "total engagement" for the candidate
-                total_engagement = daily_favorites + daily_retweets
-                # Computed weighted sentiment value for each unique tweet
-                # Store them in a list called weighted_sentiments
-                for vals in self.tweets.values():
-                    if (total_engagement != 0):
-                        weighted_sentiments.append(vals[2] * (vals[0] + vals[1])/total_engagement)
+            unique_retweeted_tweets = Tweet.objects.order_by('retweeted_id', '-created_at').distinct('retweeted_id').filter(
+                candidate=candidate, 
+                created_at__gte=from_dt,
+                created_at__lte=to_dt,
+            ).exclude(retweeted_id=None)
 
-                # sum the entire list to compute the mean daily sentiment for the candidate
-                mean_daily_sentiment = sum(weighted_sentiments)
+            unique_tweets = Tweet.objects.filter(
+                candidate=candidate, 
+                created_at__gte=from_dt,
+                created_at__lte=to_dt,
+                retweeted_id=None
+            )
+            temp_tweets = unique_retweeted_tweets.union(unique_tweets)
 
-                # create the record in the database
-                # set the from time to be today UTC 00:00:00
-                # set the to time to be tomorrow 00:00:00
-                # i.e. 24 hours time slice
-                cms = CandidateMeanSentiment.objects.create(
-                    candidate = candidate,
-                    mean_sentiment = mean_daily_sentiment,
-                    from_date_time = from_dt,
-                    to_date_time = to_dt,
-                    total_favorites = daily_favorites,
-                    total_retweets = daily_retweets
-                )
+            positive_engagement = 0
+            negative_engagement = 0
 
-        if 'total' in options['command']:
-            print("got total here")
+            positive_tweets = []
+            negative_tweets = []
 
-            for candidate in self.candidates:
-                sums = CandidateMeanSentiment.objects.filter(candidate=candidate).aggregate(x=Sum('total_favorites'), y=Sum('total_retweets'))
-            z = sums['x'] + sums['y']
-            print(z)
+            for tweet in temp_tweets:
+                engagement = tweet.favorite_count + tweet.retweet_count
+                engagement = 1 if engagement == 0 else engagement + 1 # engagement is at least 1
+                sentiment = tweet.sentiment
+
+                if sentiment > 0:
+                    positive_tweets.append(tweet)
+                    positive_engagement += engagement
+                elif sentiment < 0:
+                    negative_tweets.append(tweet)
+                    negative_engagement += engagement
+
+            mean_positive_sentiment = self.calculate_weighted_sentiments(positive_tweets, positive_engagement)
+            mean_negative_sentiment = self.calculate_weighted_sentiments(negative_tweets, negative_engagement)
+            mean_overall_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement)
+
+            CandidateMeanSentiment.objects.create(
+                candidate = candidate,
+                mean_sentiment = mean_overall_sentiment,
+                total_engagement = positive_engagement + negative_engagement,
+                from_date_time = from_dt,
+                to_date_time = to_dt,
+                negative_engagement = negative_engagement,
+                negative_mean_sentiment = mean_negative_sentiment,
+                positive_engagement = positive_engagement,
+                positive_mean_sentiment = mean_positive_sentiment,
+                num_negative_tweets = len(negative_tweets),
+                num_positive_tweets = len(positive_tweets)
+            )
