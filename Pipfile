@@ -20,6 +20,7 @@ pandas = "*"
 gunicorn = "*"
 django-environ = "*"
 bokeh = "*"
+prospector = "*"
 
 [requires]
 python_version = "3.7"

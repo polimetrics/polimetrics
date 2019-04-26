@@ -11,7 +11,7 @@ from math import pi
 def index(request):
     candidates = CandidateMeanSentiment.objects.all()
     # candidate = Candidate.objects.all()
-    
+
     sentiment_list = []
     candidates_list = []
     for candidate in candidates:
@@ -19,21 +19,22 @@ def index(request):
             sentiment_list.append(candidate.mean_sentiment)
             # candidate.first_name + candidate.last_name)
             candidates_list.append(str(
-                candidate.candidate.first_name + " " + candidate.candidate.last_name))
+                candidate.candidate.first_name.capitalize() + " " + candidate.candidate.last_name.capitalize()))
     candidate = Candidate.objects.all()
     # data = {'Candidates': candidates_list,
     #         'Sentiment': sentiment_list}
 
     # source = ColumnDataSource(data)
-    plot = figure(x_range=candidates_list, y_range=(-1, 1),
+    plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
-                  plot_height=350, plot_width=400, title="Mean Sentiment Per Candidate")
+                  plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate", tools="")
 
     plot.vbar(x=candidates_list, top=sentiment_list, width=0.4)
+    plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
-    plot.y_range.start = -1
+    # plot.y_range.start = -1
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidate':candidate}
+    context = {'script': script, 'div': div, 'candidate': candidate}
     return render_to_response('index.html', context=context)
 
 
@@ -66,9 +67,12 @@ def candidate_detail(request, slug):
                   x_axis_type='datetime',
                   y_axis_label='Sentiment',
                   plot_width=1000,
-                  plot_height=500)
-    plot.line('date', 'sentiment', source=source, line_width=2)
+                  plot_height=500,
+                  tools="",
+                  y_range=(-0.5, 0.5))
+    plot.line('date', 'sentiment', source=source, line_width=4)
     plot.xaxis.major_label_orientation = pi/4
+    # plot.y_range.start = -1
     script, div = components(plot)
     context = {'script': script, 'div': div, 'candidate': candidate}
     return render_to_response('candidate_detail.html', context=context)
@@ -99,8 +103,10 @@ def candidate_detail(request, slug):
     #     context = {'script': script, 'div': div, 'candidate': candidate}
     #     return render_to_response('candidate_detail.html', context=context)
 
+
 def methodology(request):
     return render(request, "methodology.html")
+
 
 def about(request):
     return render(request, "about.html")
