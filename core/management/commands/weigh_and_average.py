@@ -55,7 +55,7 @@ class Command(BaseCommand):
 
         to_dt = datetime(options['date'].year, options['date'].month, options['date'].day + 1, tzinfo=timezone.utc)
 
-        for candidate in Candidate.objects.filter(id__in=[42,1,2,3,4,5,6,7,8,9,10,11,12,13,23,15,16,17,18,19,20,21,22,]):
+        for candidate in Candidate.objects.all():
             
             candidate_tweets = self.get_unique_tweets(candidate, from_dt, to_dt)
 
