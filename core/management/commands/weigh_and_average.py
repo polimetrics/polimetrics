@@ -2,7 +2,6 @@ from django.core.management.base import BaseCommand, CommandError
 from core.models import Tweet, Candidate, CandidateMeanSentiment
 from datetime import datetime, timezone
 import argparse
-from django.db.models import Sum
 
 class Command(BaseCommand):
 
