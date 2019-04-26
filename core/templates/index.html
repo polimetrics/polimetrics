@@ -7,7 +7,7 @@
         <h1 class="clock-header">Countdown to the <br> 2020 Iowa Democratic Caucuses</h1>
         <div> 
             <span class="days" id="day"></span> 
-            <div class="smalltext">Days</div> 
+            <div class="smalltext" id="navel">Days</div> 
         </div> 
         <div> 
             <span class="hours" id="hour"></span> 
@@ -19,7 +19,7 @@
         </div> 
         <div> 
             <span class="seconds" id="second"></span> 
-            <div class="smalltext">Seconds</div> 
+            <div class="smalltext" id="navel">Seconds</div> 
         </div> 
     </div>
     <div id="particles-js"></div>
@@ -32,7 +32,7 @@
     <a class="mt4 header-font black link hover-red dib" href="{% url 'methodology' %}">Learn more</a>
 </div>
 <h2 class="body-headers mt5 tc">Latest Poll:</h2>
-<div class="center-graph">
+<div class="center-graph project" id="project02">
 {{ div | safe }}
 </div>
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
