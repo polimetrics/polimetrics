@@ -23,8 +23,12 @@
                                 {% endif %}
                         </div>
                         <div class="textbox2">
-                                <text class="name  mt4 "> {{ candidate.first_name }} {{ candidate.last_name }}
+                                {% if candidate.first_name == 'beto' or candidate.first_name == 'Beto' %}
+                                        <text class='name mt4'>Beto O'Rourke !</text>
+                                {% else %}
+                                        <text class="name  mt4 "> {{ candidate.first_name }} {{ candidate.last_name }}                                
                                 </text>
+                                {% endif %}
                                 <text class=" f5 "> {{ candidate.description }}. {credit:https://wikipedia.com}</text>
                         </div>
                 </a>
