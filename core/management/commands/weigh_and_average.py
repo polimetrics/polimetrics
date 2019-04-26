@@ -18,11 +18,15 @@ class Command(BaseCommand):
         parser.add_argument('-o', '--overall', action='store_true', default=False)
         parser.add_argument('-d', '--date', help='The Date at which to calculate - format YYYY-MM-DD', type=valid_date, default=datetime.utcnow())
 
+    def calculate_engagement(self, tweet):
+        engagement = tweet.favorite_count + tweet.retweet_count
+        engagement = 1 if engagement == 0 else engagement + 1 # engagement is at least 1
+        return engagement
+
     def calculate_weighted_sentiments(self, tweets, total_engagement):
         weighted_sentiment = 0
         for tweet in tweets:
-            engagement = tweet.favorite_count + tweet.retweet_count
-            engagement = 1 if engagement == 0 else engagement + 1 # engagement is at least 1
+            engagement = self.calculate_engagement(tweet)
             weighted_sentiment += tweet.sentiment * engagement/total_engagement
         return weighted_sentiment
 
@@ -62,8 +66,7 @@ class Command(BaseCommand):
             negative_tweets = []
 
             for tweet in candidate_tweets:
-                engagement = tweet.favorite_count + tweet.retweet_count
-                engagement = 1 if engagement == 0 else engagement + 1 # engagement is at least 1
+                engagement = self.calculate_engagement(tweet)
                 sentiment = tweet.sentiment
 
                 if sentiment > 0:
