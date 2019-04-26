@@ -1,4 +1,4 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from core.models import Tweet, Candidate, CandidateMeanSentiment
 from datetime import datetime, timezone
 import argparse
@@ -42,7 +42,7 @@ class Command(BaseCommand):
         )
         return unique_retweeted_tweets.union(unique_tweets)
 
-    def handle(self, **options):
+    def handle(self, *args, **options):
 
         from_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc)
         if options['overall']:
