@@ -10,7 +10,8 @@ from math import pi
 
 def index(request):
     candidates = CandidateMeanSentiment.objects.all()
-    candidate = Candidate.objects.all()
+    # candidate = Candidate.objects.all()
+    
     sentiment_list = []
     candidates_list = []
     for candidate in candidates:
@@ -19,12 +20,11 @@ def index(request):
             # candidate.first_name + candidate.last_name)
             candidates_list.append(str(
                 candidate.candidate.first_name + " " + candidate.candidate.last_name))
-    # for candidate in candidates:
+    candidate = Candidate.objects.all()
+    # data = {'Candidates': candidates_list,
+    #         'Sentiment': sentiment_list}
 
-        # data = {'Candidates': candidates_list,
-        #         'Sentiment': sentiment_list}
-
-        # source = ColumnDataSource(data)
+    # source = ColumnDataSource(data)
     plot = figure(x_range=candidates_list, y_range=(-1, 1),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
                   plot_height=350, plot_width=400, title="Mean Sentiment Per Candidate")
