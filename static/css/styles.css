@@ -1,10 +1,17 @@
 {% load staticfiles %}
 
+@font-face {
+    font-family: 'futura-pt-light';
+    src: url('/static/fonts/futura-pt-light.ttf')  format("truetype"),
+         local('futura-pt-light');
+}
+
 a {
     outline : 0 !important;
 }
 
 footer {
+    position: absolute;
     width: 1500px;
     background-color: black;
     padding: 60px 0px;
@@ -16,7 +23,7 @@ footer {
   top: 0;
   left: 0;
   width: 100%;
-  height: 12%;
+  height: 5rem;
   background-color: white;
   z-index: 50;
 }
@@ -32,7 +39,7 @@ footer {
 }
 
 .header-font {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Century Gothic', sans-serif;
     cursor: pointer;
 }
 
@@ -71,6 +78,53 @@ footer {
     margin-right: 5%;
     margin-top: 5%;
     cursor: pointer;
+    align-self: stretch;
+}
+
+.pict:hover {
+    /* border-color: red; */
+    transform: scale(1.2);
+    transition: all 300ms;
+    
+}
+.pict2:hover {
+    /* border-color: red; */
+    transform: scale(1.2);
+    transition: all 300ms;
+    
+}
+
+.pictcontainer {
+   border-style: solid;
+   border-color:white;
+    width: 90%;
+   /* max-height: 5%; */
+   /* height:30%; */
+   margin-left: 6rem;
+   margin-bottom: 2rem;
+   border-radius: 1rem;
+   z-index: 1;
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+   padding: 1%; 
+   overflow: auto;
+}
+
+.pictcontainer2 {
+    font-family: 'Century Gothic', sans-serif;
+    border-style: solid;
+    border-color:white;
+     width: 90%;
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1%;
+    text-align: right;    
 }
 
 .rep-candidates-underline {
@@ -79,6 +133,16 @@ footer {
 
 .dem-candidates-underline {
     background-color: #415CAA;
+}
+
+.textbox2 {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    z-index: -1;
+    height: 6rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: right;   
 }
 
 #about-image {
@@ -121,25 +185,26 @@ footer {
 }
 
 #about {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'futura-pt-light', sans-serif;
     color: white;
     margin-top: 50%;
 }
 
 .body-headers {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Century Gothic', sans-serif;
     color: black;
     font-size: 32px;
 }
 
 .name-header {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Century Gothic', sans-serif;
     color: black;
     font-size: 24px;
 }
 
 .body-content {
-    font-family: 'Lato', sans-serif;
+    font-family: 'futura-pt-light', sans-serif;
+    font-weight: lighter;
     font-size: 22px;
     line-height: 2rem;
 }
@@ -159,14 +224,15 @@ footer {
 }
 
 .sub-header {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Futura', sans-serif;
     font-size: 22px;
     line-height: 1rem;
     color: black;
 }
 
 .bio-answer {
-    font-family: 'Lato', sans-serif;
+    font-family: 'futura-pt-light', sans-serif;
+    font-weight: lighter;
     font-size: 24px;
     line-height: 2rem;
     color: black;
@@ -208,7 +274,7 @@ footer {
 }
 
  #clockdiv { 
-    font-family: 'Lato', sans-serif;
+    font-family: 'Century Gothic', sans-serif;
     font-size: 30px; 
     color: white; 
     display: inline-block; 
@@ -238,7 +304,7 @@ footer {
 
 .clock-header {
     color: white;
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Century Gothic', sans-serif;
     font-size: 32px;
 }
 
@@ -267,7 +333,7 @@ footer {
     z-index: 30;
     position: absolute; 
     width: 100%;
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Century Gothic', sans-serif;
     font-size: 72px;
     color: white;
     top: 400px;
@@ -280,7 +346,7 @@ footer {
     z-index: 30;
     position: absolute; 
     width: 100%;
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Century Gothic', sans-serif;
     font-size: 72px;
     color: white;
     top: 400px;
@@ -295,4 +361,53 @@ footer {
     max-width: 15%;
     max-height: 15%;
     margin: 0 auto;
+}
+.pictcontainerdetail {
+    font-family: 'Century Gothic',sans-serif;
+    border-style: solid;
+    border-color:white;
+    
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+  
+    
+    padding: 1%;
+    text-align: right;  
+    overflow: hidden; 
+    padding-right: 15%; 
+    overflow: auto;
+}
+.pictdetail {
+    border: all;
+    border-style: solid;
+    border-radius: 100%;
+    border-color: white;
+    width: 30%;
+    height: 30%;
+    border-width: .5rem;
+    margin-right: 2%;     
+    z-index: 2;
+    align-self: stretch;
+    float: left;
+}
+
+.textboxdetail {
+    color: black;
+    z-index: -1;
+    height: rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: center;  
+}
+
+.graphdetail {
+    font-family: "Futura", sans-serif;
+}
+
+.detaildes {
+    font-family: "futura-pt-light", sans-serif;
+    
 }
