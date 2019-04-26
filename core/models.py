@@ -29,7 +29,7 @@ class Candidate(models.Model):
         super().save(*args, **kwargs)
         
     def get_absolute_url(self):
-        return reverse('candidate-detail', kwargs={'slug': self.slug})
+        return reverse('candidate_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.last_name
