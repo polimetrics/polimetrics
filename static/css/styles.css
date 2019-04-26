@@ -4,6 +4,13 @@ a {
     outline : 0 !important;
 }
 
+footer {
+    width: 1500px;
+    background-color: black;
+    padding: 60px 0px;
+    margin-top: 10%;
+}
+
 .nav {
   position: fixed;
   top: 0;
@@ -37,7 +44,7 @@ a {
     content:'';
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 10;
     width: 100%;
     height: 100%;
     display: block;
@@ -45,96 +52,33 @@ a {
     background: black;
     opacity: 0.6;
 }
- /* code below is on the candidates.html */
-.pict {
-    border: all;
-    border-style: solid;
-    border-radius: 100%;
-    border-color: white;
+
+.candidates {
+    position: absolute;
+    z-index: 95;
+}
+
+.candidates-image {
+    border-radius: 75%;
+    border-width: .5rem;
+    z-index: 2;
+    flex: 1 0 25%;
     width: 15%;
     height: 15%;
-    border-width: .5rem;
-    margin-right: 2%;     
-    z-index: 2;
-    align-self: stretch;
-    float: left;
+    max-width: 15%;
+    max-height: 15%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    cursor: pointer;
 }
 
-.pict2 {
-    border: all;
-    border-style: solid;
-    border-radius: 100%;
-    border-color: cornflowerblue;
-    width: 15%;
-    height: 15%;
-    border-width: .5rem;
-    margin-right: 2%;
-    margin-left: 2%;  
-    z-index: 2;
-    align-self: stretch;
-    float: right;
+.rep-candidates-underline {
+    background-color: #ED2024;
 }
 
-.pict:hover {
-    /* border-color: red; */
-    transform: scale(1.2);
-    transition: all 300ms;
-    
-}
-.pict2:hover {
-    /* border-color: red; */
-    transform: scale(1.2);
-    transition: all 300ms;
-    
-}
-
-.pictcontainer {
-   border-style: solid;
-   border-color:white;
-    width: 90%;
-   /* max-height: 5%; */
-   /* height:30%; */
-   margin-left: 6rem;
-   margin-bottom: 2rem;
-   border-radius: 1rem;
-   z-index: 1;
-   display: flex;
-   flex-direction: column;
-   flex-grow: 1;
-   padding: 1%; 
-}
-
-.pictcontainer2 {
-    border-style: solid;
-    border-color:white;
-     width: 90%;
-    margin-left: 6rem;
-    margin-bottom: 2rem;
-    border-radius: 1rem;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    padding: 1%;
-    text-align: right;    
-}
-
-.textbox {
-    color: black;
-    z-index: -1;
-    height: 6rem;
-    text-decoration: none;
-    font-size: 3rem;
-    text-align: left;  
-}
-
-.textbox2 {
-    color: black;
-    z-index: -1;
-    height: 6rem;
-    text-decoration: none;
-    font-size: 3rem;
-    text-align: right;   
+.dem-candidates-underline {
+    background-color: #415CAA;
 }
 
 #about-image {
@@ -156,11 +100,24 @@ a {
     opacity: 0.7;
 }
 
-#box {
+#about-box {
     max-width: 50%;
     width: 50%;
     background: #ED2024;
     display: inline-block;
+}
+
+.blue-box {
+    width: 80%;
+    height: 100%;
+    background: #212121;
+    margin: 0 auto;
+    padding: 50px;
+    z-index: 5;
+}
+
+#candidates-header {
+    margin-left: 680px;
 }
 
 #about {
@@ -228,12 +185,26 @@ a {
     justify-content: center;
 }
 
-#particles-js{
-  max-width:100%;
+#particles-js {
+  max-width: 100%;
   background-image: url("white-house2.jpeg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+}
+
+#particles-js2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -670;
+    top: 0px;
+    left: 0px;
+    background-color: #ffffff;
+}
+
+#white-box {
+    background-color: #ffffff;
 }
 
  #clockdiv { 
@@ -316,4 +287,12 @@ a {
     left: 4%;
     bottom: 0;
     right: 35%;
+}
+
+.party-logo {
+    width: 15%;
+    height: 15%;
+    max-width: 15%;
+    max-height: 15%;
+    margin: 0 auto;
 }

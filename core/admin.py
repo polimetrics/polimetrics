@@ -5,8 +5,7 @@ from .models import Candidate, Tweet, Developer, CandidateMeanSentiment
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'party', 'description', 'image')
-    exclude = ('slug',)
+    list_display = ('first_name', 'last_name', 'party', 'description', 'image', 'slug')
 
 @admin.register(Tweet)
 class TweetAdmin(admin.ModelAdmin):

@@ -36,12 +36,11 @@ def index(request):
     # plot.circle(tweet_polarity_list, tweet_polarity_list, legend='f(x)',
     #             size=5, color='blue', alpha=0.9)
     script, div = components(plot)
+
+    candidates = Candidate.objects.all()
     return render_to_response('index.html',
-                              {'script': script, 'div': div})
+                              {'script': script, 'div': div, 'candidates': candidates})
 
-
-# def candidates(request):
-#     return render(request, "candidates.html")
 
 
 def candidates(request):
@@ -50,8 +49,8 @@ def candidates(request):
     return render(request, "candidates.html", context={'candidates': candidates})
 
 
-def candidate_detail_view(request, pk):
-    candidate = get_object_or_404(Candidate, pk=pk)
+def candidate_detail(request, slug):
+    candidate = get_object_or_404(Candidate, slug=slug)
     # candidate = Candidate.objects.get(Candidate, id=id)
     tweet_query_set = Tweet.objects.all()
     tweet_date_list = []
@@ -81,14 +80,8 @@ def candidate_detail_view(request, pk):
     return render_to_response('candidate_detail.html', context=context)
     # return render(request, "candidateDetail.html", context={'candidate': candidate})
 
-
-def tags(request):
-    return render(request, "tags.html")
-
-
 def methodology(request):
     return render(request, "methodology.html")
-
 
 def about(request):
     return render(request, "about.html")
