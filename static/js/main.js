@@ -10,6 +10,7 @@ $(document).ready(function () {
 
   })
     .setClassToggle('#project01', 'fade-in')
+   
     .addTo(controller);
   var controller = new ScrollMagic.Controller();
   var ourScene = new ScrollMagic.Scene({
@@ -36,6 +37,17 @@ $(document).ready(function () {
     .setClassToggle('#project04', 'fade-in')
     .addTo(controller); 
   
+
+
+ var controller = new ScrollMagic.Controller();
+ var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#navel'
+       
+    })
+    .setClassToggle('#navbar', 'fade-in')
+    .addTo(controller); 
+
+
 })
 
 

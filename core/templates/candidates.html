@@ -10,18 +10,18 @@
         <br>
         <br>
         <br>
-      
-     
-                {% for candidate in candidates %}
+
+
+        {% for candidate in candidates %}
         <div class="pictcontainer mb5 ">
                 <a href="{% url 'candidate_detail' pk=candidate.pk %}" class="link">
-                      <div>
-                              {% if candidate.image %}
-                           
-                        <img src="{{ candidate.image.url }}" class="pict">
-                              
+                        <div>
+                                {% if candidate.image %}
+
+                                <img src="{{ candidate.image.url }}" class="pict">
+
                                 {% endif %}
-                </div>
+                        </div>
                         <div class="textbox2">
                                 <text class="name  mt4 "> {{ candidate.first_name }} {{ candidate.last_name }}
                                 </text>
@@ -30,9 +30,9 @@
                 </a>
         </div>
 
-       
-{% endfor %}
-      
+
+        {% endfor %}
+
 
 </body>
 {% endblock %}
