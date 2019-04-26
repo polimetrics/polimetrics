@@ -5,9 +5,9 @@
 
 
 
-
-    <img src="{{ candidate.image.url }}" class="pictdetail">
-
+    {% if candidate.image.url == True %}
+        <img src="{{ candidate.image.url }}" class="pictdetail">
+    {% endif %}
 
 
     <div class="textboxdetail">
@@ -18,7 +18,7 @@
                 {credit:https://wikipedia.com}
             </text></text>
     </div>
-
+<div><h1 class="capitalize">o'rourke  <br>   this needs to be capitalized</h1></div>
 </div>
 <div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
 <div class="flex justify-center ma2 pa3 ">
