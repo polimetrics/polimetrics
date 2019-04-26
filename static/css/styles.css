@@ -7,7 +7,7 @@
 }
 
 a {
-    outline : 0 !important;
+    outline: 0 !important;
 }
 
 footer {
@@ -19,13 +19,13 @@ footer {
 }
 
 .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 5rem;
-  background-color: white;
-  z-index: 50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background-color: white;
+    z-index: 50;
 }
 
 .logo {
@@ -47,8 +47,9 @@ footer {
     position: relative;
     overflow: auto;
 }
+
 .image-holder:after {
-    content:'';
+    content: '';
     top: 0;
     left: 0;
     z-index: 10;
@@ -85,37 +86,22 @@ footer {
     /* border-color: red; */
     transform: scale(1.2);
     transition: all 300ms;
-    
+
 }
+
 .pict2:hover {
     /* border-color: red; */
     transform: scale(1.2);
     transition: all 300ms;
-    
+
 }
 
 .pictcontainer {
-   border-style: solid;
-   border-color:white;
-    width: 90%;
-   /* max-height: 5%; */
-   /* height:30%; */
-   margin-left: 6rem;
-   margin-bottom: 2rem;
-   border-radius: 1rem;
-   z-index: 1;
-   display: flex;
-   flex-direction: column;
-   flex-grow: 1;
-   padding: 1%; 
-   overflow: auto;
-}
-
-.pictcontainer2 {
-    font-family: 'Century Gothic', sans-serif;
     border-style: solid;
-    border-color:white;
-     width: 90%;
+    border-color: white;
+    width: 90%;
+    /* max-height: 5%; */
+    /* height:30%; */
     margin-left: 6rem;
     margin-bottom: 2rem;
     border-radius: 1rem;
@@ -124,7 +110,23 @@ footer {
     flex-direction: column;
     flex-grow: 1;
     padding: 1%;
-    text-align: right;    
+    overflow: auto;
+}
+
+.pictcontainer2 {
+    font-family: 'Century Gothic', sans-serif;
+    border-style: solid;
+    border-color: white;
+    width: 90%;
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1%;
+    text-align: right;
 }
 
 .rep-candidates-underline {
@@ -135,6 +137,15 @@ footer {
     background-color: #415CAA;
 }
 
+.textbox {
+    color: black;
+    z-index: -1;
+    height: 6rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: left;
+}
+
 .textbox2 {
     font-family: 'Century Gothic', sans-serif;
     color: black;
@@ -142,7 +153,7 @@ footer {
     height: 6rem;
     text-decoration: none;
     font-size: 3rem;
-    text-align: right;   
+    text-align: right;
 }
 
 #about-image {
@@ -152,7 +163,7 @@ footer {
 }
 
 #about-image:after {
-    content:'';
+    content: '';
     top: 0;
     left: 0;
     z-index: 1;
@@ -238,15 +249,15 @@ footer {
     color: black;
 }
 
-.github{
+.github {
     width: 5%
 }
 
 .linked-in {
-        width: 6%
+    width: 6%
 }
 
-.center-graph{
+.center-graph {
     display: flex;
     justify-content: center;
 }
@@ -275,32 +286,35 @@ footer {
 
  #clockdiv { 
     font-family: 'Century Gothic', sans-serif;
-    font-size: 30px; 
-    color: white; 
-    display: inline-block; 
-    text-align: center; 
+    font-size: 30px;
+    color: white;
+    display: inline-block;
+    text-align: center;
     z-index: 40;
     position: absolute;
     width: 100%;
     margin-top: 20%;
-} 
-#clockdiv > div { 
-    padding: 10px; 
-    border-radius: 3px; 
-    background: black; 
-    display: inline-block; 
+}
+
+#clockdiv>div {
+    padding: 10px;
+    border-radius: 3px;
+    background: black;
+    display: inline-block;
     opacity: 0.7;
-} 
-#clockdiv div > span { 
-    padding: 15px; 
-    border-radius: 3px; 
-    background: black; 
-    display: inline-block; 
-} 
-.smalltext { 
-    padding-top: 5px; 
-    font-size: 16px; 
-} 
+}
+
+#clockdiv div>span {
+    padding: 15px;
+    border-radius: 3px;
+    background: black;
+    display: inline-block;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
 
 .clock-header {
     color: white;
@@ -317,7 +331,7 @@ footer {
 }
 
 .methodology-image:after {
-    content:'';
+    content: '';
     top: 0;
     left: 0;
     z-index: 10;
@@ -331,7 +345,7 @@ footer {
 
 .data-image-text {
     z-index: 30;
-    position: absolute; 
+    position: absolute;
     width: 100%;
     font-family: 'Century Gothic', sans-serif;
     font-size: 72px;
@@ -344,7 +358,7 @@ footer {
 
 .analysis-image-text {
     z-index: 30;
-    position: absolute; 
+    position: absolute;
     width: 100%;
     font-family: 'Century Gothic', sans-serif;
     font-size: 72px;
@@ -363,23 +377,24 @@ footer {
     margin: 0 auto;
 }
 .pictcontainerdetail {
-    font-family: 'Century Gothic',sans-serif;
+    font-family: 'Century Gothic', sans-serif;
     border-style: solid;
-    border-color:white;
-    
+    border-color: white;
+
     margin-left: 6rem;
     margin-bottom: 2rem;
     border-radius: 1rem;
     z-index: 1;
     display: flex;
-  
-    
+
+
     padding: 1%;
-    text-align: right;  
-    overflow: hidden; 
-    padding-right: 15%; 
+    text-align: right;
+    overflow: hidden;
+    padding-right: 15%;
     overflow: auto;
 }
+
 .pictdetail {
     border: all;
     border-style: solid;
@@ -388,7 +403,7 @@ footer {
     width: 30%;
     height: 30%;
     border-width: .5rem;
-    margin-right: 2%;     
+    margin-right: 2%;
     z-index: 2;
     align-self: stretch;
     float: left;
@@ -400,7 +415,7 @@ footer {
     height: rem;
     text-decoration: none;
     font-size: 3rem;
-    text-align: center;  
+    text-align: center;
 }
 
 .graphdetail {
@@ -409,5 +424,9 @@ footer {
 
 .detaildes {
     font-family: "futura-pt-light", sans-serif;
-    
+
+}
+
+.capitalize {
+    text-transform: capitalize
 }
