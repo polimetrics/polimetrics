@@ -26,31 +26,34 @@ class Command(BaseCommand):
             weighted_sentiment += tweet.sentiment * engagement/total_engagement
         return weighted_sentiment
 
-    def handle(self, *args, **options):
+    def get_unique_tweets(self, candidate, from_dt, to_dt):
+        
+        unique_retweeted_tweets = Tweet.objects.order_by('retweeted_id', '-created_at').distinct('retweeted_id').filter(
+            candidate=candidate, 
+            created_at__gte=from_dt,
+            created_at__lte=to_dt,
+        ).exclude(retweeted_id=None)
 
-        utc_date = options['date']
-        from_dt = datetime(utc_date.year, utc_date.month, utc_date.day, tzinfo=timezone.utc)
+        unique_tweets = Tweet.objects.filter(
+            candidate=candidate, 
+            created_at__gte=from_dt,
+            created_at__lte=to_dt,
+            retweeted_id=None
+        )
+        return unique_retweeted_tweets.union(unique_tweets)
+
+    def handle(self, **options):
+
+        from_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc)
         if options['overall']:
             tweet = Tweet.objects.earliest('created_at')
             from_dt = tweet.created_at
 
-        to_dt = datetime(utc_date.year, utc_date.month, utc_date.day + 1, tzinfo=timezone.utc)
+        to_dt = datetime(options['date'].year, options['date'].month, options['date'].day + 1, tzinfo=timezone.utc)
 
         for candidate in Candidate.objects.all():
-
-            unique_retweeted_tweets = Tweet.objects.order_by('retweeted_id', '-created_at').distinct('retweeted_id').filter(
-                candidate=candidate, 
-                created_at__gte=from_dt,
-                created_at__lte=to_dt,
-            ).exclude(retweeted_id=None)
-
-            unique_tweets = Tweet.objects.filter(
-                candidate=candidate, 
-                created_at__gte=from_dt,
-                created_at__lte=to_dt,
-                retweeted_id=None
-            )
-            temp_tweets = unique_retweeted_tweets.union(unique_tweets)
+            
+            candidate_tweets = self.get_unique_tweets(candidate, from_dt, to_dt)
 
             positive_engagement = 0
             negative_engagement = 0
@@ -58,7 +61,7 @@ class Command(BaseCommand):
             positive_tweets = []
             negative_tweets = []
 
-            for tweet in temp_tweets:
+            for tweet in candidate_tweets:
                 engagement = tweet.favorite_count + tweet.retweet_count
                 engagement = 1 if engagement == 0 else engagement + 1 # engagement is at least 1
                 sentiment = tweet.sentiment
@@ -70,20 +73,16 @@ class Command(BaseCommand):
                     negative_tweets.append(tweet)
                     negative_engagement += engagement
 
-            mean_positive_sentiment = self.calculate_weighted_sentiments(positive_tweets, positive_engagement)
-            mean_negative_sentiment = self.calculate_weighted_sentiments(negative_tweets, negative_engagement)
-            mean_overall_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement)
-
             CandidateMeanSentiment.objects.create(
                 candidate = candidate,
-                mean_sentiment = mean_overall_sentiment,
+                mean_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement),
                 total_engagement = positive_engagement + negative_engagement,
                 from_date_time = from_dt,
                 to_date_time = to_dt,
                 negative_engagement = negative_engagement,
-                negative_mean_sentiment = mean_negative_sentiment,
+                negative_mean_sentiment = self.calculate_weighted_sentiments(negative_tweets, negative_engagement),
                 positive_engagement = positive_engagement,
-                positive_mean_sentiment = mean_positive_sentiment,
+                positive_mean_sentiment = self.calculate_weighted_sentiments(positive_tweets, positive_engagement),
                 num_negative_tweets = len(negative_tweets),
                 num_positive_tweets = len(positive_tweets)
             )
