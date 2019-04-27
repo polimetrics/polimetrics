@@ -37,10 +37,10 @@ $(document).ready(function () {
 
   var controller = new ScrollMagic.Controller()
   var ourScene = new ScrollMagic.Scene({
-    triggerElement: '#navel'
+    triggerElement: '#methpage'
 
   })
-    .setClassToggle('#navbar', 'fade-in')
+    .setClassToggle('#methpage', 'fade-in')
     .addTo(controller)
 })
 

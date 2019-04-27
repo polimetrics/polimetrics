@@ -204,7 +204,7 @@ footer {
 .body-headers {
     font-family: 'Century Gothic', sans-serif;
     color: black;
-    font-size: 6rem;
+    font-size: 32px;
 }
 
 .name-header {
@@ -215,7 +215,7 @@ footer {
 
 .body-content {
     font-family: 'futura-pt-light', sans-serif;
-    font-size: 2rem;
+    font-size: 22px;
     font-weight: lighter;
     line-height: 2rem;
 }
@@ -476,4 +476,45 @@ footer {
     font-family: 'Century Gothic', sans-serif;
     color: black;
     font-size: 6rem;
+}
+.project {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all .5s ease-out;
+    
+    }
+.project.fade-in {
+opacity: 1;
+transform: translateY(0);
+}
+
+.methcontent {
+        font-family: 'futura-pt-light', sans-serif;
+        font-size: 2rem;
+        font-weight: lighter;
+        line-height: 2rem;
+    }
+
+.projectmeth {
+    opacity: 0;
+    transform: translateX(300px);
+    transition: all 1s ease-out;
+    
+    }
+.projectmeth.fade-in {
+    opacity: 1;
+    transform: translateX(0);
+
+}
+
+
+.projectmeth2 {
+    opacity: 0;
+    transform: translateY(300px);
+    transition: all 1s ease-out;
+    
+    }
+.projectmeth2.fade-in {
+opacity: 1;
+transform: translateY(0);
 }
