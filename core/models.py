@@ -34,7 +34,7 @@ class Candidate(models.Model):
         return reverse('candidate_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return self.last_name
+        return self.first_name.capitalize() + " " + self.last_name.capitalize()
 
 class Tweet(models.Model):
     '''
