@@ -156,8 +156,13 @@ footer {
     text-align: right;
 }
 
+
+.aboutcontainer {
+    margin: 0 auto;
+}
+
 #about-image {
-    margin-top: 100px;
+    margin-top: 50px;
     display: inline-block;
     position: relative;
 }
@@ -176,10 +181,15 @@ footer {
 }
 
 #about-box {
-    max-width: 50%;
     width: 50%;
     background: #ED2024;
     display: inline-block;
+}
+
+.abouthead {
+    font-family: 'Century Gothic', sans-serif;
+    
+
 }
 
 .blue-box {
@@ -196,9 +206,9 @@ footer {
 }
 
 #about {
-    font-family: 'futura-pt-light', sans-serif;
+    font-family: 'Century Gothic', sans-serif;
     color: white;
-    margin-top: 50%;
+    margin-top: 55%;
 }
 
 .body-headers {
@@ -220,8 +230,19 @@ footer {
     line-height: 2rem;
 }
 
+.aboutbody-content {
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 22px;
+    font-weight: lighter;
+    line-height: 2rem;
+}
+
+
+
+
 .body-structure {
     max-width: 38rem;
+   
     
 }
 
@@ -477,6 +498,18 @@ footer {
     color: black;
     font-size: 6rem;
 }
+
+
+
+
+
+.methheaders2 {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 5rem;
+}
+
+
 .project {
     opacity: 0;
     transform: translateY(50px);

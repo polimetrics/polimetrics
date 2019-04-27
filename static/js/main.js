@@ -37,6 +37,30 @@ $(document).ready(function () {
 
   var controller = new ScrollMagic.Controller()
   var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#project05'
+
+  })
+    .setClassToggle('#project05', 'fade-in')
+    .addTo(controller)
+
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#project06'
+
+  })
+    .setClassToggle('#project06', 'fade-in')
+    .addTo(controller)
+
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#project07'
+
+  })
+    .setClassToggle('#project07', 'fade-in')
+    .addTo(controller)
+
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
     triggerElement: '#methpage'
 
   })
