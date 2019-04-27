@@ -3,53 +3,64 @@ var $ = require('jQuery')
 var ScrollMagic = require('ScrollMagic')
 
 $(document).ready(function () {
-
-  var controller = new ScrollMagic.Controller();
+  var controller = new ScrollMagic.Controller()
   var ourScene = new ScrollMagic.Scene({
     triggerElement: '#project01'
 
   })
     .setClassToggle('#project01', 'fade-in')
-   
-    .addTo(controller);
-  var controller = new ScrollMagic.Controller();
+
+    .addTo(controller)
+  var controller = new ScrollMagic.Controller()
   var ourScene = new ScrollMagic.Scene({
     triggerElement: '#project02'
 
-})
+  })
     .setClassToggle('#project02', 'fade-in')
-    .addTo(controller); 
+    .addTo(controller)
 
-
-  var controller = new ScrollMagic.Controller();
+  var controller = new ScrollMagic.Controller()
   var ourScene = new ScrollMagic.Scene({
     triggerElement: '#project03'
-  
+
   })
     .setClassToggle('#project03', 'fade-in')
-    .addTo(controller); 
+    .addTo(controller)
 
-  var controller = new ScrollMagic.Controller();
+  var controller = new ScrollMagic.Controller()
   var ourScene = new ScrollMagic.Scene({
     triggerElement: '#project04'
-     
+
   })
     .setClassToggle('#project04', 'fade-in')
-    .addTo(controller); 
-  
+    .addTo(controller)
 
-
- var controller = new ScrollMagic.Controller();
- var ourScene = new ScrollMagic.Scene({
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
     triggerElement: '#navel'
-       
-    })
+
+  })
     .setClassToggle('#navbar', 'fade-in')
-    .addTo(controller); 
-
-
+    .addTo(controller)
 })
 
+// function to toggle collapsable menu on methodology page //
+$(document).ready(function () {
+  var acc = document.getElementsByClassName('collapsible')
+  var i
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener('click', function () {
+      this.classList.toggle('active')
+      var panel = this.nextElementSibling
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none'
+      } else {
+        panel.style.display = 'block'
+      }
+    })
+  }
+})
 
 let deadline = new Date(`feb 3, 2020 00:01:00`).getTime()
 
