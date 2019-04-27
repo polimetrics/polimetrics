@@ -37,17 +37,22 @@ def index(request):
 
 
     candidates_mean_sentiments = CandidateMeanSentiment.objects.all()
-    candidate = Candidate.objects.all()
+    candidates = Candidate.objects.all()
     # print(candidates_mean_sentiments)
-
+    c_count = []
+    n = 0
     for candidate in candidates_mean_sentiments:
+        # print(candidate)
+        # breakpoint()
         if candidate.mean_sentiment != 0:
             # sentiment_list.append(candidate.mean_sentiment)
             # candidate.first_name + candidate.last_name)
-            if str(candidate.candidate.first_name.capitalize() + " " + candidate.candidate.last_name.capitalize()) not in candidates_list:
+            if str(candidate.candidate) not in candidates_list:
                 candidates_list.append(str(
-                    candidate.candidate.first_name.capitalize() + " " + candidate.candidate.last_name.capitalize()))
+                    candidate.candidate))
                 sentiment_list.append(candidate.mean_sentiment)
+                c_count.append(n)
+                n += 1
             else:
                 continue
         else:
@@ -60,7 +65,8 @@ def index(request):
                   x_axis_label='Candidates', y_axis_label='Sentiment',
                   plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate", tools="")
     # breakpoint()
-    print(candidates_list)
+    # print(candidates_list)
+    plot.line([])
     plot.vbar(x=candidates_list, top=sentiment_list, width=0.4)
     plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
