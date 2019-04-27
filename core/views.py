@@ -6,21 +6,52 @@ from bokeh.palettes import Spectral6
 from bokeh.transform import factor_cmap
 from core.models import Candidate, Tweet, CandidateMeanSentiment
 from math import pi
-
+from django.db.models import Min, Max
+from datetime import timezone
 
 def index(request):
-    candidates = CandidateMeanSentiment.objects.all()
-    # candidate = Candidate.objects.all()
-
     sentiment_list = []
     candidates_list = []
-    for candidate in candidates:
-        if candidate.mean_sentiment != 0:
-            sentiment_list.append(candidate.mean_sentiment)
-            # candidate.first_name + candidate.last_name)
-            candidates_list.append(str(
-                candidate.candidate.first_name.capitalize() + " " + candidate.candidate.last_name.capitalize()))
+    # candidates = Candidate.objects.all()
+    # for candidate in candidates:
+        # # candidate_from_date_times = CandidateMeanSentiment.objects.values_list('from_date_time')
+        # # candidate_from_date_times = CandidateMeanSentiment.objects.datetimes('from_date_time', 'second')
+        # mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
+        # mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
+        # print(candidate.id)
+        # # print(mean_sentiment_min_from)
+
+        # print(mean_sentiment_min_from, mean_sentiment_min_from['from_date_time__min'])
+        # print(mean_sentiment_max_to, mean_sentiment_max_to['to_date_time__max'])
+        
+        # total_mean_sentiment = CandidateMeanSentiment.objects.filter(
+        #     candidate = candidate,
+        #     from_date_time = mean_sentiment_min_from['from_date_time__min'],
+        #     to_date_time = mean_sentiment_max_to['to_date_time__max'],
+        # )
+        # print(total_mean_sentiment)
+        # breakpoint()
+
+
+
+
+
+    candidates_mean_sentiments = CandidateMeanSentiment.objects.all()
     candidate = Candidate.objects.all()
+    # print(candidates_mean_sentiments)
+
+    for candidate in candidates_mean_sentiments:
+        if candidate.mean_sentiment != 0:
+            # sentiment_list.append(candidate.mean_sentiment)
+            # candidate.first_name + candidate.last_name)
+            if str(candidate.candidate.first_name.capitalize() + " " + candidate.candidate.last_name.capitalize()) not in candidates_list:
+                candidates_list.append(str(
+                    candidate.candidate.first_name.capitalize() + " " + candidate.candidate.last_name.capitalize()))
+                sentiment_list.append(candidate.mean_sentiment)
+            else:
+                continue
+        else:
+            continue
     # data = {'Candidates': candidates_list,
     #         'Sentiment': sentiment_list}
 
@@ -28,13 +59,14 @@ def index(request):
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
                   plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate", tools="")
-
+    # breakpoint()
+    print(candidates_list)
     plot.vbar(x=candidates_list, top=sentiment_list, width=0.4)
     plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
     # plot.y_range.start = -1
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidate': candidate}
+    context = {'script': script, 'div': div, 'candidate': candidates}
     return render_to_response('index.html', context=context)
 
 
@@ -68,7 +100,7 @@ def candidate_detail(request, slug):
                   y_axis_label='Sentiment',
                   plot_width=1000,
                   plot_height=500,
-                  tools="",
+                  toolbar_lacation=None,
                   y_range=(-0.5, 0.5))
     plot.line('date', 'sentiment', source=source, line_width=4)
     plot.xaxis.major_label_orientation = pi/4
