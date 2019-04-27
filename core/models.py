@@ -22,6 +22,8 @@ class Candidate(models.Model):
         '''Creates a unique slug for every candidate'''
         if self.slug:
             return
+        slug = slugify(self.first_name+ ' ' +self.last_name)
+        self.slug = slug
           
     def save(self, *args, **kwargs):
         '''Hides slug field in admin & saves slug to use in url'''
