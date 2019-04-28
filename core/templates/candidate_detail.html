@@ -2,33 +2,26 @@
 {% load staticfiles %}
 {% block content %}
 
-<div class="pictcontainerdetail mt6  mr6    ">
+<div class="pictcontainerdetail mt6  mr5    ">
 
 
 
-    {% if candidate.image.url == True %}
+    
         <img src="{{ candidate.image.url }}" class="pictdetail project" id="project01">
-    {% endif %}
+   
 
 
     <div class="textboxdetail">
         <text class="name  mt4 f-headline b   "> {{ candidate.first_name }} {{ candidate.last_name }}
         </text>
         <br>
-        <text class=" f3 tc fw1 detaildes"> {{ candidate.description }}. <text class="f5">
-                {credit:https://wikipedia.com}
-            </text></text>
+        <div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
+        <div class="flex justify-center ma2 pa3 ">
+    
+            {{ div | safe }}
+            </div>
     </div>
 </div>
-<div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
-<div class="flex justify-center ma2 pa3 ">
-    {{ div | safe }}
-</div>
-<div>
-    <ul>
-    <li>Date of Sentiment is the date of the tweets we used to derive the sentiment for a given candidate. So it's the daily average of sentiment.</li>
-    <li></li>
-    <li></li>
-    </ul>
+
 </div>
 {% endblock %}
