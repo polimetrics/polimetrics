@@ -2,40 +2,42 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from bokeh.plotting import figure, output_file, show
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource, FactorRange
-from bokeh.palettes import Spectral6
+from bokeh.palettes import Paired8
 from bokeh.transform import factor_cmap
 from core.models import Candidate, Tweet, CandidateMeanSentiment
 from math import pi
-
+from django.db.models import Min, Max
+from datetime import timezone
 
 def index(request):
-    candidates = CandidateMeanSentiment.objects.all()
-    # candidate = Candidate.objects.all()
-    
     sentiment_list = []
     candidates_list = []
+    candidates = Candidate.objects.all()
     for candidate in candidates:
-        if candidate.mean_sentiment != 0:
-            sentiment_list.append(candidate.mean_sentiment)
-            # candidate.first_name + candidate.last_name)
-            candidates_list.append(str(
-                candidate.candidate.first_name + " " + candidate.candidate.last_name))
-    candidate = Candidate.objects.all()
-    # data = {'Candidates': candidates_list,
-    #         'Sentiment': sentiment_list}
+        mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
+        mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
 
-    # source = ColumnDataSource(data)
-    plot = figure(x_range=candidates_list, y_range=(-1, 1),
+        total_mean_sentiment = CandidateMeanSentiment.objects.filter(
+            candidate = candidate,
+            from_date_time = mean_sentiment_min_from['from_date_time__min'],
+            to_date_time = mean_sentiment_max_to['to_date_time__max'],
+        )
+        
+        candidates_list.append(str(candidate))
+        sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+    source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=Paired8))
+    plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
-                  plot_height=350, plot_width=400, title="Mean Sentiment Per Candidate")
+                  plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate", tools="")
 
-    plot.vbar(x=candidates_list, top=sentiment_list, width=0.4)
+    plot.vbar(x='candidates_list', top='sentiment_list', width=0.4,color='color', source=source)
+    plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
-    plot.y_range.start = -1
+    plot.legend.orientation = "vertical"
+    plot.legend.location = "top_center"
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidate':candidate}
+    context = {'script': script, 'div': div, 'candidate': candidates}
     return render_to_response('index.html', context=context)
-
 
 def candidates(request):
     candidates = Candidate.objects.all()
@@ -66,9 +68,12 @@ def candidate_detail(request, slug):
                   x_axis_type='datetime',
                   y_axis_label='Sentiment',
                   plot_width=1000,
-                  plot_height=500)
-    plot.line('date', 'sentiment', source=source, line_width=2)
+                  plot_height=500,
+                  toolbar_lacation=None,
+                  y_range=(-0.5, 0.5))
+    plot.line('date', 'sentiment', source=source, line_width=4)
     plot.xaxis.major_label_orientation = pi/4
+    # plot.y_range.start = -1
     script, div = components(plot)
     context = {'script': script, 'div': div, 'candidate': candidate}
     return render_to_response('candidate_detail.html', context=context)
@@ -99,8 +104,10 @@ def candidate_detail(request, slug):
     #     context = {'script': script, 'div': div, 'candidate': candidate}
     #     return render_to_response('candidate_detail.html', context=context)
 
+
 def methodology(request):
     return render(request, "methodology.html")
+
 
 def about(request):
     return render(request, "about.html")

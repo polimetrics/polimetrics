@@ -51,7 +51,7 @@ class Command(BaseCommand):
         from_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc)
         if options['overall']:
             tweet = Tweet.objects.earliest('created_at')
-            from_dt = tweet.created_at
+            from_dt = datetime(tweet.created_at.year, tweet.created_at.month, tweet.created_at.day, tzinfo=timezone.utc)
 
         to_dt = datetime(options['date'].year, options['date'].month, options['date'].day + 1, tzinfo=timezone.utc)
 
