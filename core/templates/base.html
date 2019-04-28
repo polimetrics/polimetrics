@@ -23,24 +23,76 @@
                 <img class="logo" src="{% static '/img/logo.png' %}" alt="An artist rendering of a vertical U.S. flag; the first four lines have variating line length that reflects a bar graph.">
             </a>
             <a class="link flex " href="{% url 'index' %}">
-                <div class="logo-font black mt2 ml2 header-font hover-white dib b w-100  ">polimetrics</div>
-               
-            
+                <div class="logo-font black mt2 ml2 header-font dib b w-100 ">polimetrics</div>
             </a>
-            <div class="w-100 flex list   justify-end pa3">
+            <div class="w-100 flex list justify-end pa3">
                 <li class="header-font ml1"></li>
                 <li class="header-font ml1"></li>
-                <li><a class="header-font  black link ml1 hover-dark-red dib" href="{% url 'methodology' %}">methodology</a></li>
+                <li><a class="header-font  black link ml1 hover-dark-red dib" href="{% url 'methodology' %}"><strong>methodology</strong></a></li>
                 <li class="header-font ml1"></li>
-                <li><a class="header-font  black link ml1 mr4 hover-dark-blue dib" href="{% url 'about' %}">about</a></li>
+                <li><a class="header-font  black link ml1 mr4 hover-dark-blue dib" href="{% url 'about' %}"><strong>about</strong></a></li>
             </div>
         </ul>
     </nav>
 </header>
-
-<body>
-    {% block content %}{% endblock %}
-</body>
-<!-- <footer>
-</footer> -->
+<div class="sidenav mt5">
+    <div>
+        {% for candidate in candidate %}
+            {% if candidate.party == "republican" %}
+                <div tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
+                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div>
+        {% for candidate in candidate %}
+            {% if candidate.party == "democrat" %}
+                <div class="tooltip-hover" tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
+                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="pa4 mt5"></div>
+</div>
+<div class="main">
+    <body>
+        {% block content %}{% endblock %}
+    </body>
+</div>
+<footer>
+    <div class="flex">
+        <div class="ml6 pl3 body-content" id="clockdiv"> 
+            <h1 class="clock-header">Countdown to Election Season</h1>
+            <div class="flex">
+                <div> 
+                    <span class="days" id="day"></span> 
+                    <div class="smalltext" id="navel">Days</div> 
+                </div> 
+                <div> 
+                    <span class="hours" id="hour"></span> 
+                    <div class="smalltext">Hours</div> 
+                </div> 
+                <div> 
+                    <span class="minutes" id="minute"></span> 
+                    <div class="smalltext">Minutes</div> 
+                </div> 
+                <div> 
+                    <span class="seconds" id="second"></span> 
+                    <div class="smalltext" id="navel">Seconds</div> 
+                </div> 
+            </div>
+        </div>
+        <div class="ml6 mt1">
+            <div class="footer-candidates-container ml2">
+            <div class="clock-header ml0 mt3"><strong>Candidates</strong></div>
+            {% for candidate in candidate %}
+                <div class="mt3">
+                    <a class="link footer-candidates ml3" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate.first_name }} {{ candidate.last_name }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</footer>
 </html>

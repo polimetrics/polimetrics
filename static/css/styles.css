@@ -1,9 +1,11 @@
-{% load staticfiles %}
+{
+    % load staticfiles %
+}
 
 @font-face {
     font-family: 'futura-pt-light';
-    src: url('/static/fonts/futura-pt-light.ttf')  format("truetype"),
-         local('futura-pt-light');
+    src: url('/static/fonts/futura-pt-light.ttf') format("truetype"),
+        local('futura-pt-light');
 }
 
 a {
@@ -14,7 +16,7 @@ footer {
     position: absolute;
     width: 100%;
     background-color: black;
-    padding: 60px 0px;
+    padding: 30px 0px;
     margin-top: 10%;
 }
 
@@ -43,43 +45,50 @@ footer {
     cursor: pointer;
 }
 
-.image-holder {
-    position: relative;
-    overflow: auto;
-}
-
-.image-holder:after {
-    content: '';
+/* Sidebar Nav */
+.sidenav {
+    height: 100%;
+    width: 100px;
+    position: fixed;
+    z-index: 1;
     top: 0;
     left: 0;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    background: black;
-    opacity: 0.6;
+    background-color: #212121;
+    overflow-x: visible;
+    overflow-y: scroll;
+    padding-top: 20px;
 }
 
-.candidates {
-    position: absolute;
-    z-index: 95;
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    display: block;
+}
+
+.main {
+    margin-left: 100px;
+    /* Same as the width of the sidebar */
 }
 
 .candidates-image {
     border-radius: 75%;
     border-width: .5rem;
     z-index: 2;
-    flex: 1 0 25%;
-    width: 15%;
-    height: 15%;
-    max-width: 15%;
-    max-height: 15%;
+    display: block;
+    width: 75%;
+    height: 75%;
+    max-width: 75%;
+    max-height: 75%;
     margin-left: 5%;
     margin-right: 5%;
     margin-top: 5%;
     cursor: pointer;
     align-self: stretch;
+}
+
+.index-header {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 75px;
 }
 
 .pict:hover {
@@ -201,10 +210,6 @@ footer {
     z-index: 5;
 }
 
-#candidates-header {
-    margin-left: 680px;
-}
-
 #about {
     font-family: 'Century Gothic', sans-serif;
     color: white;
@@ -246,6 +251,10 @@ footer {
     
 }
 
+.body-structure-index {
+    max-width: 38rem;
+}
+
 .headshot {
     width: 50%;
 }
@@ -278,17 +287,12 @@ footer {
     width: 6%
 }
 
-.center-graph {
-    display: flex;
-    justify-content: center;
-}
-
 #particles-js {
-  max-width: 100%;
-  background-image: url("white-house2.jpeg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+    max-width: 100%;
+    background-image: url("white-house2.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #particles-js2 {
@@ -301,47 +305,11 @@ footer {
     background-color: #ffffff;
 }
 
-#white-box {
-    background-color: #ffffff;
-}
-
- #clockdiv { 
-    font-family: 'Century Gothic', sans-serif;
-    font-size: 30px;
-    color: white;
-    display: inline-block;
-    text-align: center;
-    z-index: 40;
-    position: absolute;
-    width: 100%;
-    margin-top: 20%;
-}
-
-#clockdiv>div {
-    padding: 10px;
-    border-radius: 3px;
-    background: black;
-    display: inline-block;
-    opacity: 0.7;
-}
-
-#clockdiv div>span {
-    padding: 15px;
-    border-radius: 3px;
-    background: black;
-    display: inline-block;
-}
-
 .smalltext {
     padding-top: 5px;
     font-size: 16px;
 }
 
-.clock-header {
-    color: white;
-    font-family: 'Century Gothic', sans-serif;
-    font-size: 32px;
-}
 
 .methodology-image {
     width: 50%;
@@ -397,6 +365,7 @@ footer {
     max-height: 15%;
     margin: 0 auto;
 }
+
 .pictcontainerdetail {
     font-family: 'Century Gothic', sans-serif;
     border-style: solid;
@@ -550,4 +519,135 @@ transform: translateY(0);
 .projectmeth2.fade-in {
 opacity: 1;
 transform: translateY(0);
+/* Countdown clock */
+#clockdiv {
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 30px;
+    color: white;
+    z-index: 40;
+}
+
+#clockdiv>div {
+    padding: 10px;
+    border-radius: 3px;
+    opacity: 0.7;
+}
+
+#clockdiv div>span {
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+    color: white;
+}
+
+.clock-header {
+    color: white;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 32px;
+}
+
+/* Tooltips */
+[tooltip] {
+    margin: 5px;
+    position: relative;
+    display: block;
+}
+
+[tooltip]::after {
+    content: attr(tooltip);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+    font-family: "futura-pt-light", sans-serif;
+    padding: 4px 2px;
+    font-size: 12px;
+    min-width: 80px;
+    border-radius: 5px;
+    pointer-events: none;
+    padding: 4px 4px;
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+[tooltip-position='bottom']::before {
+    top: 100%;
+    transform: translateX(-50%) translatey(-100%) rotate(-180deg)
+}
+
+[tooltip-position='bottom']::after {
+    top: 100%;
+    transform: translateX(-50%) translateY(0%);
+}
+
+[tooltip]:hover::after,
+[tooltip]:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.footer-candidates-container {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.footer-candidates {
+    font-family: "futura-pt-light", sans-serif;
+    color: white;
+    flex: 1 1 30px;
+}
+
+.foot-header {
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 30px;
+    color: white;
+}
+
+.accordion {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    background-color: #212121;
+    color: white;
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 20px;
+    display: none;
+    overflow: hidden;
+    max-height: 50px;
+    transition: max-height 0.2s ease-out;
+}
+
+.accordion:after {
+    content: '\02795';
+    font-size: 13px;
+    color: black;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: '\2796';
+    color: black;
 }
