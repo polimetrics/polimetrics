@@ -24,18 +24,16 @@ def index(request):
             to_date_time = mean_sentiment_max_to['to_date_time__max'],
         )
         
-        candidates_list.append(str(candidate))
-        # sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
-    source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=Paired8))
-        if total_mean_sentiment[0].mean_sentiment > 0.1 or total_mean_sentiment[0].mean_sentiment < -.1:
-            candidates_list.append(str(candidate))
-            sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
-            if candidate.party == 'democrat':
-                color_list.append('#415caa')
-            elif candidate.party == 'republican':
-                color_list.append('#ed2024')
-            else:
-                continue
+        
+        # if total_mean_sentiment[0].mean_sentiment > 0.1 or total_mean_sentiment[0].mean_sentiment < -.1:
+        #     candidates_list.append(str(candidate))
+        #     sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+        #     if candidate.party == 'democrat':
+        #         color_list.append('#415caa')
+        #     elif candidate.party == 'republican':
+        #         color_list.append('#ed2024')
+        #     else:
+        #         continue
     source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=color_list))
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
