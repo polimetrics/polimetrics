@@ -86,13 +86,6 @@ $(document).ready(function () {
   }
 })
 
-    triggerElement: '#navel'
-
-  })
-    .setClassToggle('#navbar', 'fade-in')
-    .addTo(controller)
-})
-
 let deadline = new Date(`feb 3, 2020 00:01:00`).getTime()
 
 let x = setInterval(function () {

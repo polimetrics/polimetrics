@@ -106,8 +106,13 @@ def candidate_detail(request, slug):
 
 
 def methodology(request):
-    return render(request, "methodology.html")
+    candidates = Candidate.objects.all()
+
+                  
+    return render(request, "methodology.html", context={'candidates': candidates})
 
 
 def about(request):
-    return render(request, "about.html")
+    candidates = Candidate.objects.all()
+
+    return render(request, "about.html", context={'candidates': candidates})
