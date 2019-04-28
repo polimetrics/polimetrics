@@ -24,7 +24,7 @@ def index(request):
         )
         
         candidates_list.append(str(candidate))
-        sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+        # sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
     source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=Paired8))
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
