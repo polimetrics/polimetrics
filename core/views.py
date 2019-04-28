@@ -10,9 +10,11 @@ from django.db.models import Min, Max
 from datetime import timezone
 
 def index(request):
+    color_list = []
     sentiment_list = []
     candidates_list = []
     candidates = Candidate.objects.all()
+    candidates_mean_sentiments = []
     for candidate in candidates:
         mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
         mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
@@ -22,21 +24,32 @@ def index(request):
             from_date_time = mean_sentiment_min_from['from_date_time__min'],
             to_date_time = mean_sentiment_max_to['to_date_time__max'],
         )
-        
-        candidates_list.append(str(candidate))
-        # sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
-    source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=Paired8))
+
+        if total_mean_sentiment[0].mean_sentiment > 0.1:
+            candidates_mean_sentiments.append(str(candidate))
+                
+        if total_mean_sentiment[0].mean_sentiment > 0.1 or total_mean_sentiment[0].mean_sentiment < -.1:
+            candidates_list.append(str(candidate))
+            sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+            if candidate.party == 'democrat':
+                color_list.append('#415caa')
+            elif candidate.party == 'republican':
+                color_list.append('#ed2024')
+            else:
+                continue
+    source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=color_list))
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
-                  plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate", tools="")
-
+                  plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate",
+                  tools="", toolbar_location=None,)
+    print(candidates_mean_sentiments)
     plot.vbar(x='candidates_list', top='sentiment_list', width=0.4,color='color', source=source)
     plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
-    plot.legend.orientation = "vertical"
-    plot.legend.location = "top_center"
+    # plot.legend.orientation = "vertical"
+    # plot.legend.location = "top_center"
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidates': candidates}
+    context = {'script': script, 'div': div, 'candidates': candidates, 'candidates_mean_sentiments': candidates_mean_sentiments}
     return render_to_response('index.html', context=context)
 
 def candidates(request):

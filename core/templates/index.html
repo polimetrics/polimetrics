@@ -18,8 +18,12 @@
         <div class="body-headers accordion pa3"><strong>Who's buzzing?</strong></div>
         <div class="panel">
             <ol>
-                <li>Test</li>
+            {% for candidate in candidates_mean_sentiments %}
+                <li>{{ candidate }}</li>
+            {% endfor %}
+            <li>Test</li>
             </ol>
+            
         </div>
     </div>
 </div>
