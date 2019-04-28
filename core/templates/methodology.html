@@ -2,60 +2,89 @@
 {% load staticfiles %}
 
 {% block content %}
-<div>
-    <h1 class="tc mt6 body-headers tc">Methodology</h1>
-    <p class="tc body-content body-structure">Tweets + Sentiment Analysis = Polimetrics</p>
-    <div class="body-content body-structure">
-        <p>Our methodology is divided into five steps:</p>
-        <div>1. <a class="black link hover-red dib pointer" href="">Data collection</a></div>
-        <div>2. <a class="black link hover-dark-blue dib pointer" href="">Data cleaning</a></div>
-        <div>3. <a class="black link hover-red dib pointer" href="">Polarity and sentiment evaluation</a></div>
-        <div>4. <a class="black link hover-dark-blue dib pointer" href="">Data weighting</a></div>
-        <div>5. <a class="black link hover-red dib pointer" href="">Graph rendering</a></div>
-    </div>
-    <div class="mt4 tc methodology-image project" id="project01">
-        <img src="{% static '/img/washington-monument.jpg' %}" alt="An image of cherry blossoms with the Washington Monument in the background."/>
-        <div class="data-image-text">
-            <div>Data</div>
-        </div>
-    </div>
-    <h2 class="tc body-headers pa3">Data Collection</h2>
-    <div class="body-content body-structure">
-        <p>We begin our process by collecting Tweets with Twitter's Standard search API. This allows us to specify, and therefore return Tweets about, each candidate. Results can be returned with various search parameters such as candidate's first and last name, last name, hastags, and mentions. Unfortunately the Standard search API does not return all Tweets that are about the searched candidate, instead the results are a sampling of random but relevant Tweets. Given that the relevance is at play we have assumed that results received are a truly random sampling.</p>
-    </div>
-    <h3 class="tc body-headers pa3">Data Cleaning</h3>
-        <div class="body-content body-structure">
-            <p>As we collect Tweets, we use a regular expression to remove all parts that are not useful for calculating sentiment, i.e., links, emojis, and @ symbols. This step is essential to ensure that the evaluation of sentiment is not misguided by information that does not have explicit meaning.</p>
-        </div>
-    <div class="mt4 methodology-image project" id="project02">
-        <img src="{% static '/img/ceiling.jpg' %}" alt="An image of cherry blossoms with the Washington Monument in the background."/>
-        <div class="analysis-image-text">
-            <div>Analysis</div>
-        </div>
-    </div>
-    <h4 class="tc body-headers pa3">Polarity and Subjectivity</h4>
-        <div class="body-content body-structure">
-            <p>We then use <a class="black link hover-red dib pointer" href="https://textblob.readthedocs.io/en/dev/"><strong>TextBlob</strong></a>, a simple API for natural language processing (NLP), to evaluate the cleaned Tweets' sentiment. TextBlob uses two sentiment analysis implementations, PatternAnalyzer and NaiveBayesAnalyzer. The PatternAnalyzer is based on the <a class="black link hover-red dib pointer" href="https://www.clips.uantwerpen.be/pattern"> <strong>pattern</strong></a> library. While the NaiveBayesAnalyzer is an Natural Language Toolkit classifier trained on a corpus of movie reviews.</p>
-            <p>TextBlob returns two values when performing sentiment anaylsis on a text, polarity and and subjectivity. Polarity is a float between -1 (most negative sentiment) and 1 (most positive sentiment). 
+<div class="methcontainer ">
+    <div class="methcolumn">
+    <div class="mh5">
+            <h1 class=" mt6 methheaders" id="methpage">Methodology</h1>
             
-            Polarity uses the wording of a text to determine whether it is positive or negative and returns a float between -1 and 1, with -1 being completely negative and 1 being completely positive. Subjectivity refers to how direct, and therfore how explicit, the text is, which also provides a metric for the accuracy of the polarity. The value returned is a float ranging from 0 (very objective) to 1 (very subjective).</p>
-        </div>
-    <h5 class="tc body-headers pa3">Data Weighting</h5>
-        <div class="body-content body-structure">
-            <p>In order to improve the accuracy of our results and take in to consideration a few of the many varaibles, we have weighted our data using the formula below.</p>
-            <div class="tc">
-                <img src="{% static '/img/polimetrics-formula.png' %}"/>
+            <div class=" methcontent body-structure projectmeth" id="methpage">Tweets + Sentiment Analysis = Polimetrics</div>
+            <div class="methcontent body-structure projectmeth mb" id="methpage">
+            <p class="projectmeth" id="methpage">Our methodology is divided into 3 steps:</p>
+            <div>1. <a class="black link hover-red dib pointer projectmeth" id="methpage" href="">Data collection</a></div>
+            <div>2. <a class="black link hover-dark-blue dib pointer projectmeth" id="methpage" href="">Data cleaning</a></div>
+            <div>3. <a class="black link hover-red dib pointer projectmeth mb4 " id="methpage" href="">Polarity and sentiment evaluation</a></div>
+            
             </div>
+            </div>
+        
+            <div class=" mt1  b mh5 methheaders2 projectmeth" id="methpage" >Data Weighting</div>
+        <div class=" methcontent projectmeth" id="methpage">
+        <p class="mh5 projectmeth" id="methpage">In order to improve the accuracy of our results and take in to consideration a few of the many varaibles, we have weighted our data using the formula below.</p>
+        <div class="tc projectmeth" id="methpage">
+        <img src="{% static '/img/polimetrics-formula.png' %}" class="w-80 mh5" />
         </div>
-    <h6 class="tc body-headers pa3">Graph Rendering</h6>
-        <div class="body-content body-structure">
-            <p></p>
         </div>
-    <div class="tc body-headers pa3">Caveats</div>
-        <div>
-            <p class="body-content body-structure">
-            Like all opinion polls, our data isn't perfect. The reality is that not all voters use Twitter. More specifically, the age groups that make up the United States population are not portionate to the age groups that use Twitter. Our solution is to weight the results of our sentiment analysis. In an effort to provide the most insight to our users, we have made weighted and unweighted analysis available on the application. 
+
+        
+    </div>        
+        
+        
+        
+        
+        <div class="methcolumn ml3 projectmeth2" id="methpage">
+        
+    
+    
+    
+    
+    
+    <div class="mt6 mr5   "> 
+        <button class="collapsible f1 tl  b  "> Data Collection </button>
+        <div class="content f4 tl  ">
+            <p> We begin our process by collecting Tweets with Twitter's Standard search API. This allows us to specify, and therefore return Tweets about, each candidate. Results can be returned with various search parameters such as candidate's first and last name, last name, hastags, and mentions. Unfortunately the Standard search API does not return all Tweets that are about the searched candidate, instead the results are a sampling of random but relevant Tweets. Given that the relevance is at play we have assumed that results received are a truly random sampling
             </p>
+        </div>
+        </div>
+    
+    
+
+
+
+    <div class="mr5 "> 
+        <button class="collapsible f1 b tl  ">Data Cleaning</button>
+        <div class="content f4  ">
+            <p> As we collect Tweets, we use a regular expression to remove all parts that are not useful for calculating sentiment, i.e., links, emojis, and @ symbols. This step is essential to ensure that the evaluation of sentiment is not misguided by information that does not have explicit meaning.
+
+            </p>
+        </div>
+        </div>
+               
+
+
+
+    <div class="mt2 mr5 "> 
+        <button class="collapsible b f1 mb4 tl  "> Polarity and sentiment evaluation</button>
+        <div class="content f4  ">
+            <p> <p>We then use <a class="black link hover-red dib pointer" href="https://textblob.readthedocs.io/en/dev/"><strong>TextBlob</strong></a>, a simple API for natural language processing (NLP), to evaluate the cleaned Tweets' sentiment. TextBlob uses two sentiment analysis implementations, PatternAnalyzer and NaiveBayesAnalyzer. The PatternAnalyzer is based on the <a class="black link hover-red dib pointer" href="https://www.clips.uantwerpen.be/pattern"> <strong>pattern</strong></a> library. While the NaiveBayesAnalyzer is an Natural Language Toolkit classifier trained on a corpus of movie reviews.</p>
+            <p>TextBlob returns two values when performing sentiment anaylsis on a text, polarity and and subjectivity. Polarity is a float between -1 (most negative sentiment) and 1 (most positive sentiment).
+            Polarity uses the wording of a text to determine whether it is positive or negative and returns a float between -1 and 1, with -1 being completely negative and 1 being completely positive. Subjectivity refers to how direct, and therfore how explicit, the text is, which also provides a metric for the accuracy of the polarity. The value returned is a float ranging from 0 (very objective) to 1 (very subjective).</p>
+            
+            </p>
+        </div>
+        </div>
+        
+        
+    
+    </div>
+
+           
+
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 {% endblock %}

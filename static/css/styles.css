@@ -165,8 +165,13 @@ footer {
     text-align: right;
 }
 
+
+.aboutcontainer {
+    margin: 0 auto;
+}
+
 #about-image {
-    margin-top: 100px;
+    margin-top: 50px;
     display: inline-block;
     position: relative;
 }
@@ -185,10 +190,15 @@ footer {
 }
 
 #about-box {
-    max-width: 50%;
     width: 50%;
     background: #ED2024;
     display: inline-block;
+}
+
+.abouthead {
+    font-family: 'Century Gothic', sans-serif;
+    
+
 }
 
 .blue-box {
@@ -201,9 +211,9 @@ footer {
 }
 
 #about {
-    font-family: 'futura-pt-light', sans-serif;
+    font-family: 'Century Gothic', sans-serif;
     color: white;
-    margin-top: 50%;
+    margin-top: 55%;
 }
 
 .body-headers {
@@ -220,14 +230,25 @@ footer {
 
 .body-content {
     font-family: 'futura-pt-light', sans-serif;
-    font-weight: lighter;
     font-size: 22px;
+    font-weight: lighter;
     line-height: 2rem;
 }
 
+.aboutbody-content {
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 22px;
+    font-weight: lighter;
+    line-height: 2rem;
+}
+
+
+
+
 .body-structure {
     max-width: 38rem;
-    margin: auto;
+   
+    
 }
 
 .body-structure-index {
@@ -400,6 +421,104 @@ footer {
     text-transform: capitalize
 }
 
+/* methodology page collapsobile  */
+.collapsible {
+    font-family: "Century Gothic", sans-serif;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    width: 100%;
+    height: 5rem;
+    border: none;
+    text-align: center;
+    outline: none;
+    
+}
+.active, .collapsible:hover {
+    background-color: white;
+  }
+  
+.content {
+    font-family: "futura-pt-light", sans-serif;
+    padding: 0 18px;
+   
+    overflow: hidden;
+    background-color: #f1f1f1;
+    
+}
+
+.methcontainer {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:100;
+
+}
+
+.methcolumn {
+    display:flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+.methheaders {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 6rem;
+}
+
+
+
+
+
+.methheaders2 {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 5rem;
+}
+
+
+.project {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all .5s ease-out;
+    
+    }
+.project.fade-in {
+opacity: 1;
+transform: translateY(0);
+}
+
+.methcontent {
+        font-family: 'futura-pt-light', sans-serif;
+        font-size: 2rem;
+        font-weight: lighter;
+        line-height: 2rem;
+    }
+
+.projectmeth {
+    opacity: 0;
+    transform: translateX(300px);
+    transition: all 1s ease-out;
+    
+    }
+.projectmeth.fade-in {
+    opacity: 1;
+    transform: translateX(0);
+
+}
+
+
+.projectmeth2 {
+    opacity: 0;
+    transform: translateY(300px);
+    transition: all 1s ease-out;
+    
+    }
+.projectmeth2.fade-in {
+opacity: 1;
+transform: translateY(0);
 /* Countdown clock */
 #clockdiv {
     font-family: 'Century Gothic', sans-serif;

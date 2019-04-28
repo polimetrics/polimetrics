@@ -2,7 +2,8 @@
 {% load staticfiles %}
 
 {% block content %}
-<div class="aboutbox">
+<div class="aboutcontainer">
+<div class="aboutbox projectmeth" id="project07">
 <div class="flex flex-wrap">
   
     <div class="w-50">
@@ -10,17 +11,20 @@
             <img src="{% static '/img/about-image.jpeg' %}" alt="An image of a building in a city flying a U.S. flag."/>
         </div>
     </div>
-    <div id="about-box" class="bcg">
-        <div id="about" class="flex justify-end pa4 pt4 mr2 bcg-parallax">
-            <h1>About.</h1>
+    <div id="about-box">
+        <div id="about" class="flex justify-end pa4  pt4 mr2">
+            <div class="f1 b" >About.</div>
         </div>
     </div>
 </div>
 </div>
 
-<div>
-    <p class="body-content body-structure project" id="project04">
-    Technology changed the way we live our lives, so why haven't our political polls changed? 🤔 
+<div class="methcontainer ma0 ">
+    
+    <p class="f-5 methcolumn abouthead b ml6 mr3   projectmeth " id="project06">Technology changed the way we live our lives,<br> so why haven't our political polls changed?</p>
+    
+    <p class="aboutbody-content body-structure project  methcolumn mr6 mt4        " id="project04">
+    
     <br>
     <br>
     In a world of daily robocalls, constant stimulus, and infrequent trips to the mailbox, traditional avenues of collecting opinion poll data has yielded a declining response rate for the past decade. The result of the 2016 presidential election only raises further questions about the accuracy of opinion polling. Despite a growing body of hard questions, pollsters have not made a concerted effort to adjust their means of collecting and evaluating poll data.
@@ -31,20 +35,24 @@
     <br>
     Polmetrics aims to bring these academic insights to the general public by creating an opinion poll that uses the mood sentiment of Tweets.  
     </p>
-    </div>
+    
 </div>
+
+
+
+
 <div class="tc">
     <h3 class="body-headers pa3">Team</h2>
 </div>
 <div class="flex">
     <div class="headshot-box">
         <div class="tc black">
-            <div class="body-headers mt7">Bailey Costin</div>
+            <div class="body-headers mt4">Bailey Costin</div>
             <p class="sub-header i">Political science nerd, outdoors enthusiast, software developer</p>
-            <p class="body-content pr5 pl5">Lorem ipsum dolor sit amet, his ei modo unum liber. Cu modo invidunt eos, per alienum laboramus cu, an per probo omnes saepe. Te quas admodum patrioque qui, nibh autem per at, te vero sonet utinam qui. Et est timeam impedit fuisset. Falli tritani accommodare sed id, velit impedit vel ex. Cu vim indoctum corrumpit constituto, euismod recteque consequat eum et. Dicunt principes urbanitas sed ut, an impedit suscipit vis, ad pri adhuc veniam.</p>
-            <p class="body-content i">Only album I'd take to a deserted island:</p>
+            <p class="aboutbody-content pr5 pl5">Lorem ipsum dolor sit amet, his ei modo unum liber. Cu modo invidunt eos, per alienum laboramus cu, an per probo omnes saepe. Te quas admodum patrioque qui, nibh autem per at, te vero sonet utinam qui. Et est timeam impedit fuisset. Falli tritani accommodare sed id, velit impedit vel ex. Cu vim indoctum corrumpit constituto, euismod recteque consequat eum et. Dicunt principes urbanitas sed ut, an impedit suscipit vis, ad pri adhuc veniam.</p>
+            <p class="aboutbody-content i">Only album I'd take to a deserted island:</p>
             <p class="bio-answer">good kid, m.A.A.d city - Kendrick Lamar</p>
-            <p class="body-content i">Prefers coffee:</p>
+            <p class="aboutbody-content i">Prefers coffee:</p>
             <p class="bio-answer">black</p>
             <p class="body-content i">Favorite president:</p>
             <p class="bio-answer">Theodore Roosevelt </p>
@@ -53,7 +61,7 @@
         </div>
     </div>
     <div class="headshot project" id="project01">
-        <a href="https://www.linkedin.com/in/bailey-costin-7745b8179/"><img src="{% static '/img/bailey-costin.jpg' %}" alt="An image of Bailey Costin."/></a>
+        <a href="https://www.linkedin.com/in/bailey-costin-7745b8179/"><img src="{% static '/img/Bailey.jpg' %}" alt="An image of Bailey Costin."/></a>
     </div>
 </div>
 <div class="flex">
@@ -61,14 +69,14 @@
         <a href="https://www.linkedin.com/in/david-kirk-525813181/"><img src="{% static '/img/david-kirk.jpg' %}" alt="An image of David Kirk."/></a>
     </div>
     <div class="headshot-box tc black">
-        <div class="body-headers mt7">David Kirk</div>
+        <div class="body-headers mt4">David Kirk</div>
         <p class="sub-header i">software developer</p>
         <p class="bio-answer pr5 pl5">Lorem ipsum dolor sit amet, his ei modo unum liber. Cu modo invidunt eos, per alienum laboramus cu, an per probo omnes saepe. Te quas admodum patrioque qui, nibh autem per at, te vero sonet utinam qui. Et est timeam impedit fuisset. Falli tritani accommodare sed id, velit impedit vel ex. Cu vim indoctum corrumpit constituto, euismod recteque consequat eum et. Dicunt principes urbanitas sed ut, an impedit suscipit vis, ad pri adhuc veniam</p>
-            <p class="body-content i">Only album I'd take to a deserted island:</p>
+            <p class="aboutbody-content i">Only album I'd take to a deserted island:</p>
             <p class="bio-answer">ok computer by Radiohead</p>
-            <p class="body-content i">Prefers coffee:</p>
+            <p class="aboutbody-content i">Prefers coffee:</p>
             <p class="bio-answer">lots of cream, lots of sugar</p>
-            <p class="body-content i">Favorite president:</p>
+            <p class="aboutbody-content i">Favorite president:</p>
             <p class="bio-answer">Thomas Jefferson</p>
             <a href="https://github.com/davidiskirk"><img class="github" src="{% static '/img/GitHub.png' %}" alt="An image of the GitHub logo."/></a>
             <a href="https://www.linkedin.com/in/david-kirk-525813181/"><img class="linked-in" src="{% static '/img/linked-in.png' %}" alt="An image of the Linked-In logo."/></a>
@@ -76,22 +84,43 @@
 </div>
 <div class="flex">
     <div class="headshot-box tc black">
-        <div class="body-headers mt7">Daniel Peterson</div>
+        <div class="body-headers mt4">Daniel Peterson</div>
         <p class="sub-header i">, , software developer</p>
         <p class="bio-answer pr5 pl5">Lorem ipsum dolor sit amet, his ei modo unum liber. Cu modo invidunt eos, per alienum laboramus cu, an per probo omnes saepe. Te quas admodum patrioque qui, nibh autem per at, te vero sonet utinam qui. Et est timeam impedit fuisset. Falli tritani accommodare sed id, velit impedit vel ex. Cu vim indoctum corrumpit constituto, euismod recteque consequat eum et. Dicunt principes urbanitas sed ut, an impedit suscipit vis, ad pri adhuc veniam.</p>
-            <p class="body-content i">Only album I'd take to a deserted island:</p>
-            <p class="body-content i">Only album I'd take to a deserted island:</p>
+            <p class="aboutbody-content i">Only album I'd take to a deserted island:</p>
+            <p class="aboutbody-content i">Only album I'd take to a deserted island:</p>
             <p class="bio-answer"></p>
-            <p class="body-content i">Prefers coffee:</p>
+            <p class="aboutbody-content i">Prefers coffee:</p>
             <p class="bio-answer"></p>
-            <p class="body-content i">Favorite president:</p>
+            <p class="aboutbody-content i">Favorite president:</p>
             <p class="bio-answer"></p>
             <a href="https://github.com/dmpeterson317"><img class="github" src="{% static '/img/GitHub.png' %}" alt="An image of the GitHub logo."/></a>
             <a href="https://www.linkedin.com/in/daniel-peterson-a66330181/"><img class="linked-in" src="{% static '/img/linked-in.png' %}" alt="An image of the Linked-In logo."/></a>
     </div>
     <div class="headshot project" id="project03">
-        <a href="https://www.linkedin.com/in/daniel-peterson-a66330181/"><img src="{% static '/img/daniel-peterson.jpeg' %}" alt="An image of Daniel Peterson."/></a>
+        <a href="https://www.linkedin.com/in/daniel-peterson-a66330181/"><img src="{% static '/img/Dan.JPG' %}" alt="An image of Daniel Peterson."/></a>
     </div>
+</div>
+
+
+<div class="flex">
+    <div class="headshot project" id="project05">
+        <a href="//"><img src="{% static '/img/dennis.JPG' %}" alt="An image of Dennis Dinwiddy."/></a>
+    </div>
+    <div class="headshot-box tc black">
+        <div class="body-headers mt4">Dennis Dinwiddy</div>
+        <p class="sub-header i">software developer</p>
+        <p class="bio-answer pr5 pl5">Lorem ipsum dolor sit amet, his ei modo unum liber. Cu modo invidunt eos, per alienum laboramus cu, an per probo omnes saepe. Te quas admodum patrioque qui, nibh autem per at, te vero sonet utinam qui. Et est timeam impedit fuisset. Falli tritani accommodare sed id, velit impedit vel ex. Cu vim indoctum corrumpit constituto, euismod recteque consequat eum et. Dicunt principes urbanitas sed ut, an impedit suscipit vis, ad pri adhuc veniam</p>
+            <p class="aboutbody-content i">Only album I'd take to a deserted island:</p>
+            <p class="bio-answer">ok computer by Radiohead</p>
+            <p class="aboutbody-content i">Prefers coffee:</p>
+            <p class="bio-answer">lots of cream, lots of sugar</p>
+            <p class="aboutbody-content i">Favorite president:</p>
+            <p class="bio-answer">Thomas Jefferson</p>
+            <a href=""><img class="github" src="{% static '/img/GitHub.png' %}" alt="An image of the GitHub logo."/></a>
+            <a href=""><img class="linked-in" src="{% static '/img/linked-in.png' %}" alt="An image of the Linked-In logo."/></a>
+    </div>
+</div>
 </div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/ScrollMagic.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/plugins/debug.addIndicators.min.js"></script>

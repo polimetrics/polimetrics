@@ -37,6 +37,55 @@ $(document).ready(function () {
 
   var controller = new ScrollMagic.Controller()
   var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#project05'
+
+  })
+    .setClassToggle('#project05', 'fade-in')
+    .addTo(controller)
+
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#project06'
+
+  })
+    .setClassToggle('#project06', 'fade-in')
+    .addTo(controller)
+
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#project07'
+
+  })
+    .setClassToggle('#project07', 'fade-in')
+    .addTo(controller)
+
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#methpage'
+
+  })
+    .setClassToggle('#methpage', 'fade-in')
+    .addTo(controller)
+})
+
+// function to toggle collapsable menu on methodology page //
+$(document).ready(function () {
+  var acc = document.getElementsByClassName('collapsible')
+  var i
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener('click', function () {
+      this.classList.toggle('active')
+      var panel = this.nextElementSibling
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none'
+      } else {
+        panel.style.display = 'block'
+      }
+    })
+  }
+})
+
     triggerElement: '#navel'
 
   })
