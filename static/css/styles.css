@@ -652,3 +652,51 @@ transform: translateY(0);
     content: '\2796';
     color: black;
 }
+
+
+.accordiondetail {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.active,
+.accordiondetail:hover {
+    background-color: #ccc;
+}
+
+.paneldetail {
+    background-color: #212121;
+    color: white;
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 20px;
+    display: none;
+    overflow: hidden;
+    max-height: 50px;
+    transition: max-height 0.2s ease-out;
+    width:100%
+}
+
+.accordiondetail:after {
+    content: '\02795';
+    font-size: 13px;
+    color: black;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: '\2796';
+    color: black;
+}
+
+.detailbox {
+    display: flex;
+    flex-direction: column;
+    width:200px;
+}
