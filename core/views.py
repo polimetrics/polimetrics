@@ -36,7 +36,7 @@ def index(request):
     plot.legend.orientation = "vertical"
     plot.legend.location = "top_center"
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidate': candidates}
+    context = {'script': script, 'div': div, 'candidates': candidates}
     return render_to_response('index.html', context=context)
 
 def candidates(request):
