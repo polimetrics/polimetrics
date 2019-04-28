@@ -49,7 +49,7 @@ def candidates(request):
 def candidate_detail(request, slug):
     candidate = get_object_or_404(Candidate, slug=slug)
     # candidate = Candidate.objects.get(Candidate, id=id)
-
+    candidates = Candidate.objects.all()
     candidate_mean_sentiment = CandidateMeanSentiment.objects.all()
     candidate_mean_sentiment_data = []
     candidate_mean_sentiment_date = []
@@ -69,13 +69,13 @@ def candidate_detail(request, slug):
                   y_axis_label='Sentiment',
                   plot_width=1000,
                   plot_height=500,
-                  toolbar_lacation=None,
+                  toolbar_location=None,
                   y_range=(-0.5, 0.5))
     plot.line('date', 'sentiment', source=source, line_width=4)
     plot.xaxis.major_label_orientation = pi/4
     # plot.y_range.start = -1
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidate': candidate}
+    context = {'script': script, 'div': div, 'candidate': candidate, 'candidates': candidates}
     return render_to_response('candidate_detail.html', context=context)
     # tweet_query_set = Tweet.objects.all()
     # tweet_date_list = []
