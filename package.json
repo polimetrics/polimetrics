@@ -5,9 +5,9 @@
         "watchify": "^3.11.1"
     },
     "scripts": {
-        "watch": "watchify core/static/js/main.js --debug -v -o core/static/build/bundle.js",
-        "build-dev": "browserify core/static/js/main.js --debug -o core/static/build/bundle.js",
-        "build": "browserify core/static/js/main.js -o core/static/build/bundle.js"
+        "watch": "watchify static/js/main.js --debug -v -o static/build/bundle.js",
+        "build-dev": "browserify static/js/main.js --debug -o static/build/bundle.js",
+        "build": "browserify static/js/main.js -o static/build/bundle.js"
     },
     "dependencies": {
         "greensock": "^1.20.2",
