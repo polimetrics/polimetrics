@@ -37,7 +37,7 @@
 </header>
 <div class="sidenav mt5">
     <div>
-        {% for candidate in candidate %}
+        {% for candidate in candidates %}
             {% if candidate.party == "republican" %}
                 <div tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
                     <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
@@ -46,7 +46,7 @@
         {% endfor %}
     </div>
     <div>
-        {% for candidate in candidate %}
+        {% for candidate in candidates %}
             {% if candidate.party == "democrat" %}
                 <div class="tooltip-hover" tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
                     <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
@@ -87,7 +87,7 @@
         <div class="ml6 mt1">
             <div class="footer-candidates-container ml2">
             <div class="clock-header ml0 mt3"><strong>Candidates</strong></div>
-            {% for candidate in candidate %}
+            {% for candidate in candidates %}
                 <div class="mt3">
                     <a class="link footer-candidates ml3" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate.first_name }} {{ candidate.last_name }}</a>
             </div>
