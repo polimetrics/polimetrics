@@ -90,6 +90,7 @@
             {% for candidate in candidates %}
                 <div class="mt3">
                     <a class="link footer-candidates ml3" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate.first_name }} {{ candidate.last_name }}</a>
+                </div>
             </div>
             {% endfor %}
         </div>

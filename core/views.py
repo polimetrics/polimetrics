@@ -13,6 +13,7 @@ def index(request):
     sentiment_list = []
     candidates_list = []
     candidates = Candidate.objects.all()
+    candidates_mean_sentiments = []
     for candidate in candidates:
         mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
         mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
@@ -24,7 +25,12 @@ def index(request):
         )
         
         candidates_list.append(str(candidate))
-        sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+        # sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+
+
+        # if total_mean_sentiment[0]
+
+
     source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=Paired8))
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
@@ -36,7 +42,7 @@ def index(request):
     plot.legend.orientation = "vertical"
     plot.legend.location = "top_center"
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidates': candidates}
+    context = {'script': script, 'div': div, 'candidates': candidates, 'candidates_mean_sentiments': candidates_mean_sentiments}
     return render_to_response('index.html', context=context)
 
 def candidates(request):

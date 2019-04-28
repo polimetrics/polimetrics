@@ -18,6 +18,11 @@
         <div class="body-headers accordion pa3"><strong>Who's buzzing?</strong></div>
         <div class="panel">
             <ol>
+            {% for candidate in candidates %}
+              {% if candidates_mean_sentiments.mean_sentiment > 0.1 %}
+                <li>{{ candidate.first_name }}</li>
+              {% endif %}
+            {% endfor %}
                 <li>Test</li>
             </ol>
         </div>
