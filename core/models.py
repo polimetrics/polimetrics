@@ -22,6 +22,8 @@ class Candidate(models.Model):
         '''Creates a unique slug for every candidate'''
         if self.slug:
             return
+        slug = slugify(self.first_name+ ' ' +self.last_name)
+        self.slug = slug
           
     def save(self, *args, **kwargs):
         '''Hides slug field in admin & saves slug to use in url'''
@@ -32,7 +34,7 @@ class Candidate(models.Model):
         return reverse('candidate_detail', kwargs={'slug': self.slug})
 
     def __str__(self):
-        return self.last_name
+        return self.first_name.capitalize() + " " + self.last_name.capitalize()
 
 class Tweet(models.Model):
     '''

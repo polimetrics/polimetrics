@@ -40,9 +40,7 @@
         {% for candidate in candidate %}
             {% if candidate.party == "republican" %}
                 <div tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
-                    <div class="overlay-rep">
-                        <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
-                    </div>
+                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
                 </div>
             {% endif %}
         {% endfor %}
@@ -51,9 +49,7 @@
         {% for candidate in candidate %}
             {% if candidate.party == "democrat" %}
                 <div class="tooltip-hover" tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
-                    <div class="overlay-dem">
-                        <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
-                    </div>
+                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
                 </div>
             {% endif %}
         {% endfor %}

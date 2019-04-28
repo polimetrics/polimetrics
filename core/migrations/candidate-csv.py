@@ -23,25 +23,13 @@ def load_candidate_data(apps, schema_editor):
                 party=row['party'],
                 description=row['description'],
                 image=row['image']
-
-
-
-
             )
             candidate.save()
-
-
-
-
-
-
-
-
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0001_initial'),
+        ('core', '0003_auto_20190425_1732'),
     ]
 
     operations = [migrations.RunPython(load_candidate_data)]

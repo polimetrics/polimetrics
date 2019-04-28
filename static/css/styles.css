@@ -85,58 +85,6 @@ footer {
     align-self: stretch;
 }
 
-.overlay-rep {
-    position: relative;
-    display: inline-block;
-}
-
-  
-.overlay-rep::before {
-    border-radius: 75%;
-    border-width: .5rem;
-    content: '';
-    position: absolute;
-    margin-left: 21%;
-    margin-right: 5%;
-    margin-top: 10%;
-    width: 56%;
-    height: 79%;
-    background: #ED2024;
-    opacity: 0;
-    transition: .5s ease;
-    cursor: pointer;
-}
-  
-.overlay-rep:hover::before {
-    opacity: 0.4;
-}
-
-.overlay-rep {
-    position: relative;
-    display: inline-block;
-}
-
-  
-.overlay-dem::before {
-    border-radius: 75%;
-    border-width: .5rem;
-    content: '';
-    position: absolute;
-    margin-left: 21%;
-    margin-right: 5%;
-    margin-top: 10%;
-    width: 56%;
-    height: 79%;
-    background: #415CAA;
-    opacity: 0;
-    transition: .5s ease;
-    cursor: pointer;
-}
-  
-.overlay-dem:hover::before {
-    opacity: 0.4;
-}
-
 .index-header {
     display: flex;
     flex-wrap: wrap;

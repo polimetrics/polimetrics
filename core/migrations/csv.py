@@ -30,14 +30,6 @@ def load_candidate_data(apps, schema_editor):
             )
             candidate.save()
 
-
-
-
-
-
-
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
