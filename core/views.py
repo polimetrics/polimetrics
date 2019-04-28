@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from bokeh.plotting import figure, output_file, show
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource, FactorRange
-from bokeh.palettes import Spectral6
+from bokeh.palettes import Paired8
 from bokeh.transform import factor_cmap
 from core.models import Candidate, Tweet, CandidateMeanSentiment
 from math import pi
@@ -12,69 +12,32 @@ from datetime import timezone
 def index(request):
     sentiment_list = []
     candidates_list = []
-    # candidates = Candidate.objects.all()
-    # for candidate in candidates:
-        # # candidate_from_date_times = CandidateMeanSentiment.objects.values_list('from_date_time')
-        # # candidate_from_date_times = CandidateMeanSentiment.objects.datetimes('from_date_time', 'second')
-        # mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
-        # mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
-        # print(candidate.id)
-        # # print(mean_sentiment_min_from)
-
-        # print(mean_sentiment_min_from, mean_sentiment_min_from['from_date_time__min'])
-        # print(mean_sentiment_max_to, mean_sentiment_max_to['to_date_time__max'])
-        
-        # total_mean_sentiment = CandidateMeanSentiment.objects.filter(
-        #     candidate = candidate,
-        #     from_date_time = mean_sentiment_min_from['from_date_time__min'],
-        #     to_date_time = mean_sentiment_max_to['to_date_time__max'],
-        # )
-        # print(total_mean_sentiment)
-        # breakpoint()
-
-
-
-
-
-    candidates_mean_sentiments = CandidateMeanSentiment.objects.all()
     candidates = Candidate.objects.all()
-    # print(candidates_mean_sentiments)
-    c_count = []
-    n = 0
-    for candidate in candidates_mean_sentiments:
-        # print(candidate)
-        # breakpoint()
-        if candidate.mean_sentiment != 0:
-            # sentiment_list.append(candidate.mean_sentiment)
-            # candidate.first_name + candidate.last_name)
-            if str(candidate.candidate) not in candidates_list:
-                candidates_list.append(str(
-                    candidate.candidate))
-                sentiment_list.append(candidate.mean_sentiment)
-                c_count.append(n)
-                n += 1
-            else:
-                continue
-        else:
-            continue
-    # data = {'Candidates': candidates_list,
-    #         'Sentiment': sentiment_list}
+    for candidate in candidates:
+        mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
+        mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
 
-    # source = ColumnDataSource(data)
+        total_mean_sentiment = CandidateMeanSentiment.objects.filter(
+            candidate = candidate,
+            from_date_time = mean_sentiment_min_from['from_date_time__min'],
+            to_date_time = mean_sentiment_max_to['to_date_time__max'],
+        )
+        
+        candidates_list.append(str(candidate))
+        sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+    source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=Paired8))
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
                   plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate", tools="")
-    # breakpoint()
-    # print(candidates_list)
-    plot.line([])
-    plot.vbar(x=candidates_list, top=sentiment_list, width=0.4)
+
+    plot.vbar(x='candidates_list', top='sentiment_list', width=0.4,color='color', source=source)
     plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
-    # plot.y_range.start = -1
+    plot.legend.orientation = "vertical"
+    plot.legend.location = "top_center"
     script, div = components(plot)
     context = {'script': script, 'div': div, 'candidate': candidates}
     return render_to_response('index.html', context=context)
-
 
 def candidates(request):
     candidates = Candidate.objects.all()
