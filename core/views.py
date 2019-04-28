@@ -10,6 +10,7 @@ from django.db.models import Min, Max
 from datetime import timezone
 
 def index(request):
+    color_list = []
     sentiment_list = []
     candidates_list = []
     candidates = Candidate.objects.all()
@@ -26,9 +27,21 @@ def index(request):
         candidates_list.append(str(candidate))
         # sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
     source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=Paired8))
+        if total_mean_sentiment[0].mean_sentiment > 0.1 or total_mean_sentiment[0].mean_sentiment < -.1:
+            candidates_list.append(str(candidate))
+            sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+            if candidate.party == 'democrat':
+                color_list.append('#415caa')
+            elif candidate.party == 'republican':
+                color_list.append('#ed2024')
+            else:
+                color_list.append('')
+        print(color_list)
+    source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=color_list))
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
-                  plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate", tools="")
+                  plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate",
+                  tools="", toolbar_location=None,)
 
     plot.vbar(x='candidates_list', top='sentiment_list', width=0.4,color='color', source=source)
     plot.xaxis.major_label_orientation = pi/4
