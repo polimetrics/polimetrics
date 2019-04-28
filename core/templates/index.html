@@ -59,7 +59,11 @@
         {% for candidate in candidate %}
             {% if candidate.party == "democrat" %}
                 <a class="no-underline dim dem-candidates-underline" href="{% url 'candidate_detail' slug=candidate.slug %}">
-                    <img class="candidates-image" src="{{ candidate.image.url }}">
+                    {% if candidate.image.url %}
+                        <img class="candidates-image" src="{{ candidate.image.url }}">
+                    {% else %}
+                        <div>No Image</div>
+                    {% endif %}
                 </a>
             {% endif %}
         {% endfor %}
