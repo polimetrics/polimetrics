@@ -35,8 +35,7 @@ def index(request):
             elif candidate.party == 'republican':
                 color_list.append('#ed2024')
             else:
-                color_list.append('')
-        print(color_list)
+                continue
     source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=color_list))
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
