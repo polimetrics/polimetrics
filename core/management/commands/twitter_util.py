@@ -73,12 +73,13 @@ class Command(BaseCommand):
                 last_name=last_name
             )
             
+            i = 0
             for tweet in tweets:
                 textBlob = TextBlob(self.clean_tweet(tweet.text))
                 temp_polarity = textBlob.sentiment.polarity
                 temp_subjectivity = textBlob.sentiment.subjectivity
                 temp_sentiment = temp_polarity * (1-temp_subjectivity/2)
-                
+                i += 1
                 try:
                     Tweet.objects.create(
                         candidate = new_candidate,
@@ -96,3 +97,5 @@ class Command(BaseCommand):
                     )
                 except DataError:
                     pass
+            print('Finished writing {0} tweets for {1}'.format(i, candidate))
+        print(Tweet.objects.all().count())
