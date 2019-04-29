@@ -34,7 +34,8 @@ def index(request):
                 candidates_sentiments_dict[str(candidate)].append('#696969')
         if total_mean_sentiment[0].mean_sentiment > .125:
             candidate_accordian_list.append(candidate)
-    candidates_list = list(candidates_sentiments_dict.  keys())
+
+    candidates_list = list(candidates_sentiments_dict.keys())
     sentiment_color_list = candidates_sentiments_dict.values()
     for sentiment_color in sentiment_color_list:
         sentiment_list.append(sentiment_color[0])
@@ -54,22 +55,10 @@ def index(request):
     context = {'script': script, 'div': div, 'candidates': candidates, 'candidate_accordian_list': candidate_accordian_list}
     return render_to_response('index.html', context=context)
 
-def candidates(request):
-    candidates = Candidate.objects.all()
-
-    return render(request, "candidates.html",
-                  context={'candidates': candidates})
-
 
 def candidate_detail(request, slug):
     candidate = get_object_or_404(Candidate, slug=slug)
-    # color_list = []
-    # sentiment_list = []
-    # candidates_list = []
-    # candidates_sentiments_dict = {}
-    # candidate = Candidate.objects.get(Candidate, id=id)
     candidates = Candidate.objects.all()
-    
     agg_mean_sentiments = []
     agg_mean_sentiment_dates = []
     daily_mean_sentiments = []
@@ -81,7 +70,6 @@ def candidate_detail(request, slug):
 
     day_delta = utcnow.day - min_time.day
 
-
     for day in range(day_delta):
         daily_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
@@ -92,37 +80,19 @@ def candidate_detail(request, slug):
             daily_mean_sentiment_dates.append(daily_sentiment[0].to_date_time)
             daily_mean_sentiments.append(daily_sentiment[0].mean_sentiment)
 
-
-
-
     agg_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
         candidate = candidate,
         from_date_time = mean_sentiment_min_from['from_date_time__min']
     )
 
-
-
-    daily_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
-        candidate=candidate
-    ).annotate(
-        delta = F('to_date_time') - F('from_date_time')
-    ).filter(
-        delta = timedelta(days=1, hours=0, minutes=0)
-    )
-
-    daily_mean_sentiments = CandidateMeanSentiment.objects.filter(
-        candidate = candidate,
-    )
-
-
+    # daily_mean_sentiments = CandidateMeanSentiment.objects.filter(
+    #     candidate = candidate,
+    # )
 
     for mean_sentiment in agg_candidate_mean_sentiments:
         agg_mean_sentiments.append(mean_sentiment.mean_sentiment)
         agg_mean_sentiment_dates.append(mean_sentiment.to_date_time)
         
-    data = {'date': mean_sentiment_dates,
-            'sentiment': mean_sentiments}
-    source = ColumnDataSource(data)
     detail_line_graph = figure(x_axis_label='Date of sentiment',
                   x_axis_type='datetime',
                   y_axis_label='Sentiment',
@@ -131,13 +101,7 @@ def candidate_detail(request, slug):
                   toolbar_location=None,
                   y_range=(-0.5, 0.5))
     detail_line_graph.multi_line([agg_mean_sentiment_dates, daily_mean_sentiment_dates], [agg_mean_sentiments, daily_mean_sentiments], color=['black', 'blue'],line_width=4, alpha=[.8, .5])
-    detail_line_graph.xaxis.major_label_orientation = pi/4
-
-    comparison_line_graph = figure()
-    comparison_line_graph.wedge()
-
-    plot3 = figure()
-    plot3.comparisonview
+    # detail_line_graph.xaxis.major_label_orientation = pi/4
 
 
     script, div = components(detail_line_graph)
