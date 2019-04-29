@@ -50,7 +50,7 @@ def index(request):
 
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
-                  plot_height=500, plot_width=800, title="Average Sentiment Per Candidate for April 2019",
+                  plot_height=600, plot_width=1100, title="Average Sentiment Per Candidate for April 2019",
                   tools="", toolbar_location=None,
                   tooltips=TOOLTIPS)
     plot.title.text_font_size = "21px"
