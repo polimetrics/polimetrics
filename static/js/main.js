@@ -1,6 +1,6 @@
 
 var $ = require('jquery')
-var ScrollMagic = require('ScrollMagic')
+var ScrollMagic = require('scrollmagic')
 
 $(document).ready(function () {
   var controller = new ScrollMagic.Controller()
