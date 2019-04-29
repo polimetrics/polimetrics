@@ -16,13 +16,17 @@ def index(request):
     for candidate in candidates:
         mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
         mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
-
+        print(candidate)
+        print(mean_sentiment_max_to)
+        print(mean_sentiment_min_from)
+        # breakpoint()
         total_mean_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
             from_date_time = mean_sentiment_min_from['from_date_time__min'],
             to_date_time = mean_sentiment_max_to['to_date_time__max'],
         )
-                
+        # print(total_mean_sentiment)
+        # breakpoint()
         if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
             candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]
             if candidate.party == 'democrat':
