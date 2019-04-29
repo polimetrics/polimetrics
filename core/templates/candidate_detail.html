@@ -8,20 +8,46 @@
         <text class="name  mt4 f-headline b   "> {{ candidate.first_name }} {{ candidate.last_name }}
         </text>
         <br>
-        <text class=" f3 tc fw1 detaildes"> {{ candidate.description }}. <text class="f5">
-                {credit:https://wikipedia.com}
-            </text></text>
+        <div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
+        <div class="flex justify-center ma2 pa3 ">
+    
+            {{ div | safe }}
+            </div>
+    
+           
+            
+    
     </div>
 </div>
-<div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
-<div class="flex justify-center ma2 pa3 ">
-    {{ div | safe }}
-</div>
+
+
+<!-- <div class="ml5 mr5 ">     
 <div>
-    <ul>
-    <li>Date of Sentiment is the date of the tweets we used to derive the sentiment for a given candidate. So it's the daily average of sentiment.</li>
-    <li></li>
-    <li></li>
-    </ul>
-</div>
+        <div class="body-headers accordion pa3"><strong>Who's buzzing?</strong></div>
+        <div class="panel">
+            <ol>
+                <li>Test</li>
+            </ol>
+        </div>
+    </div>
+</div> -->
+
+
+<script>
+        let acc = document.getElementsByClassName('accordion')
+        let i
+      
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener('click', function () {
+            this.classList.toggle('active')
+            let panel = this.nextElementSibling
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + 'px'
+            }
+          })
+        }
+      </script>
+
 {% endblock %}
