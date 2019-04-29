@@ -75,6 +75,9 @@ class CandidateMeanSentiment(models.Model):
     num_positive_tweets = models.IntegerField(default=0)
     num_negative_tweets = models.IntegerField(default=0)    
 
+    class Meta:
+        ordering = ['to_date_time']
+
 class Developer(models.Model):
     '''
     This model represents the project's developers

@@ -5,15 +5,16 @@
 <div class="pictcontainerdetail mt6 mr6">
         <img src="{{ candidate.image.url }}" class="pictdetail project" id="project01">
     <div class="textboxdetail">
-        <text class="name  mt4 f-headline b   "> {{ candidate.first_name }} {{ candidate.last_name }}
+        <text class="name  mt4 f-headline b   "> {{ candidate }}
         </text>
         <br>
         <div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
         <div class="flex justify-center ma2 pa3 ">
     
             {{ div | safe }}
-            </div>
-    
+            
+        </div>
+        <p class="f5">The blue line represents each days sentiment activity and the black line represents the overall trend in relation to the first date.</p>
            
             
     

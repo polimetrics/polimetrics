@@ -1,20 +1,20 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
-from bokeh.plotting import figure, output_file, show
+from bokeh.plotting import figure, show
+from bokeh.layouts import layout
+from bokeh.io import curdoc
 from bokeh.embed import components
-from bokeh.models import ColumnDataSource, FactorRange
-from bokeh.palettes import Paired8
-from bokeh.transform import factor_cmap
-from core.models import Candidate, Tweet, CandidateMeanSentiment
+from bokeh.models import ColumnDataSource, Tabs, Panel
+from core.models import Candidate, CandidateMeanSentiment
 from math import pi
-from django.db.models import Min, Max
-from datetime import timezone
+from django.db.models import Min, Max, F, ExpressionWrapper, DateTimeField
+from datetime import timezone, timedelta, datetime
 
 def index(request):
     color_list = []
     sentiment_list = []
     candidates_list = []
+    candidates_sentiments_dict = {}
     candidates = Candidate.objects.all()
-    candidates_mean_sentiments = []
     for candidate in candidates:
         mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
         mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
@@ -24,32 +24,34 @@ def index(request):
             from_date_time = mean_sentiment_min_from['from_date_time__min'],
             to_date_time = mean_sentiment_max_to['to_date_time__max'],
         )
-
-        if total_mean_sentiment[0].mean_sentiment > 0.1:
-            candidates_mean_sentiments.append(str(candidate))
                 
-        if total_mean_sentiment[0].mean_sentiment > 0.1 or total_mean_sentiment[0].mean_sentiment < -.1:
-            candidates_list.append(str(candidate))
-            sentiment_list.append(total_mean_sentiment[0].mean_sentiment)
+        if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
+            candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]
             if candidate.party == 'democrat':
-                color_list.append('#415caa')
+                candidates_sentiments_dict[str(candidate)].append('#415caa')
             elif candidate.party == 'republican':
-                color_list.append('#ed2024')
+                candidates_sentiments_dict[str(candidate)].append('#ed2024')
             else:
-                continue
+                candidates_sentiments_dict[str(candidate)].append('#696969')
+
+    candidates_list = list(candidates_sentiments_dict.keys())
+    sentiment_color_list = candidates_sentiments_dict.values()
+    for sentiment_color in sentiment_color_list:
+        sentiment_list.append(sentiment_color[0])
+        color_list.append(sentiment_color[1])
+
     source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=color_list))
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
                   plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate",
                   tools="", toolbar_location=None,)
-    print(candidates_mean_sentiments)
     plot.vbar(x='candidates_list', top='sentiment_list', width=0.4,color='color', source=source)
     plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
     # plot.legend.orientation = "vertical"
     # plot.legend.location = "top_center"
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidates': candidates, 'candidates_mean_sentiments': candidates_mean_sentiments}
+    context = {'script': script, 'div': div, 'candidates': candidates}
     return render_to_response('index.html', context=context)
 
 def candidates(request):
@@ -61,61 +63,92 @@ def candidates(request):
 
 def candidate_detail(request, slug):
     candidate = get_object_or_404(Candidate, slug=slug)
+    # color_list = []
+    # sentiment_list = []
+    # candidates_list = []
+    # candidates_sentiments_dict = {}
     # candidate = Candidate.objects.get(Candidate, id=id)
     candidates = Candidate.objects.all()
-    candidate_mean_sentiment = CandidateMeanSentiment.objects.all()
-    candidate_mean_sentiment_data = []
-    candidate_mean_sentiment_date = []
+    
+    agg_mean_sentiments = []
+    agg_mean_sentiment_dates = []
+    daily_mean_sentiments = []
+    daily_mean_sentiment_dates = []
+    mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
+    min_time = mean_sentiment_min_from['from_date_time__min']
 
-    for tweet in candidate_mean_sentiment:
-        if tweet.mean_sentiment != 0 and candidate.last_name == tweet.candidate.last_name:
-            candidate_mean_sentiment_data.append(
-                tweet.mean_sentiment)
-            candidate_mean_sentiment_date.append(
-                tweet.to_date_time)
+    utcnow = datetime.utcnow()
 
-    data = {'date': candidate_mean_sentiment_date,
-            'sentiment': candidate_mean_sentiment_data}
-    source = ColumnDataSource(data)
-    plot = figure(x_axis_label='Date of sentiment',
+    day_delta = utcnow.day - min_time.day
+
+
+    for day in range(day_delta):
+        daily_sentiment = CandidateMeanSentiment.objects.filter(
+            candidate = candidate,
+            from_date_time = min_time + timedelta(days=day),
+            to_date_time = min_time + timedelta(days=day+1)
+        )
+        if daily_sentiment:
+            daily_mean_sentiment_dates.append(daily_sentiment[0].to_date_time)
+            daily_mean_sentiments.append(daily_sentiment[0].mean_sentiment)
+
+
+
+
+    agg_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
+        candidate = candidate,
+        from_date_time = mean_sentiment_min_from['from_date_time__min']
+    )
+
+
+
+    # daily_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
+    #     candidate=candidate
+    # ).annotate(
+    #     delta = F('to_date_time') - F('from_date_time')
+    # ).filter(
+    #     delta = timedelta(days=1, hours=0, minutes=0)
+    # )
+    # print(daily_candidate_mean_sentiments)
+
+    # daily_mean_sentiments = CandidateMeanSentiment.objects.filter(
+    #     candidate = candidate,
+    # )
+    # print(agg_mean_sentiments)
+    # breakpoint()
+
+
+
+    for mean_sentiment in agg_candidate_mean_sentiments:
+        agg_mean_sentiments.append(mean_sentiment.mean_sentiment)
+        agg_mean_sentiment_dates.append(mean_sentiment.to_date_time)
+        
+    # print(mean_sentiments)
+    # breakpoint()
+    # data = {'date': mean_sentiment_dates,
+    #         'sentiment': mean_sentiments}
+    # source = ColumnDataSource(data)
+    detail_line_graph = figure(x_axis_label='Date of sentiment',
                   x_axis_type='datetime',
                   y_axis_label='Sentiment',
                   plot_width=1000,
                   plot_height=500,
                   toolbar_location=None,
                   y_range=(-0.5, 0.5))
-    plot.line('date', 'sentiment', source=source, line_width=4)
-    plot.xaxis.major_label_orientation = pi/4
-    # plot.y_range.start = -1
-    script, div = components(plot)
+    detail_line_graph.multi_line([agg_mean_sentiment_dates, daily_mean_sentiment_dates], [agg_mean_sentiments, daily_mean_sentiments], color=['black', 'blue'],line_width=4, alpha=[.8, .5])
+    # detail_line_graph.xaxis.major_label_orientation = pi/4
+    # print(mean_sentiments)
+    # print(mean_sentiment_dates)
+    # comparison_line_graph = figure()
+    # comparison_line_graph.wedge()
+
+    # plot3 = figure()
+    # plot3.comparisonview
+
+
+    script, div = components(detail_line_graph)
     context = {'script': script, 'div': div, 'candidate': candidate, 'candidates': candidates}
     return render_to_response('candidate_detail.html', context=context)
-    # tweet_query_set = Tweet.objects.all()
-    # tweet_date_list = []
-    # tweet_polarity_list = []
-
-    # for tweet in tweet_query_set:
-    #     if tweet.polarity != 0 and tweet.candidate.last_name == candidate.last_name:
-    #         tweet_polarity_list.append(tweet.polarity)
-    #         tweet_date_list.append(tweet.created_at)
-
-    #     data = {'date': tweet_date_list, 'polarity': tweet_polarity_list}
-    #     title = 'y = f(x)'
-    #     source = ColumnDataSource(data)
-    #     plot = figure(title=title,
-    #                   x_axis_label='Date of Tweet',
-    #                   x_axis_type="datetime",
-    #                   y_axis_label='Polarity',
-    #                   plot_width=1000,
-    #                   plot_height=500)
-    #     plot.circle('date', 'polarity', source=source)
-
-    #     plot.xaxis.major_label_orientation = pi/4
-    #     plot.circle(tweet_polarity_list, tweet_polarity_list, legend='f(x)',
-    #                 size=5, color='blue', alpha=0.9)
-    #     script, div = components(plot)
-    #     context = {'script': script, 'div': div, 'candidate': candidate}
-    #     return render_to_response('candidate_detail.html', context=context)
 
 
 def methodology(request):
