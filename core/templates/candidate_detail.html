@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-
+<div class="detailbody">
 <div class="pictcontainerdetail mt6 mr6">
         <img src="{{ candidate.image.url }}" class="pictdetail project" id="project01">
     <div class="textboxdetail">
@@ -9,7 +9,7 @@
         </text>
         <br>
         <div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
-        <div class="flex justify-center ma2 pa3 ">
+        <div class="flex   ">
     
             {{ div | safe }}
             
@@ -22,18 +22,25 @@
 </div>
 
 
-<!-- <div class="ml5 mr5 ">     
+<div class="ml5 mr5 methproject ">     
 <div>
-        <div class="body-headers accordion pa3"><strong>Who's buzzing?</strong></div>
-        <div class="panel">
-            <ol>
-                <li>Test</li>
+        <div class="body-headers accordiondetail pa3"><strong>About {{ candidate.first_name }} {{candidate.last_name }}</strong></div>
+        <div class="paneldetailpage">
+            <ol class="list">
+                <li>{{ candidate.description }} [credit//wikipedia.com]</li>
             </ol>
         </div>
     </div>
-</div> -->
+</div>
 
+</div>
 
+<br>
+<br>
+<br>
+<br><br>
+<br><br>
+<br>
 <script>
         let acc = document.getElementsByClassName('accordion')
         let i

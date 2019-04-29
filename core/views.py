@@ -17,17 +17,13 @@ def index(request):
     for candidate in candidates:
         mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
         mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
-        print(candidate)
-        print(mean_sentiment_max_to)
-        print(mean_sentiment_min_from)
-        # breakpoint()
+
         total_mean_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
             from_date_time = mean_sentiment_min_from['from_date_time__min'],
             to_date_time = mean_sentiment_max_to['to_date_time__max'],
         )
-        # print(total_mean_sentiment)
-        # breakpoint()
+
         if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
             candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]
             if candidate.party == 'democrat':
@@ -106,20 +102,17 @@ def candidate_detail(request, slug):
 
 
 
-    # daily_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
-    #     candidate=candidate
-    # ).annotate(
-    #     delta = F('to_date_time') - F('from_date_time')
-    # ).filter(
-    #     delta = timedelta(days=1, hours=0, minutes=0)
-    # )
-    # print(daily_candidate_mean_sentiments)
+    daily_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
+        candidate=candidate
+    ).annotate(
+        delta = F('to_date_time') - F('from_date_time')
+    ).filter(
+        delta = timedelta(days=1, hours=0, minutes=0)
+    )
 
-    # daily_mean_sentiments = CandidateMeanSentiment.objects.filter(
-    #     candidate = candidate,
-    # )
-    # print(agg_mean_sentiments)
-    # breakpoint()
+    daily_mean_sentiments = CandidateMeanSentiment.objects.filter(
+        candidate = candidate,
+    )
 
 
 
@@ -127,27 +120,24 @@ def candidate_detail(request, slug):
         agg_mean_sentiments.append(mean_sentiment.mean_sentiment)
         agg_mean_sentiment_dates.append(mean_sentiment.to_date_time)
         
-    # print(mean_sentiments)
-    # breakpoint()
-    # data = {'date': mean_sentiment_dates,
-    #         'sentiment': mean_sentiments}
-    # source = ColumnDataSource(data)
+    data = {'date': mean_sentiment_dates,
+            'sentiment': mean_sentiments}
+    source = ColumnDataSource(data)
     detail_line_graph = figure(x_axis_label='Date of sentiment',
                   x_axis_type='datetime',
                   y_axis_label='Sentiment',
-                  plot_width=1000,
-                  plot_height=500,
+                  plot_width=700,
+                  plot_height=350,
                   toolbar_location=None,
                   y_range=(-0.5, 0.5))
     detail_line_graph.multi_line([agg_mean_sentiment_dates, daily_mean_sentiment_dates], [agg_mean_sentiments, daily_mean_sentiments], color=['black', 'blue'],line_width=4, alpha=[.8, .5])
-    # detail_line_graph.xaxis.major_label_orientation = pi/4
-    # print(mean_sentiments)
-    # print(mean_sentiment_dates)
-    # comparison_line_graph = figure()
-    # comparison_line_graph.wedge()
+    detail_line_graph.xaxis.major_label_orientation = pi/4
 
-    # plot3 = figure()
-    # plot3.comparisonview
+    comparison_line_graph = figure()
+    comparison_line_graph.wedge()
+
+    plot3 = figure()
+    plot3.comparisonview
 
 
     script, div = components(detail_line_graph)
