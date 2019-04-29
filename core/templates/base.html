@@ -45,7 +45,7 @@
     <div>
         {% for candidate in candidates %}
         {% if candidate.party == "republican" %}
-        <div tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
+        <div tooltip="{{ candidate }}" tooltip-position="bottom">
             <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
                     src="{{ candidate.image.url }}"></a>
         </div>
@@ -54,21 +54,13 @@
     </div>
     <div>
         {% for candidate in candidates %}
-<<<<<<< HEAD
             {% if candidate.party == "democrat" %}
-                <div class="tooltip-hover" tooltip="{{ candidate }}" tooltip-position="bottom">
-                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
-                </div>
+            <div class="tooltip-hover" tooltip="{{ candidate }}"
+                tooltip-position="bottom">
+                <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
+                        src="{{ candidate.image.url }}"></a>
+            </div>
             {% endif %}
-=======
-        {% if candidate.party == "democrat" %}
-        <div class="tooltip-hover" tooltip="{{ candidate.first_name }} {{ candidate.last_name }}"
-            tooltip-position="bottom">
-            <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
-                    src="{{ candidate.image.url }}"></a>
-        </div>
-        {% endif %}
->>>>>>> 3f5979c8cb672a6837ed9c1afffd2be11d8fa12d
         {% endfor %}
     </div>
     <div class="pa4 mt5"></div>
@@ -102,14 +94,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-        <div class="ml6 mt1">
-            <div class="footer-candidates-container ml2">
-            <div class="clock-header ml0 mt3"><strong>Candidates</strong></div>
-            {% for candidate in candidates %}
-                <div class="mt3">
-                    <a class="link footer-candidates ml3" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
-=======
         <div class="candidates-footer-header pl5"><strong>Candidates</strong>
             <div class="footer-candidates-container">
                 {% for candidate in candidates %}
@@ -122,7 +106,6 @@
                         <a class="link footer-candidates mt2 mr2 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
                     {% endif %}
                 {% endfor %}
->>>>>>> 3f5979c8cb672a6837ed9c1afffd2be11d8fa12d
             </div>
         </div>
     </div>

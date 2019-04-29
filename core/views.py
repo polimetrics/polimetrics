@@ -1,13 +1,11 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
-from bokeh.plotting import figure, show
-from bokeh.layouts import layout
-from bokeh.io import curdoc
+from bokeh.plotting import figure
 from bokeh.embed import components
-from bokeh.models import ColumnDataSource, Tabs, Panel
+from bokeh.models import ColumnDataSource
 from core.models import Candidate, CandidateMeanSentiment
 from math import pi
-from django.db.models import Min, Max, F, ExpressionWrapper, DateTimeField
-from datetime import timezone, timedelta, datetime
+from django.db.models import Min, Max
+from datetime import timedelta, datetime
 
 def index(request):
     color_list = []
