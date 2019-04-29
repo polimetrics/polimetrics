@@ -36,7 +36,7 @@ def index(request):
                 candidates_sentiments_dict[str(candidate)].append('#ed2024')
             else:
                 candidates_sentiments_dict[str(candidate)].append('#696969')
-        if total_mean_sentiment[0].mean_sentiment > .1:
+        if total_mean_sentiment[0].mean_sentiment > .125:
             candidate_accordian_list.append(candidate)
     candidates_list = list(candidates_sentiments_dict.  keys())
     sentiment_color_list = candidates_sentiments_dict.values()
