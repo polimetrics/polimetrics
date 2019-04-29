@@ -2,12 +2,15 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>polimetrics</title>
     <meta charset="utf-8">
-    <meta name="description" content="Polimetrics aims to provide an innovative polling solution for the 2020 Presidential Primary by using the mood sentiment of Tweets.">
+    <meta name="description"
+        content="Polimetrics aims to provide an innovative polling solution for the 2020 Presidential Primary by using the mood sentiment of Tweets.">
+    <link rel="shortcut icon" href="{% static '/img/logo.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static '/css/styles.css' %}">
-    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville:700" rel="stylesheet">
     <script src="{% static 'build/bundle.js' %}"></script>
     <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -19,18 +22,21 @@
 <header>
     <nav class="nav " id="navbar">
         <ul class="flex">
-           <a href="{% url 'index' %}">
-                <img class="logo" src="{% static '/img/logo.png' %}" alt="An artist rendering of a vertical U.S. flag; the first four lines have variating line length that reflects a bar graph.">
+            <a href="{% url 'index' %}">
+                <img class="logo" src="{% static '/img/logo.png' %}"
+                    alt="An artist rendering of a vertical U.S. flag; the first four lines have variating line length that reflects a bar graph.">
             </a>
             <a class="link flex " href="{% url 'index' %}">
-                <div class="logo-font black mt2 ml2 header-font dib b w-100 ">polimetrics</div>
+                <div class="logo-font black mt2 ml2 header-font dib b w-100">polimetrics</div>
             </a>
             <div class="w-100 flex list justify-end pa3">
                 <li class="header-font ml1"></li>
                 <li class="header-font ml1"></li>
-                <li><a class="header-font  black link ml1 hover-dark-red dib" href="{% url 'methodology' %}"><strong>methodology</strong></a></li>
+                <li><a class="header-font  black link ml1 hover-red dib"
+                        href="{% url 'methodology' %}"><strong>methodology</strong></a></li>
                 <li class="header-font ml1"></li>
-                <li><a class="header-font  black link ml1 mr4 hover-dark-blue dib" href="{% url 'about' %}"><strong>about</strong></a></li>
+                <li><a class="header-font  black link ml1 mr4 hover-dark-blue dib"
+                        href="{% url 'about' %}"><strong>about</strong></a></li>
             </div>
         </ul>
     </nav>
@@ -38,63 +44,88 @@
 <div class="sidenav mt5">
     <div>
         {% for candidate in candidates %}
-            {% if candidate.party == "republican" %}
-                <div tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
-                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
-                </div>
-            {% endif %}
+        {% if candidate.party == "republican" %}
+        <div tooltip="{{ candidate.first_name }} {{ candidate.last_name }}" tooltip-position="bottom">
+            <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
+                    src="{{ candidate.image.url }}"></a>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
     <div>
         {% for candidate in candidates %}
+<<<<<<< HEAD
             {% if candidate.party == "democrat" %}
                 <div class="tooltip-hover" tooltip="{{ candidate }}" tooltip-position="bottom">
                     <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
                 </div>
             {% endif %}
+=======
+        {% if candidate.party == "democrat" %}
+        <div class="tooltip-hover" tooltip="{{ candidate.first_name }} {{ candidate.last_name }}"
+            tooltip-position="bottom">
+            <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
+                    src="{{ candidate.image.url }}"></a>
+        </div>
+        {% endif %}
+>>>>>>> 3f5979c8cb672a6837ed9c1afffd2be11d8fa12d
         {% endfor %}
     </div>
     <div class="pa4 mt5"></div>
 </div>
 <div class="main">
+
     <body>
         {% block content %}{% endblock %}
     </body>
 </div>
 <footer>
-    <div class="flex">
-        <div class="ml6 pl3 body-content" id="clockdiv"> 
-            <h1 class="clock-header">Countdown to Election Season</h1>
-            <div class="flex">
-                <div> 
-                    <span class="days" id="day"></span> 
-                    <div class="smalltext" id="navel">Days</div> 
-                </div> 
-                <div> 
-                    <span class="hours" id="hour"></span> 
-                    <div class="smalltext">Hours</div> 
-                </div> 
-                <div> 
-                    <span class="minutes" id="minute"></span> 
-                    <div class="smalltext">Minutes</div> 
-                </div> 
-                <div> 
-                    <span class="seconds" id="second"></span> 
-                    <div class="smalltext" id="navel">Seconds</div> 
-                </div> 
+    <div class="flex white">
+        <div class="ml6 pl3" id="clockdiv">
+            <div class="clock-header"><strong>Countdown to Election Season</strong></div>
+            <div class="flex tc">
+                <div class="pa2">
+                    <span class="days" id="day"></span>
+                    <div class="smalltext" id="navel">Days</div>
+                </div>
+                <div class="pa2">
+                    <span class="hours" id="hour"></span>
+                    <div class="smalltext">Hours</div>
+                </div>
+                <div class="pa2">
+                    <span class="minutes" id="minute"></span>
+                    <div class="smalltext">Minutes</div>
+                </div>
+                <div class="pa2">
+                    <span class="seconds" id="second"></span>
+                    <div class="smalltext" id="navel">Seconds</div>
+                </div>
             </div>
         </div>
+<<<<<<< HEAD
         <div class="ml6 mt1">
             <div class="footer-candidates-container ml2">
             <div class="clock-header ml0 mt3"><strong>Candidates</strong></div>
             {% for candidate in candidates %}
                 <div class="mt3">
                     <a class="link footer-candidates ml3" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
+=======
+        <div class="candidates-footer-header pl5"><strong>Candidates</strong>
+            <div class="footer-candidates-container">
+                {% for candidate in candidates %}
+                    {% if candidate.party == "republican" %}
+                        <a class="link footer-candidates mt2 mr2 hover-red" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% for candidate in candidates %}
+                    {% if candidate.party == "democrat" %}
+                        <a class="link footer-candidates mt2 mr2 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
+                    {% endif %}
+                {% endfor %}
+>>>>>>> 3f5979c8cb672a6837ed9c1afffd2be11d8fa12d
             </div>
-            {% endfor %}
         </div>
     </div>
-
-</div>
 </footer>
+
 </html>

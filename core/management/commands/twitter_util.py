@@ -19,12 +19,10 @@ class Command(BaseCommand):
                 msg = "Not a valid date: '{0}'.".format(s)
                 raise argparse.ArgumentTypeError(msg)
 
-        parser.add_argument('candidate', nargs=2, help='The candidate to search')
+        parser.add_argument('-a', '--all', help='Collect tweets for all candidates in the database', action='store_true', default=False)
+        parser.add_argument('-n', '--name', nargs=2, help='The first and last name of the candidate to search')
         parser.add_argument('-c', '--count', help='The number of tweets to fetch', type=int, default=10)
         parser.add_argument('-d', '--date', help='The Date at which to calculate - format YYYY-MM-DD', type=valid_date, default=datetime.utcnow())
-
-    def __init__(self):
-        self.tweets = []
 
     def clean_tweet(self, tweet): 
         ''' 
@@ -44,41 +42,60 @@ class Command(BaseCommand):
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 
-        # 
         utc_date_str = (options['date'] + timedelta(days=1)).strftime("%Y-%m-%d")
-        temp_candidate = options['candidate']
         num_terms = options['count']
 
-        api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
+        candidates = []
 
-        # searching for tweets
-        self.tweets = tweepy.Cursor(api.search, q=temp_candidate, until=utc_date_str, lang = "en").items(num_terms)
-        
-        new_candidate, _ = Candidate.objects.get_or_create(
-            first_name=temp_candidate[0].lower(), 
-            last_name=temp_candidate[1].lower()
-        )
+        if options['all']:
+            for candidate in Candidate.objects.all():
+                candidates.append(str(candidate).lower())
 
-        for tweet in self.tweets:
-            textBlob = TextBlob(self.clean_tweet(tweet.text))
-            temp_polarity = textBlob.sentiment.polarity
-            temp_subjectivity = textBlob.sentiment.subjectivity
-            temp_sentiment = temp_polarity * (1-temp_subjectivity/2)
+        if options['name']:
+            first_name=options['name'][0].lower() 
+            last_name=options['name'][1].lower()
+            temp_name = first_name + " " + last_name
+            if temp_name not in candidates:
+                candidates.append(temp_name)
+
+        tweets = []
+
+        for candidate in candidates:
+            api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True, compression=True)
+
+            # searching for tweets
+            tweets = tweepy.Cursor(api.search, q=candidate, until=utc_date_str, lang = "en").items(num_terms)
+
+            first_name, last_name = candidate.split()
+
+            new_candidate, _ = Candidate.objects.get_or_create(
+                first_name=first_name,
+                last_name=last_name
+            )
             
-            try:
-                Tweet.objects.create(
-                    candidate = new_candidate,
-                    text = tweet.text,
-                    followers = tweet.user.followers_count,
-                    created_at = tweet.created_at.replace(tzinfo=timezone.utc),
-                    polarity = temp_polarity,
-                    subjectivity = temp_subjectivity,
-                    location = tweet.user.location[:100],
-                    sentiment = temp_sentiment,
-                    retweet_count = tweet.retweet_count,
-                    favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else tweet.favorite_count,
-                    tweet_id = tweet.id_str,
-                    retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') else None
-                )
-            except DataError:
-                pass
+            i = 0
+            for tweet in tweets:
+                textBlob = TextBlob(self.clean_tweet(tweet.text))
+                temp_polarity = textBlob.sentiment.polarity
+                temp_subjectivity = textBlob.sentiment.subjectivity
+                temp_sentiment = temp_polarity * (1-temp_subjectivity/2)
+                i += 1
+                try:
+                    Tweet.objects.create(
+                        candidate = new_candidate,
+                        text = tweet.text,
+                        followers = tweet.user.followers_count,
+                        created_at = tweet.created_at.replace(tzinfo=timezone.utc),
+                        polarity = temp_polarity,
+                        subjectivity = temp_subjectivity,
+                        location = tweet.user.location[:100],
+                        sentiment = temp_sentiment,
+                        retweet_count = tweet.retweet_count,
+                        favorite_count = tweet.retweeted_status.favorite_count if hasattr(tweet, 'retweeted_status') else tweet.favorite_count,
+                        tweet_id = tweet.id_str,
+                        retweeted_id = tweet.retweeted_status.id_str if hasattr(tweet, 'retweeted_status') else None
+                    )
+                except DataError:
+                    pass
+            print('Finished writing {0} tweets for {1}'.format(i, candidate))
+        print(Tweet.objects.all().count())
