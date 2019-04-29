@@ -14,7 +14,7 @@ a {
 
 footer {
     position: absolute;
-    width: 100%;
+    width: 1500px;
     background-color: black;
     padding: 30px 0px;
     margin-top: 10%;
@@ -529,7 +529,6 @@ transform: translateY(0);
 }
 
 #clockdiv>div {
-    padding: 10px;
     border-radius: 3px;
     opacity: 0.7;
 }
@@ -546,7 +545,13 @@ transform: translateY(0);
 }
 
 .clock-header {
-    color: white;
+    color: #7C7C7C;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 32px;
+}
+
+.candidates-footer-header{
+    color: #575757;
     font-family: 'Century Gothic', sans-serif;
     font-size: 32px;
 }
@@ -603,8 +608,9 @@ transform: translateY(0);
 
 .footer-candidates {
     font-family: "futura-pt-light", sans-serif;
-    color: white;
-    flex: 1 1 30px;
+    color: #B2B2B2;
+    font-size: 18px;
+    flex: 1 1 10px;
 }
 
 .foot-header {
@@ -614,7 +620,7 @@ transform: translateY(0);
 }
 
 .accordion {
-    background-color: white;
+    background-color: #ccc;
     color: black;
     cursor: pointer;
     width: 100%;
@@ -626,8 +632,10 @@ transform: translateY(0);
 
 .active,
 .accordion:hover {
-    background-color: #ccc;
-}
+    background: #f5f5f5;
+    color: white;
+    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
+    transition: opacity .35s ease-in-out;}
 
 .panel {
     background-color: #212121;
@@ -656,7 +664,7 @@ transform: translateY(0);
 
 .accordiondetail {
     background-color: white;
-    color: black;
+    color: white;
     cursor: pointer;
     width: 100%;
     text-align: left;
