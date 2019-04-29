@@ -17,11 +17,11 @@
     <div>
         <div class="body-headers accordion pa3"><strong>Who's buzzing?</strong></div>
         <div class="panel">
-            <ol>
+            <div>
             {% for candidate in candidate_accordian_list %}
-                <li>{{ candidate }}</li>
+                <div class="pa3">{{ candidate }}</div>
             {% endfor %}
-            </ol>
+            </div>
             
         </div>
     </div>
