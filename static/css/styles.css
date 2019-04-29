@@ -14,7 +14,7 @@ a {
 
 footer {
     position: absolute;
-    width: 1500px;
+    width: 100%;
     background-color: black;
     padding: 30px 0px;
     margin-top: 10%;
@@ -197,8 +197,6 @@ footer {
 
 .abouthead {
     font-family: 'Century Gothic', sans-serif;
-    
-
 }
 
 .blue-box {
@@ -247,8 +245,6 @@ footer {
 
 .body-structure {
     max-width: 38rem;
-   
-    
 }
 
 .body-structure-index {
@@ -377,8 +373,6 @@ footer {
     z-index: 1;
     display: flex;
     flex-basis: auto;
-
-
     padding: 1%;
     text-align: right;
     padding-right: 15%;
@@ -413,7 +407,6 @@ footer {
 
 .detaildes {
     font-family: "futura-pt-light", sans-serif;
-
 }
 
 .capitalize {
@@ -430,12 +423,12 @@ footer {
     height: 5rem;
     border: none;
     text-align: center;
-    outline: none;
-    
+    outline: none; 
 }
+
 .active, .collapsible:hover {
     background-color: white;
-  }
+}
   
 .content {
     font-family: "futura-pt-light", sans-serif;
@@ -467,10 +460,6 @@ footer {
     font-size: 6rem;
 }
 
-
-
-
-
 .methheaders2 {
     font-family: 'Century Gothic', sans-serif;
     color: black;
@@ -482,8 +471,8 @@ footer {
     opacity: 0;
     transform: translateY(50px);
     transition: all .5s ease-out;
-    
-    }
+}
+
 .project.fade-in {
 opacity: 1;
 transform: translateY(0);
@@ -494,18 +483,17 @@ transform: translateY(0);
         font-size: 2rem;
         font-weight: lighter;
         line-height: 2rem;
-    }
+}
 
 .projectmeth {
     opacity: 0;
     transform: translateX(300px);
-    transition: all 1s ease-out;
-    
-    }
+    transition: all 1s ease-out; 
+}
+
 .projectmeth.fade-in {
     opacity: 1;
     transform: translateX(0);
-
 }
 
 

@@ -1,5 +1,5 @@
 
-var $ = require('jQuery')
+var $ = require('jquery')
 var ScrollMagic = require('ScrollMagic')
 
 $(document).ready(function () {
