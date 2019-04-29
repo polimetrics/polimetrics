@@ -13,6 +13,7 @@ def index(request):
     candidates_list = []
     candidates_sentiments_dict = {}
     candidates = Candidate.objects.all()
+    candidate_accordian_list = []
     for candidate in candidates:
         mean_sentiment_min_from = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
         mean_sentiment_max_to = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
@@ -35,8 +36,9 @@ def index(request):
                 candidates_sentiments_dict[str(candidate)].append('#ed2024')
             else:
                 candidates_sentiments_dict[str(candidate)].append('#696969')
-
-    candidates_list = list(candidates_sentiments_dict.keys())
+        if total_mean_sentiment[0].mean_sentiment > .1:
+            candidate_accordian_list.append(candidate)
+    candidates_list = list(candidates_sentiments_dict.  keys())
     sentiment_color_list = candidates_sentiments_dict.values()
     for sentiment_color in sentiment_color_list:
         sentiment_list.append(sentiment_color[0])
@@ -53,7 +55,7 @@ def index(request):
     # plot.legend.orientation = "vertical"
     # plot.legend.location = "top_center"
     script, div = components(plot)
-    context = {'script': script, 'div': div, 'candidates': candidates}
+    context = {'script': script, 'div': div, 'candidates': candidates, 'candidate_accordian_list': candidate_accordian_list}
     return render_to_response('index.html', context=context)
 
 def candidates(request):
