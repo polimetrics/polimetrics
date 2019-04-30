@@ -66,6 +66,17 @@ footer {
     display: block;
 }
 
+.projectsidenav {
+    opacity: 0;
+    transform: translateY(300px);
+    transition: all 1s ease-out; 
+}
+
+.projectsidenav.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .main {
     margin-left: 100px;
     /* Same as the width of the sidebar */
@@ -92,6 +103,7 @@ footer {
     flex-wrap: wrap;
     margin-top: 75px;
 }
+
 
 .pict:hover {
     /* border-color: red; */
@@ -217,6 +229,12 @@ footer {
 }
 
 .body-headers {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 32px;
+}
+
+.body-headersindex {
     font-family: 'Century Gothic', sans-serif;
     color: black;
     font-size: 32px;
@@ -406,6 +424,9 @@ footer {
 .graphdetail {
     font-family: "Futura", sans-serif;
     
+}
+.graphsubtext {
+    font-family: "futura-pt-light" sans-serif;
 }
 
 .detaildes {
@@ -633,9 +654,9 @@ transform: translateY(0);
 }
 
 .accordion {
-    background-color: #ccc;
-    color: black;
-    cursor: pointer;
+    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
+    color: white;
+    
     width: 100%;
     text-align: left;
     border: none;
@@ -643,26 +664,18 @@ transform: translateY(0);
     transition: 0.4s;
 }
 
-.active,
-.accordion:hover {
-    background: #f5f5f5;
-    color: white;
-    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
-    transition: opacity .35s ease-in-out;}
+
 
 .panel {
     background-color: #212121;
     color: white;
     font-family: 'futura-pt-light', sans-serif;
     font-size: 20px;
-    display: none;
-    overflow: hidden;
-    max-height: 500px;
-    transition: max-height 0.2s ease-out;
+   
 }
 
 .accordion:after {
-    content: '\02795';
+    
     font-size: 13px;
     color: black;
     float: right;
