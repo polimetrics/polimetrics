@@ -8,6 +8,7 @@ import re
 from datetime import datetime, timezone, timedelta
 import argparse
 from django.db.utils import DataError
+import sys
 
 class Command(BaseCommand):
 
@@ -47,16 +48,18 @@ class Command(BaseCommand):
 
         candidates = []
 
-        if options['all']:
-            for candidate in Candidate.objects.all():
-                candidates.append(str(candidate).lower())
-
         if options['name']:
             first_name=options['name'][0].lower() 
             last_name=options['name'][1].lower()
             temp_name = first_name + " " + last_name
             if temp_name not in candidates:
                 candidates.append(temp_name)
+        elif options['all']:
+            for candidate in Candidate.objects.all():
+                candidates.append(str(candidate).lower())
+        else:
+            print('You need to specify -n firstname lastname or -a')
+            sys.exit()
 
         tweets = []
 
@@ -98,4 +101,3 @@ class Command(BaseCommand):
                 except DataError:
                     pass
             print('Finished writing {0} tweets for {1}'.format(i, candidate))
-        print(Tweet.objects.all().count())

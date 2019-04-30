@@ -374,16 +374,9 @@ footer {
     z-index: 1;
     display: flex;
     flex-basis: auto;
-    flex-direction: row;
     padding: 1%;
     text-align: right;
     padding-right: 15%;
-    
-}
-.detailbody {
-    
-    
-    width:100%;
 }
 
 .pictdetail {
@@ -391,18 +384,13 @@ footer {
     border-style: solid;
     border-radius: 100%;
     border-color: white;
-    width: 20%;
-    height: 20%;
+    width: 30%;
+    height: 30%;
     border-width: .5rem;
     margin-right: 2%;
     z-index: 2;
     align-self: stretch;
     float: left;
-    display:flex;
-    flex-direction:column;
-    flex-basis: 100%;
-    flex:1;
-    
 }
 
 .textboxdetail {
@@ -412,45 +400,11 @@ footer {
     text-decoration: none;
     font-size: 3rem;
     text-align: center;
-    display:flex;
-    flex-direction: column;
-    flex-basis:100%;
-    flex:1;
 }
 
 .graphdetail {
     font-family: "Futura", sans-serif;
-    
-    
-    
 }
-.accordiondetail {
-    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
-    color: black;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-}
-
-
-
-.paneldetailpage {
-    background-color: #212121;
-    color: white;
-    font-family: 'futura-pt-light', sans-serif;
-    font-size: 20px;
-    
-    padding: 1%;
-    max-height:20%;
-   
-    
-    
-    transition: max-height 0.2s ease-out;
-}
-
 
 .detaildes {
     font-family: "futura-pt-light", sans-serif;

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
 from bokeh.plotting import figure
 from bokeh.embed import components
-from bokeh.models import ColumnDataSource
+from bokeh.models import ColumnDataSource, HoverTool
 from core.models import Candidate, CandidateMeanSentiment
 from math import pi
 from django.db.models import Min, Max
@@ -42,10 +42,22 @@ def index(request):
         color_list.append(sentiment_color[1])
 
     source = ColumnDataSource(data=dict(candidates_list=candidates_list, sentiment_list=sentiment_list, color=color_list))
+
+    hover = HoverTool(
+        tooltips = [
+        ("candidate name", "@candidates_list"),
+        ("sentiment value", "@sentiment_list{-0.000}"),
+    ],
+    mode = 'vline'
+    ) 
+
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
-                  plot_height=500, plot_width=800, title="Mean Sentiment Per Candidate",
-                  tools="", toolbar_location=None,)
+                  plot_height=600, plot_width=1100, title="Average Sentiment Per Candidate for April 2019",
+                  tools=[hover], toolbar_location=None,)
+    plot.title.text_font_size = "21px"
+    plot.xaxis.axis_label_text_font_size = "19px"
+    plot.yaxis.axis_label_text_font_size = "19px"
     plot.vbar(x='candidates_list', top='sentiment_list', width=0.4,color='color', source=source)
     plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
