@@ -36,13 +36,14 @@
                 <li><a class="header-font  black link ml1 hover-red dib"
                         href="{% url 'methodology' %}"><strong>methodology</strong></a></li>
                 <li class="header-font ml1"></li>
-                <li><a class="header-font  black link ml1 mr4 hover-dark-blue dib"
+                <li><a class="header-font  black link ml1 mh4  mr4 hover-dark-blue dib"
                         href="{% url 'about' %}"><strong>about</strong></a></li>
             </div>
         </ul>
     </nav>
 </header>
-<div class="sidenav mt5">
+<body>
+<div class="sidenav projectsidenav mt5" id="projectsidenav">
     <div>
         {% for candidate in candidates %}
         {% if candidate.party == "republican" %}
@@ -110,4 +111,6 @@
         </div>
     </div>
 </footer>
+</body>
+
 </html>

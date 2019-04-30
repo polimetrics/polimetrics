@@ -18,6 +18,7 @@ footer {
     background-color: black;
     padding: 30px 0px;
     margin-top: 10%;
+    display: flex;
 }
 
 .nav {
@@ -49,6 +50,7 @@ footer {
 .sidenav {
     height: 100%;
     width: 100px;
+    margin-right: 1rem;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -62,6 +64,17 @@ footer {
 .sidenav a {
     padding: 6px 8px 6px 16px;
     display: block;
+}
+
+.projectsidenav {
+    opacity: 0;
+    transform: translateY(300px);
+    transition: all 1s ease-out; 
+}
+
+.projectsidenav.fade-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .main {
@@ -90,6 +103,7 @@ footer {
     flex-wrap: wrap;
     margin-top: 75px;
 }
+
 
 .pict:hover {
     /* border-color: red; */
@@ -215,6 +229,12 @@ footer {
 }
 
 .body-headers {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 32px;
+}
+
+.body-headersindex {
     font-family: 'Century Gothic', sans-serif;
     color: black;
     font-size: 32px;
@@ -403,22 +423,48 @@ footer {
 
 .graphdetail {
     font-family: "Futura", sans-serif;
+    
+}
+.graphsubtext {
+    font-family: "futura-pt-light" sans-serif;
 }
 
 .detaildes {
     font-family: "futura-pt-light", sans-serif;
 }
 
+.accordiondetailpage {
+    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
+    color: white;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+
+.paneldetailpage {
+    background-color: #212121;
+    color: white;
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 20px;
+    
+    overflow: hidden;
+    
+    width:100%
+}
+
+
 .capitalize {
     text-transform: capitalize
 }
 
-/* methodology page collapsobile  */
+/* methodology page collapsoƒile  */
 .collapsible {
     font-family: "Century Gothic", sans-serif;
     background-color: white;
     color: black;
-    cursor: pointer;
     width: 100%;
     height: 5rem;
     border: none;
@@ -426,7 +472,7 @@ footer {
     outline: none; 
 }
 
-.active, .collapsible:hover {
+ .collapsible:hover {
     background-color: white;
 }
   
@@ -608,9 +654,9 @@ transform: translateY(0);
 }
 
 .accordion {
-    background-color: #ccc;
-    color: black;
-    cursor: pointer;
+    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
+    color: white;
+    
     width: 100%;
     text-align: left;
     border: none;
@@ -618,26 +664,18 @@ transform: translateY(0);
     transition: 0.4s;
 }
 
-.active,
-.accordion:hover {
-    background: #f5f5f5;
-    color: white;
-    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
-    transition: opacity .35s ease-in-out;}
+
 
 .panel {
     background-color: #212121;
     color: white;
     font-family: 'futura-pt-light', sans-serif;
     font-size: 20px;
-    display: none;
-    overflow: hidden;
-    max-height: 500px;
-    transition: max-height 0.2s ease-out;
+   
 }
 
 .accordion:after {
-    content: '\02795';
+    
     font-size: 13px;
     color: black;
     float: right;
