@@ -24,16 +24,16 @@ def index(request):
             to_date_time = mean_sentiment_max_to['to_date_time__max'],
         )
 
-        if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
-            candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]
-            if candidate.party == 'democrat':
-                candidates_sentiments_dict[str(candidate)].append('#415caa')
-            elif candidate.party == 'republican':
-                candidates_sentiments_dict[str(candidate)].append('#ed2024')
-            else:
-                candidates_sentiments_dict[str(candidate)].append('#696969')
-        if total_mean_sentiment[0].mean_sentiment > .125:
-            candidate_accordian_list.append(candidate)
+        # if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
+        #     candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]
+        #     if candidate.party == 'democrat':
+        #         candidates_sentiments_dict[str(candidate)].append('#415caa')
+        #     elif candidate.party == 'republican':
+        #         candidates_sentiments_dict[str(candidate)].append('#ed2024')
+        #     else:
+        #         candidates_sentiments_dict[str(candidate)].append('#696969')
+        # if total_mean_sentiment[0].mean_sentiment > .125:
+        #     candidate_accordian_list.append(candidate)
 
     candidates_list = list(candidates_sentiments_dict.keys())
     sentiment_color_list = candidates_sentiments_dict.values()
@@ -53,7 +53,7 @@ def index(request):
 
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
-                  plot_height=600, plot_width=1100, title="Average Sentiment Per Candidate for April 2019",
+                  plot_height=600, plot_width=950, title="Average Sentiment Per Candidate for April 2019",
                   tools=[hover], toolbar_location=None, sizing_mode="scale_both")
     plot.title.text_font_size = "21px"
     plot.xaxis.axis_label_text_font_size = "19px"
