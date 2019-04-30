@@ -61,6 +61,22 @@ $(document).ready(function () {
 
   var controller = new ScrollMagic.Controller()
   var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#projectindex'
+
+  })
+    .setClassToggle('#projectindex', 'fade-in')
+    .addTo(controller)
+
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
+    triggerElement: '#projectsidenav'
+
+  })
+    .setClassToggle('#projectsidenav', 'fade-in')
+    .addTo(controller)
+
+  var controller = new ScrollMagic.Controller()
+  var ourScene = new ScrollMagic.Scene({
     triggerElement: '#methpage'
 
   })
