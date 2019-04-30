@@ -36,12 +36,13 @@
                 <li><a class="header-font  black link ml1 hover-red dib"
                         href="{% url 'methodology' %}"><strong>methodology</strong></a></li>
                 <li class="header-font ml1"></li>
-                <li><a class="header-font  black link ml1 mr4 hover-dark-blue dib"
+                <li><a class="header-font  black link ml1 mh4  mr4 hover-dark-blue dib"
                         href="{% url 'about' %}"><strong>about</strong></a></li>
             </div>
         </ul>
     </nav>
 </header>
+<body>
 <div class="sidenav mt5">
     <div>
         {% for candidate in candidates %}
@@ -111,5 +112,6 @@
         </div>
     </div>
 </footer>
+</body>
 
 </html>

@@ -12,13 +12,13 @@ a {
     outline: 0 !important;
 }
 
-
 footer {
     position: absolute;
     width: 100%;
     background-color: black;
     padding: 30px 0px;
     margin-top: 10%;
+    display: flex;
 }
 
 .nav {
@@ -50,6 +50,7 @@ footer {
 .sidenav {
     height: 100%;
     width: 100px;
+    margin-right: 1rem;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -404,11 +405,35 @@ footer {
 
 .graphdetail {
     font-family: "Futura", sans-serif;
+    
 }
 
 .detaildes {
     font-family: "futura-pt-light", sans-serif;
 }
+
+.accordiondetailpage {
+    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
+    color: white;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+
+.paneldetailpage {
+    background-color: #212121;
+    color: white;
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 20px;
+    
+    overflow: hidden;
+    
+    width:100%
+}
+
 
 .capitalize {
     text-transform: capitalize
