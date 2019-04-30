@@ -634,7 +634,7 @@ transform: translateY(0);
 }
 
 .footer-candidates-container {
-    height: 300px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
