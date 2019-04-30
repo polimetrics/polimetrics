@@ -54,7 +54,7 @@ def index(request):
     plot = figure(x_range=candidates_list, y_range=(-0.5, .5),
                   x_axis_label='Candidates', y_axis_label='Sentiment',
                   plot_height=600, plot_width=1100, title="Average Sentiment Per Candidate for April 2019",
-                  tools=[hover], toolbar_location=None,)
+                  tools=[hover], toolbar_location=None, sizing_mode="scale_both")
     plot.title.text_font_size = "21px"
     plot.xaxis.axis_label_text_font_size = "19px"
     plot.yaxis.axis_label_text_font_size = "19px"
@@ -111,7 +111,8 @@ def candidate_detail(request, slug):
                   plot_width=700,
                   plot_height=350,
                   toolbar_location=None,
-                  y_range=(-0.5, 0.5))
+                  y_range=(-0.5, 0.5), 
+                  sizing_mode="scale_both")
     detail_line_graph.multi_line([agg_mean_sentiment_dates, daily_mean_sentiment_dates], [agg_mean_sentiments, daily_mean_sentiments], color=['black', 'blue'],line_width=4, alpha=[.8, .5])
     # detail_line_graph.xaxis.major_label_orientation = pi/4
 
