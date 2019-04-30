@@ -12,6 +12,7 @@ a {
     outline: 0 !important;
 }
 
+
 footer {
     position: absolute;
     width: 100%;
@@ -459,12 +460,11 @@ footer {
     text-transform: capitalize
 }
 
-/* methodology page collapsobile  */
+/* methodology page collapsoƒile  */
 .collapsible {
     font-family: "Century Gothic", sans-serif;
     background-color: white;
     color: black;
-    cursor: pointer;
     width: 100%;
     height: 5rem;
     border: none;
@@ -472,7 +472,7 @@ footer {
     outline: none; 
 }
 
-.active, .collapsible:hover {
+ .collapsible:hover {
     background-color: white;
 }
   
