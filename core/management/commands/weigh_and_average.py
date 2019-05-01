@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from core.models import Tweet, Candidate, CandidateMeanSentiment
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import argparse
 
 class Command(BaseCommand):
@@ -48,7 +48,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        from_dt = datetime(options['date'].year, options['date'].month, options['date'].day - 1, tzinfo=timezone.utc)
+        from_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc) - timedelta(days=1)
         if options['overall']:
             tweet = Tweet.objects.earliest('created_at')
             from_dt = datetime(tweet.created_at.year, tweet.created_at.month, tweet.created_at.day, tzinfo=timezone.utc)
