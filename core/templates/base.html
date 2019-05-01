@@ -99,12 +99,12 @@
             <div class="footer-candidates-container">
                 {% for candidate in candidates %}
                     {% if candidate.party == "republican" %}
-                        <a class="link footer-candidates mr3 hover-red" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
+                        <a class="link footer-candidates ml2 mr3 hover-red" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
                     {% endif %}
                 {% endfor %}
                 {% for candidate in candidates %}
                     {% if candidate.party == "democrat" %}
-                        <a class="link footer-candidates mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
+                        <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
                     {% endif %}
                 {% endfor %}
             </div>
