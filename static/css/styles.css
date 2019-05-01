@@ -734,3 +734,9 @@ transform: translateY(0);
     flex-direction: column;
     width:200px;
 }
+
+@media only screen and (max-width: 600px) {
+    div.mobile-bokeh{
+        padding-right: 10%;
+    }
+}
