@@ -84,24 +84,6 @@ $(document).ready(function () {
     .addTo(controller)
 })
 
-// function to toggle collapsable menu on methodology page //
-$(document).ready(function () {
-  var acc = document.getElementsByClassName('collapsible')
-  var i
-
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener('click', function () {
-      this.classList.toggle('active')
-      var panel = this.nextElementSibling
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none'
-      } else {
-        panel.style.display = 'block'
-      }
-    })
-  }
-})
-
 let deadline = new Date(`feb 3, 2020 00:01:00`).getTime()
 
 let x = setInterval(function () {
