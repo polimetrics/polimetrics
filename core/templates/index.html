@@ -4,7 +4,7 @@
 {% block content %}
 <body>
 <div class="index-header projectmeth" id="projectindex">
-    <div class="pl4 pr3 mh4    ">
+    <div class="pl3  pr3 mh2      ">
         <div class="body-headersindex mt3">
             <strong>A modern opinion poll for modern politics.</strong>
         </div>
@@ -33,28 +33,13 @@
     </div>
 </div>
 <div class="projectmeth" id="projectindex">
-    <h3 class="body-headers mt4 pl4 ml5   ">Latest Poll</h3>
+    <h3 class="body-headers mt4 pl2 mh4   ">Latest Poll</h3>
 </div>
-<div class="mw8 ">
-  <div class="tc pl4 projectmeth" id="projectindex">
+<div class="mw8 s  ">
+  <div class="tc pl3 projectmeth" id="projectindex">
       {{ div | safe }}
   </div>
 </div>
 </body>
-<script>
-  let acc = document.getElementsByClassName('accordion')
-  let i
 
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener('click', function () {
-      this.classList.toggle('active')
-      let panel = this.nextElementSibling
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + 'px'
-      }
-    })
-  }
-</script>
 {% endblock %}

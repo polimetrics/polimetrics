@@ -50,7 +50,6 @@ footer {
 .sidenav {
     height: 100%;
     width: 100px;
-    margin-right: 1rem;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -68,7 +67,7 @@ footer {
 
 .projectsidenav {
     opacity: 0;
-    transform: translateY(300px);
+    transform: translateY(50px);
     transition: all 1s ease-out; 
 }
 
@@ -661,7 +660,7 @@ transform: translateY(0);
     text-align: left;
     border: none;
     outline: none;
-    transition: 0.4s;
+   
 }
 
 
@@ -674,18 +673,8 @@ transform: translateY(0);
    
 }
 
-.accordion:after {
-    
-    font-size: 13px;
-    color: black;
-    float: right;
-    margin-left: 5px;
-}
 
-.active:after {
-    content: '\2796';
-    color: black;
-}
+
 
 
 .accordiondetail {
