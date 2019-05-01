@@ -57,11 +57,19 @@
     <div>
         {% for candidate in candidates %}
             {% if candidate.party == "democrat" %}
-            <div class="tooltip-hover" tooltip="{{ candidate }}"
-                tooltip-position="bottom">
-                <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
+                {% if candidate.first_name == 'beto' %}
+                    <div class="tooltip-hover" tooltip="Beto O'Rourke"
+                        tooltip-position="bottom">
+                        <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
+                                src="{{ candidate.image.url }}"></a>
+                    </div>
+                {% else %}
+                    <div class="tooltip-hover" tooltip="{{ candidate }}"
+                        tooltip-position="bottom">
+                        <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
                         src="{{ candidate.image.url }}"></a>
-            </div>
+                    </div>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </div>
@@ -106,7 +114,11 @@
                 {% endfor %}
                 {% for candidate in candidates %}
                     {% if candidate.party == "democrat" %}
-                        <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
+                        {% if candidate == 'Beto Orourke' %}
+                            <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}"><p>'Beto O'Rourke'</p></a>
+                        {% else %}
+                            <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
