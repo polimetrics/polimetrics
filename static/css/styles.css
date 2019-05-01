@@ -11,6 +11,9 @@
 a {
     outline: 0 !important;
 }
+html {
+    width: 100%;
+}
 
 footer {
     position: absolute;
@@ -19,6 +22,7 @@ footer {
     padding: 30px 0px;
     margin-top: 10%;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .nav {
@@ -633,10 +637,11 @@ transform: translateY(0);
 }
 
 .footer-candidates-container {
-    height: 400px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    flex-grow: 1;
 }
 
 .footer-candidates {

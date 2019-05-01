@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="description"
         content="Polimetrics aims to provide an innovative polling solution for the 2020 Presidential Primary by using the mood sentiment of Tweets.">
-    
+        <meta name="viewport" content="width=device-width, initial-scale=0">
         <link rel="shortcut icon" href="{% static '/img/logo.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static '/css/styles.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
@@ -95,6 +95,8 @@
                 </div>
             </div>
         </div>
+        </div>
+        <div class="candidatebox">
         <div class="candidates-footer-header pl5"><strong>Candidates</strong>
             <div class="footer-candidates-container">
                 {% for candidate in candidates %}
