@@ -5,57 +5,45 @@
 <div class="pictcontainerdetail mt6 mr6">
         <img src="{{ candidate.image.url }}" class="pictdetail project" id="project01">
     <div class="textboxdetail">
-        <text class="name  mt4 f-headline b   "> {{ candidate }}
-        </text>
+      {% if candidate.first_name == 'beto' %}
+        <text class="name mt4 f-headline b">Beto O'Rourke</text>
+      {% else %}
+        <text class="name mt4 f-headline b">{{ candidate }}</text>
+      {% endif %}
         <br>
-        <div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
-        <div class="flex     ">
+        <div class=" tc f2 graphdetail"> Sentiment Analysis </div>
+        <div class="flex">
     
             {{ div | safe }}
-            
+          
         </div>
         <p class="f2 graphdetail  ">The blue line represents each day's sentiment activity and the black line represents the overall trend in relation to the first date.</p>
-           
-            
-    
     </div>
 </div>
-
-
-<div class="ml5 mr5 methproject ">     
-<div>
+<div class="ml5 mr5 methproject mb6">     
+  {% if candidate.first_name == 'beto' %}
+        <div class="body-headers accordiondetailpage pa3"><strong>About Beto O'Rourke<strong></div>
+        <div class="paneldetailpage">
+            <div class="lh-copy">
+                <div class="tc">{{ candidate.description }} [source: wikipedia.com]</div>
+            </div>
+        </div>
+  {% elif candidate.first_name == 'julián' %}
+  <div class="body-headers accordiondetailpage pa3"><strong>About Julián Castro<strong></div>
+        <div class="paneldetailpage">
+            <div class="lh-copy">
+                <div class="julian-panel tc">"Juli<span class="julian-font">á</span>n Castro (born September 16, 1974) is an American Democratic politician who was the youngest member of President Obama's Cabinet, serving as the 16th United States Secretary of Housing and Urban Development from 2014 to 2017.Castro served as the mayor of his native San Antonio, Texas from 2009 until he joined Obama's cabinet in 2014. He was mentioned as a possible running mate for Hillary Clinton during the 2016 presidential campaign.Castro is the twin brother of Congressman Joaquin Castro." [source: wikipedia.com]</div>
+            </div>
+        </div>
+  {% else %}
         <div class="body-headers accordiondetailpage pa3"><strong>About {{ candidate }}</strong></div>
         <div class="paneldetailpage">
             <div class="lh-copy">
-                <div class="tc">{{ candidate.description }} [source: wikipedia.com]</li>
+                <div class="tc">{{ candidate.description }} [source: wikipedia.com]</div>
             </div>
         </div>
-    </div>
+  {% endif %}
 </div>
-
 </div>
-
-<br>
-<br>
-<br>
-<br><br>
-<br><br>
-<br>
-<script>
-        let acc = document.getElementsByClassName('accordion')
-        let i
-      
-        for (i = 0; i < acc.length; i++) {
-          acc[i].addEventListener('click', function () {
-            this.classList.toggle('active')
-            let panel = this.nextElementSibling
-            if (panel.style.maxHeight) {
-              panel.style.maxHeight = null
-            } else {
-              panel.style.maxHeight = panel.scrollHeight + 'px'
-            }
-          })
-        }
-      </script>
-
+</div>
 {% endblock %}

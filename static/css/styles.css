@@ -183,7 +183,6 @@ footer {
     text-align: right;
 }
 
-
 .aboutcontainer {
     margin: 0 auto;
 }
@@ -263,9 +262,6 @@ footer {
     font-weight: lighter;
     line-height: 2rem;
 }
-
-
-
 
 .body-structure {
     max-width: 38rem;
@@ -545,7 +541,6 @@ transform: translateY(0);
     transform: translateX(0);
 }
 
-
 .projectmeth2 {
     opacity: 0;
     transform: translateY(300px);
@@ -608,7 +603,7 @@ transform: translateY(0);
     background: rgba(0, 0, 0, 0.7);
     text-align: center;
     color: #fff;
-    font-family: "futura-pt-light", sans-serif;
+    font-family: "muli", sans-serif;
     padding: 4px 2px;
     font-size: 12px;
     min-width: 80px;
@@ -664,7 +659,6 @@ transform: translateY(0);
     text-align: left;
     border: none;
     outline: none;
-    
 }
 
 .panel {
@@ -673,10 +667,6 @@ transform: translateY(0);
     font-family: 'futura-pt-light', sans-serif;
     font-size: 20px;
 }
-
-
-
-
 
 .accordiondetail {
     background-color: white;
@@ -706,19 +696,6 @@ transform: translateY(0);
     width:100%
 }
 
-.accordiondetail:after {
-    content: '\02795';
-    font-size: 13px;
-    color: black;
-    float: right;
-    margin-left: 5px;
-}
-
-.active:after {
-    content: '\2796';
-    color: black;
-}
-
 .detailbox {
     display: flex;
     flex-direction: column;
@@ -729,4 +706,14 @@ transform: translateY(0);
     div.mobile-bokeh{
         padding-right: 10%;
     }
+}
+
+.julian-font {
+    font-family: 'Muli', sans-serif;
+    font-size: 17px;
+}
+
+.julian-font-about {
+    font-family: 'Muli', sans-serif;
+    font-size: 22px;
 }
