@@ -5,7 +5,7 @@ from bokeh.models import ColumnDataSource, HoverTool
 from core.models import Candidate, CandidateMeanSentiment
 from math import pi
 from django.db.models import Min, Max
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, timezone
 
 def index(request):
     color_list = []
@@ -80,9 +80,8 @@ def candidate_detail(request, slug):
 
     utcnow = datetime.utcnow()
 
-    day_delta = utcnow.day - min_time.day
-
-    for day in range(day_delta):
+    day_delta = utcnow.replace(tzinfo=timezone.utc) - min_time
+    for day in range(day_delta.days):
         daily_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
             from_date_time = min_time + timedelta(days=day),
@@ -96,15 +95,11 @@ def candidate_detail(request, slug):
         candidate = candidate,
         from_date_time = mean_sentiment_min_from['from_date_time__min']
     )
-
-    # daily_mean_sentiments = CandidateMeanSentiment.objects.filter(
-    #     candidate = candidate,
-    # )
-
+   
     for mean_sentiment in agg_candidate_mean_sentiments:
         agg_mean_sentiments.append(mean_sentiment.mean_sentiment)
         agg_mean_sentiment_dates.append(mean_sentiment.to_date_time)
-        
+
     detail_line_graph = figure(x_axis_label='Date of sentiment',
                   x_axis_type='datetime',
                   y_axis_label='Sentiment',
@@ -112,9 +107,11 @@ def candidate_detail(request, slug):
                   plot_height=350,
                   toolbar_location=None,
                   y_range=(-0.5, 0.5), 
-                  sizing_mode="scale_both")
-    detail_line_graph.multi_line([agg_mean_sentiment_dates, daily_mean_sentiment_dates], [agg_mean_sentiments, daily_mean_sentiments], color=['black', 'blue'],line_width=4, alpha=[.8, .5])
-    # detail_line_graph.xaxis.major_label_orientation = pi/4
+                  sizing_mode="scale_both"
+    )
+
+    detail_line_graph.multi_line([agg_mean_sentiment_dates, daily_mean_sentiment_dates], 
+                    [agg_mean_sentiments, daily_mean_sentiments], color=['black', 'blue'], line_width=4, alpha=[.8, .5])
 
 
     script, div = components(detail_line_graph)
