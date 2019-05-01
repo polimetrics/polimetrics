@@ -60,7 +60,7 @@ def index(request):
     plot.title.text_font_size = "21px"
     plot.xaxis.axis_label_text_font_size = "19px"
     plot.yaxis.axis_label_text_font_size = "19px"
-    plot.vbar(x='candidates_list', top='sentiment_list', width=0.4,color='color', source=source)
+    plot.vbar(x='candidates_list', top='sentiment_list', width=0.4, color='color', source=source)
     plot.xaxis.major_label_orientation = pi/4
     plot.xgrid.grid_line_color = None
     # plot.legend.orientation = "vertical"
@@ -117,11 +117,19 @@ def candidate_detail(request, slug):
                             y_range=(-0.5, 0.5), 
                             sizing_mode="scale_both")
 
-    detail_line_graph.multi_line([agg_mean_sentiment_dates, daily_mean_sentiment_dates], 
-                            [agg_mean_sentiments, daily_mean_sentiments], 
-                            color=['black', 'blue'], 
+    detail_line_graph.line(agg_mean_sentiment_dates, 
+                            agg_mean_sentiments,  
+                            line_color='black', 
                             line_width=3, 
-                            alpha=[.8, .5])
+                            line_dash=[5,5],
+                            alpha=.9,
+                            legend="Aggregate")
+    detail_line_graph.line(daily_mean_sentiment_dates, 
+                            daily_mean_sentiments,  
+                            line_color='blue', 
+                            line_width=3, 
+                            alpha=.5,
+                            legend="Daily")
 
     # detail_line_graph.xaxis.major_label_orientation = pi/4
     tab1 = Panel(child=detail_line_graph, title="line")
