@@ -1,18 +1,17 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<div class="detailbody">
+
 <div class="pictcontainerdetail mt6 mr6">
-        <img src="{{ candidate.image.url }}" class="pictdetail project" id="project01">
+  <img src="{{ candidate.image.url }}" class="pictdetail project" id="project01">
     <div class="textboxdetail">
-        <text class="name  mt4 f-headline b   "> {{ candidate }}
-        </text>
+        <text class="name  mt4 f-headline b"> {{ candidate }}</text>
         <br>
-        <div class=" tc f2    graphdetail   "> Sentiment Analysis </div>
-        <div class="flex     ">
+        <div class=" tc f2 graphdetail"> Sentiment Analysis </div>
+        <div class="detail-graph flex m4">
     
-            {{ div | safe }}
-            
+          {{ div | safe }}
+          
         </div>
         <p class="f2 graphdetail  ">The blue line represents each day's sentiment activity and the black line represents the overall trend in relation to the first date.</p>
            
@@ -20,7 +19,11 @@
     
     </div>
 </div>
-
+<!-- <div class="flex m4">
+    
+  {{ div | safe }}
+  
+</div> -->
 
 <div class="ml5 mr5 methproject ">     
 <div>
