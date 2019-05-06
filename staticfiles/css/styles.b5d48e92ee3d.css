@@ -1,0 +1,719 @@
+{
+    % load staticfiles %
+}
+
+@font-face {
+    font-family: 'futura-pt-light';
+    src: url("/static/fonts/futura-pt-light.21fa37e35708.ttf") format("truetype"),
+        local('futura-pt-light');
+}
+
+a {
+    outline: 0 !important;
+}
+html {
+    width: 100%;
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+    background-color: black;
+    padding: 30px 0px;
+    margin-top: 10%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background-color: white;
+    z-index: 50;
+}
+
+.logo {
+    height: 100%;
+    width: 60px;
+}
+
+.logo-font {
+    font-size: 30px;
+    margin-left: 0;
+}
+
+.header-font {
+    font-family: 'Century Gothic', sans-serif;
+    cursor: pointer;
+}
+
+/* Sidebar Nav */
+.sidenav {
+    height: 100%;
+    width: 100px;
+   
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #212121;
+    overflow-x: visible;
+    overflow-y: scroll;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    display: block;
+}
+
+.projectsidenav {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out; 
+}
+
+.projectsidenav.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.main {
+    margin-left: 100px;
+    /* Same as the width of the sidebar */
+}
+
+.candidates-image {
+    border-radius: 75%;
+    border-width: .5rem;
+    z-index: 2;
+    display: block;
+    width: 75%;
+    height: 75%;
+    max-width: 75%;
+    max-height: 75%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    cursor: pointer;
+    align-self: stretch;
+}
+
+.index-header {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 75px;
+}
+
+
+.pict:hover {
+    /* border-color: red; */
+    transform: scale(1.2);
+    transition: all 300ms;
+
+}
+
+.pict2:hover {
+    /* border-color: red; */
+    transform: scale(1.2);
+    transition: all 300ms;
+
+}
+
+.pictcontainer {
+    border-style: solid;
+    border-color: white;
+    width: 90%;
+    /* max-height: 5%; */
+    /* height:30%; */
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1%;
+    overflow: auto;
+}
+
+.pictcontainer2 {
+    font-family: 'Century Gothic', sans-serif;
+    border-style: solid;
+    border-color: white;
+    width: 90%;
+    margin-left: 6rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1%;
+    text-align: right;
+}
+
+.rep-candidates-underline {
+    background-color: #ED2024;
+}
+
+.dem-candidates-underline {
+    background-color: #415CAA;
+}
+
+.textbox {
+    color: black;
+    z-index: -1;
+    height: 6rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: left;
+}
+
+.textbox2 {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    z-index: -1;
+    height: 6rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: right;
+}
+
+.aboutcontainer {
+    margin: 0 auto;
+}
+
+#about-image {
+    margin-top: 50px;
+    display: inline-block;
+    position: relative;
+}
+
+#about-image:after {
+    content: '';
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    background: black;
+    opacity: 0.7;
+}
+
+#about-box {
+    width: 50%;
+    background: #ED2024;
+    display: inline-block;
+}
+
+.abouthead {
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.blue-box {
+    width: 80%;
+    height: 100%;
+    background: #212121;
+    margin: 0 auto;
+    padding: 50px;
+    z-index: 5;
+}
+
+#about {
+    font-family: 'Century Gothic', sans-serif;
+    color: white;
+    margin-top: 55%;
+}
+
+.body-headers {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 32px;
+}
+
+.body-headersindex {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 32px;
+}
+
+.name-header {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 24px;
+}
+
+.body-content {
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 22px;
+    font-weight: lighter;
+    line-height: 2rem;
+}
+
+.aboutbody-content {
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 22px;
+    font-weight: lighter;
+    line-height: 2rem;
+}
+
+.body-structure {
+    max-width: 38rem;
+}
+
+.body-structure-index {
+    max-width: 38rem;
+}
+
+.headshot {
+    width: 50%;
+}
+
+.headshot-box {
+    width: 50%;
+    color: white;
+}
+
+.sub-header {
+    font-family: 'Futura', sans-serif;
+    font-size: 22px;
+    line-height: 1rem;
+    color: black;
+}
+
+.bio-answer {
+    font-family: 'futura-pt-light', sans-serif;
+    font-weight: lighter;
+    font-size: 24px;
+    line-height: 2rem;
+    color: black;
+}
+
+.github {
+    width: 5%
+}
+
+.linked-in {
+    width: 6%
+}
+
+#particles-js {
+    max-width: 100%;
+    background-image: url("white-house2.4d726e608936.jpeg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#particles-js2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -670;
+    top: 0px;
+    left: 0px;
+    background-color: #ffffff;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+}
+
+
+.methodology-image {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.methodology-image:after {
+    content: '';
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    background: black;
+    opacity: 0.6;
+}
+
+.data-image-text {
+    z-index: 30;
+    position: absolute;
+    width: 100%;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 72px;
+    color: white;
+    top: 400px;
+    left: 35%;
+    bottom: 0;
+    right: 0;
+}
+
+.analysis-image-text {
+    z-index: 30;
+    position: absolute;
+    width: 100%;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 72px;
+    color: white;
+    top: 400px;
+    left: 4%;
+    bottom: 0;
+    right: 35%;
+}
+
+.party-logo {
+    width: 15%;
+    height: 15%;
+    max-width: 15%;
+    max-height: 15%;
+    margin: 0 auto;
+}
+
+.pictcontainerdetail {
+    font-family: 'Century Gothic', sans-serif;
+    border-style: solid;
+    border-color: white;
+    width:100%;
+    margin-left: 0rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-basis: auto;
+    padding: 1%;
+    text-align: right;
+    padding-right: 15%;
+}
+
+.pictdetail {
+    border: all;
+    border-style: solid;
+    border-radius: 100%;
+    border-color: white;
+    width: 30%;
+    height: 30%;
+    border-width: .5rem;
+    margin-right: 2%;
+    z-index: 2;
+    align-self: stretch;
+    float: left;
+}
+
+.textboxdetail {
+    color: black;
+    z-index: -1;
+    height: rem;
+    text-decoration: none;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.graphdetail {
+    font-family: "Futura", sans-serif;
+    
+}
+.graphsubtext {
+    font-family: "futura-pt-light" sans-serif;
+}
+
+.detaildes {
+    font-family: "futura-pt-light", sans-serif;
+}
+
+.accordiondetailpage {
+    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
+    color: white;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+
+.paneldetailpage {
+    background-color: #212121;
+    color: white;
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 20px;
+    padding: 30px;
+    overflow: hidden;
+    width:100%
+}
+
+
+.capitalize {
+    text-transform: capitalize
+}
+
+/* methodology page collapsoƒile  */
+.collapsible {
+    font-family: "Century Gothic", sans-serif;
+    background-color: white;
+    color: black;
+    width: 100%;
+    height: 5rem;
+    border: none;
+    text-align: center;
+    outline: none; 
+}
+
+ .collapsible:hover {
+    background-color: white;
+}
+  
+.content {
+    font-family: "futura-pt-light", sans-serif;
+    padding: 0 18px;
+   
+    overflow: hidden;
+    background-color: #f1f1f1;
+    
+}
+
+.methcontainer {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:100;
+
+}
+
+.methcolumn {
+    display:flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+.methheaders {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 6rem;
+}
+
+.methheaders2 {
+    font-family: 'Century Gothic', sans-serif;
+    color: black;
+    font-size: 5rem;
+}
+
+
+.project {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all .5s ease-out;
+}
+
+.project.fade-in {
+opacity: 1;
+transform: translateY(0);
+}
+
+.methcontent {
+        font-family: 'futura-pt-light', sans-serif;
+        font-size: 2rem;
+        font-weight: lighter;
+        line-height: 2rem;
+}
+
+.projectmeth {
+    opacity: 0;
+    transform: translateX(300px);
+    transition: all 1s ease-out; 
+}
+
+.projectmeth.fade-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.projectmeth2 {
+    opacity: 0;
+    transform: translateY(300px);
+    transition: all 1s ease-out;
+    
+    }
+.projectmeth2.fade-in {
+opacity: 1;
+transform: translateY(0);
+/* Countdown clock */
+}
+
+#clockdiv {
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 30px;
+    color: white;
+    z-index: 40;
+}
+
+#clockdiv>div {
+    border-radius: 3px;
+    opacity: 0.7;
+}
+
+#clockdiv div>span {
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.smalltext {
+    padding-top: 5px;
+    font-size: 16px;
+    color: white;
+}
+
+.clock-header {
+    color: #7C7C7C;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 32px;
+}
+
+.candidates-footer-header{
+    color: #575757;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 32px;
+}
+
+/* Tooltips */
+[tooltip] {
+    margin: 5px;
+    position: relative;
+    display: block;
+}
+
+[tooltip]::after {
+    content: attr(tooltip);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+    font-family: "muli", sans-serif;
+    padding: 4px 2px;
+    font-size: 12px;
+    min-width: 80px;
+    border-radius: 5px;
+    pointer-events: none;
+    padding: 4px 4px;
+    z-index: 99;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+[tooltip-position='bottom']::before {
+    top: 100%;
+    transform: translateX(-50%) translatey(-100%) rotate(-180deg)
+}
+
+[tooltip-position='bottom']::after {
+    top: 100%;
+    transform: translateX(-50%) translateY(0%);
+}
+
+[tooltip]:hover::after,
+[tooltip]:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.footer-candidates-container {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.footer-candidates {
+    font-family: "futura-pt-light", sans-serif;
+    color: #B2B2B2;
+    font-size: 18px;
+    flex: 1 1 10px;
+}
+
+.foot-header {
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 30px;
+    color: white;
+}
+
+.accordion {
+    background: linear-gradient(to left, #ED2024 0%,#415CAA  100%);
+    color: white;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+}
+
+.panel {
+    background-color: #212121;
+    color: white;
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 20px;
+}
+
+.accordiondetail {
+    background-color: white;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.active,
+.accordiondetail:hover {
+    background-color: #ccc;
+}
+
+.paneldetail {
+    background-color: #212121;
+    color: white;
+    font-family: 'futura-pt-light', sans-serif;
+    font-size: 20px;
+    display: none;
+    overflow: hidden;
+    max-height: 50px;
+    transition: max-height 0.2s ease-out;
+    width:100%
+}
+
+.detailbox {
+    display: flex;
+    flex-direction: column;
+    width:200px;
+}
+
+@media only screen and (max-width: 600px) {
+    div.mobile-bokeh{
+        padding-right: 10%;
+    }
+}
+
+.julian-font {
+    font-family: 'Muli', sans-serif;
+    font-size: 17px;
+}
+
+.julian-font-about {
+    font-family: 'Muli', sans-serif;
+    font-size: 22px;
+}
