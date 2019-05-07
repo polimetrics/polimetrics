@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block content %}
-<div class="detailbody">
+
 <div class="pictcontainerdetail mt6 mr6">
-        <img src="{{ candidate.image.url }}" class="pictdetail project" id="project01">
+  <img src="{{ candidate.image.url }}" class="pictdetail project" id="project01">
     <div class="textboxdetail">
       {% if candidate.first_name == 'beto' %}
         <text class="name mt4 f-headline b">Beto O'Rourke</text>
