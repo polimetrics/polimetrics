@@ -8,11 +8,11 @@
     <meta charset="utf-8">
     <meta name="description"
         content="Polimetrics aims to provide an innovative polling solution for the 2020 Presidential Primary by using the mood sentiment of Tweets.">
-    
+        <meta name="viewport" content="width=device-width, initial-scale=0">
         <link rel="shortcut icon" href="{% static '/img/logo.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static '/css/styles.css' %}">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato|Libre+Baskerville:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:300" rel="stylesheet">
     <script src="{% static 'build/bundle.js' %}"></script>
     <link href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" rel="stylesheet" type="text/css">
     <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -56,22 +56,20 @@
     </div>
     <div>
         {% for candidate in candidates %}
-            {% if candidate.party == "democrat" %}
-                {% if candidate.first_name == 'beto' %}
-                    <div class="tooltip-hover" tooltip="Beto O'Rourke"
-                        tooltip-position="bottom">
-                        <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
-                                src="{{ candidate.image.url }}"></a>
-                    </div>
-                {% else %}
-                    <div class="tooltip-hover" tooltip="{{ candidate }}"
-                        tooltip-position="bottom">
-                        <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image"
-                        src="{{ candidate.image.url }}"></a>
-                    </div>
-                {% endif %}
+            {% if candidate.first_name == 'beto' %}
+                <div class="tooltip-hover" tooltip="Beto O'Rourke" tooltip-position="bottom">
+                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
+                </div>
+            {% elif candidate.first_name == 'julián' %}
+                <div class="tooltip-hover julian-font" tooltip="Julián Castro" tooltip-position="bottom">
+                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
+                </div>
+            {% elif candidate.party == "democrat" %}
+                <div class="tooltip-hover" tooltip="{{ candidate }}" tooltip-position="bottom">
+                    <a href="{% url 'candidate_detail' slug=candidate.slug %}"><img class="candidates-image" src="{{ candidate.image.url }}"></a>
+                </div>
             {% endif %}
-        {% endfor %}
+        {% endfor %}               
     </div>
     <div class="pa4 mt5"></div>
 </div>
@@ -103,20 +101,22 @@
                 </div>
             </div>
         </div>
+        </div>
+        <div class="candidatebox">
         <div class="candidates-footer-header pl5"><strong>Candidates</strong>
-            <div class="footer-candidates-container">
+            <div class="footer-candidates-container mt3">
                 {% for candidate in candidates %}
                     {% if candidate.party == "republican" %}
                         <a class="link footer-candidates ml2 mr3 hover-red" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
                     {% endif %}
                 {% endfor %}
                 {% for candidate in candidates %}
-                    {% if candidate.party == "democrat" %}
-                        {% if candidate == 'Beto Orourke' %}
-                            <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}"><p>'Beto O'Rourke'</p></a>
-                        {% else %}
-                            <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
-                        {% endif %}
+                    {% if candidate.first_name == 'beto' %}
+                        <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">Beto O'Rourke</a>
+                    {% elif candidate.first_name == 'julián' %}
+                        <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">Juli<span class="julian-font">á</span>n Castro</a>
+                    {% elif candidate.party == "democrat" %}
+                        <a class="link footer-candidates ml2 mr3 hover-dark-blue" href="{% url 'candidate_detail' slug=candidate.slug %}">{{ candidate }}</a>
                     {% endif %}
                 {% endfor %}
             </div>

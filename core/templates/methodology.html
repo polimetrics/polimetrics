@@ -5,86 +5,53 @@
 <div class="methcontainer ">
     <div class="methcolumn">
     <div class="mh5">
-            <h1 class=" mt6 methheaders" id="methpage">Methodology</h1>
-            
+            <h1 class="mt6 methheaders" id="methpage">Methodology</h1>
             <div class=" methcontent body-structure projectmeth" id="methpage">Tweets + Sentiment Analysis = Polimetrics</div>
             <div class="methcontent body-structure projectmeth mb" id="methpage">
             <p class="projectmeth" id="methpage">Our methodology is divided into 3 steps:</p>
             <div class="projectmeth" id="methpage">1. Data collection</div>
             <div class="projectmeth" id="methpage">2. Data cleaning</div>
             <div class="projectmeth" id="methpage">3. Polarity and sentiment evaluation</div>
-            
             </div>
             </div>
         
-            <div class=" mt1  b mh5 methheaders2 projectmeth" id="methpage" >Data Weighting</div>
+        <div class="mt3 b mh5 methheaders2 projectmeth" id="methpage" >Data Weighting</div>
         <div class=" methcontent projectmeth" id="methpage">
         <p class="mh5 projectmeth" id="methpage">In order to improve the accuracy of our results and take in to consideration a few of the many varaibles, we have weighted our data using the formula below.</p>
         <div class="tc projectmeth" id="methpage">
         <img src="{% static '/img/polimetrics-formula.png' %}" class="w-80 mh5" />
-        
-        
-        <p class="mh5 f4 content  projectmeth" id="methpage"><strong class=b>Engagement = total_retweets + total_favorites</strong> on a single tweet. The engagement values is what we use to compute a weighted average. A <strong class=b>weighted average</strong> is a method of computing a kind of arithmetic mean of a set of numbers in which some elements of the set carry more importance (weight) than others.</p>
-        <p class="mh5 content projectmeth f4" id="methpage">With this in mind, engagement helps us derive proportionality of a tweet's activity. Here we achieve two distinct evaluations: the <i>aggregate average</i>--computed by summing the product of each individual tweets sentiment and the engagement proportion--and the <i>actual daily average</i>--where the proportion accounts only for the engagement total for that day, irrespective of the engagement totals in days prior. </p>
         </div>
         </div>
-
-        
+        <p class="tl f4 content projectmeth pa3" id="methpage"><strong class=b>Engagement = total_retweets + total_favorites</strong> on a single tweet. The engagement values is what we use to compute a weighted average. A <strong class=b>weighted average</strong> is a method of computing a kind of arithmetic mean of a set of numbers in which some elements of the set carry more importance (weight) than others.</p>
+        <p class="tl f4 content projectmeth pa3" id="methpage">With this in mind, engagement helps us derive proportionality of a tweet's activity. Here we achieve two distinct evaluations: the <i>aggregate average</i>--computed by summing the product of each individual tweets sentiment and the engagement proportion--and the <i>actual daily average</i>--where the proportion accounts only for the engagement total for that day, irrespective of the engagement totals in days prior. </p>
+       
     </div>        
-        
-        
-        
-        
         <div class="methcolumn ml3 projectmeth2" id="methpage">
-        
-    
-    
-    
-    
-    
-    <div class="mt6 mr5   "> 
-        <button class="collapsible f1 tl  b  "> Data Collection </button>
-        <div class="content f4 tl  ">
+    <div class="mt6 mr5"> 
+        <button class="collapsible f1 tl b"> Data Collection </button>
+        <div class="content f4 tl">
             <p> We begin our process by collecting Tweets with Twitter's Standard search API. This allows us to specify, and therefore return Tweets about, each candidate. Results can be returned with various search parameters such as candidate's first and last name, last name, hastags, and mentions. Unfortunately the Standard search API does not return all Tweets that are about the searched candidate, instead the results are a sampling of random but relevant Tweets. Given that the relevance is at play we have assumed that results received are a truly random sampling
             </p>
         </div>
         </div>
-    
-    
-
-
-
-    <div class="mr5 "> 
-        <button class="collapsible f1 b tl  ">Data Cleaning</button>
-        <div class="content f4  ">
+    <div class="mr5"> 
+        <button class="collapsible f1 b tl">Data Cleaning</button>
+        <div class="content f4">
             <p> As we collect Tweets, we use a regular expression to remove all parts that are not useful for calculating sentiment, i.e., links, emojis, and @ symbols. This step is essential to ensure that the evaluation of sentiment is not misguided by information that does not have explicit meaning.
-
             </p>
         </div>
         </div>
-               
-
-
-
-    <div class="mt2 mr5 "> 
-        <button class="collapsible b f1 mb4 tl  "> Polarity and sentiment evaluation</button>
-        <div class="content f4  ">
+    <div class="mt3 mr5"> 
+        <button class="collapsible b f1 mb4 tl"> Polarity and sentiment evaluation</button>
+        <div class="content f4 mt3">
             <p> <p>We then use <a class="black link hover-red dib pointer" href="https://textblob.readthedocs.io/en/dev/"><strong>TextBlob</strong></a>, a simple API for natural language processing (NLP), to evaluate the cleaned Tweets' sentiment. TextBlob uses two sentiment analysis implementations, PatternAnalyzer and NaiveBayesAnalyzer. The PatternAnalyzer is based on the <a class="black link hover-red dib pointer" href="https://www.clips.uantwerpen.be/pattern"> <strong>pattern</strong></a> library. While the NaiveBayesAnalyzer is an Natural Language Toolkit classifier trained on a corpus of movie reviews.</p>
             <p>TextBlob returns two values when performing sentiment anaylsis on a text, polarity and and subjectivity. Polarity is a float between -1 (most negative sentiment) and 1 (most positive sentiment).
             Polarity uses the wording of a text to determine whether it is positive or negative and returns a float between -1 and 1, with -1 being completely negative and 1 being completely positive. Subjectivity refers to how direct, and therfore how explicit, the text is, which also provides a metric for the accuracy of the polarity. The value returned is a float ranging from 0 (very objective) to 1 (very subjective).</p>
-            
             </p>
         </div>
         </div>
-        
-        
-    
     </div>
-
-           
-
 </div>
-
 <br>
 <br>
 <br>
