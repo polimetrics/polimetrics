@@ -47,30 +47,30 @@ def index(request):
 
     hover = HoverTool(
         tooltips = [
-        ("candidate name", "@candidates_list"),
-        ("sentiment value", "@sentiment_list{-0.000}"),
-    ],
-    mode = 'vline'
+            ("candidate name", "@candidates_list"),
+            ("sentiment value", "@sentiment_list{-0.000}"),
+        ],
+        mode = 'vline'
     ) 
 
-    plot = figure(x_range=candidates_list, 
+    index_bar_graph = figure(x_range=candidates_list, 
                             y_range=(-0.5, .5),
                             x_axis_label='Candidates', 
                             y_axis_label='Sentiment',
                             plot_height=600, 
-                            plot_width=950, 
+                            plot_width=950,
                             title="Average Sentiment Per Candidate for April 2019",
-                            tools=[hover, 'wheel_zoom', 'reset'], 
+                            tools=[hover, 'wheel_zoom', 'reset'],
                             sizing_mode="scale_both")
-    plot.title.text_font_size = "21px"
-    plot.xaxis.axis_label_text_font_size = "19px"
-    plot.yaxis.axis_label_text_font_size = "19px"
-    plot.vbar(x='candidates_list', top='sentiment_list', width=0.4, color='color', source=source)
-    plot.xaxis.major_label_orientation = pi/4
-    plot.xgrid.grid_line_color = None
-    # plot.legend.orientation = "vertical"
-    # plot.legend.location = "top_center"
-    script, div = components(plot)
+    index_bar_graph.title.text_font_size = "21px"
+    index_bar_graph.xaxis.axis_label_text_font_size = "19px"
+    index_bar_graph.yaxis.axis_label_text_font_size = "19px"
+    index_bar_graph.vbar(x='candidates_list', top='sentiment_list', width=0.4, color='color', source=source)
+    index_bar_graph.xaxis.major_label_orientation = pi/4
+    index_bar_graph.xgrid.grid_line_color = None
+    # index_bar_graph.legend.orientation = "vertical"
+    # index_bar_graph.legend.location = "top_center"
+    script, div = components(index_bar_graph)
     context = {'script': script, 'div': div, 'candidates': candidates, 'candidate_accordian_list': candidate_accordian_list}
     return render_to_response('index.html', context=context)
 
@@ -80,8 +80,7 @@ def candidate_detail(request, slug):
     candidates = Candidate.objects.all()
     agg_mean_sentiments = []
     agg_mean_sentiment_dates = []
-    daily_mean_sentiments = []
-    daily_mean_sentiment_dates = []
+    daily_mean_sentiment_objs = []
     min_from_date_time_dict = CandidateMeanSentiment.objects.filter(
         candidate = candidate).aggregate(min_from_date_time = Min('from_date_time'))
 
@@ -99,16 +98,15 @@ def candidate_detail(request, slug):
             to_date_time = min_from_time + timedelta(days=day+1))
         # records ordered by to_date_time asc and created_at desc
         if daily_sentiment: 
-            daily_mean_sentiment_dates.append(daily_sentiment[0].to_date_time)
-            daily_mean_sentiments.append(daily_sentiment[0].mean_sentiment)
-            print(daily_sentiment[0].to_date_time, daily_sentiment[0].mean_sentiment, daily_sentiment[0].pk)
-
-    # print('current day negative engagement', daily_sentiment.last().negative_engagement, daily_sentiment.last().pk)
+            daily_mean_sentiment_objs.append(daily_sentiment[0])
+    
+    date_list = [obj.to_date_time for obj in daily_mean_sentiment_objs]
+    sentiment_list = [obj.mean_sentiment for obj in daily_mean_sentiment_objs]
 
     agg_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
         candidate = candidate,
         from_date_time = min_from_time)
-        
+
     agg_data = {}
 
     for sent_obj in agg_candidate_mean_sentiments:
@@ -122,6 +120,15 @@ def candidate_detail(request, slug):
     for date_time, mean_sent_list in agg_data.items():
         agg_mean_sentiment_dates.append(date_time)
         agg_mean_sentiments.append(mean_sent_list[0])
+    
+
+    # hover = HoverTool(
+    #     tooltips = [
+    #         ('date', '@date_list'),
+    #         ('daily sentiment', '@sentiment_list')
+    #     ],
+    #     mode = 'vline'
+    # )
 
     detail_line_graph = figure(x_axis_label='Date of sentiment',
                             x_axis_type='datetime',
@@ -133,8 +140,8 @@ def candidate_detail(request, slug):
                             sizing_mode="scale_both"
                             )
 
-    detail_line_graph.line(daily_mean_sentiment_dates, 
-                            daily_mean_sentiments,  
+    detail_line_graph.line(date_list, 
+                            sentiment_list,  
                             line_color='blue', 
                             line_width=3, 
                             alpha=.5,
@@ -148,14 +155,15 @@ def candidate_detail(request, slug):
                             alpha=.9,
                             legend="Aggregate")
 
-    # detail_line_graph.xaxis.major_label_orientation = pi/4
-        
-    # today_pos_engagement = daily_sentiment.last().negative_engagement
-    # today_neg_engagement = daily_sentiment.last().positive_engagement
-    # today_engagement = daily_sentiment.last().total_engagement
 
-    # today_pos_percent = (today_pos_engagement / today_engagement)*100
-    # today_neg_percent = (today_engagement / today_engagement)*100
+    # detail_line_graph.xaxis.major_label_orientation = pi/4
+    # daily_mean_sentiment_objs - the last element is the latest
+    today_pos_engagement = daily_mean_sentiment_objs[-1].positive_engagement
+    today_neg_engagement = daily_mean_sentiment_objs[-1].negative_engagement
+    today_engagement = daily_mean_sentiment_objs[-1].total_engagement
+
+    today_pos_percent = (today_pos_engagement / today_engagement)*100
+    today_neg_percent = (today_neg_engagement / today_engagement)*100
     
     max_pos_engagement = agg_candidate_mean_sentiments.last().positive_engagement
     max_neg_engagement = agg_candidate_mean_sentiments.last().negative_engagement
@@ -164,18 +172,13 @@ def candidate_detail(request, slug):
     max_pos_percent = (max_pos_engagement / total_engagement)*100
     max_neg_percent = (max_neg_engagement / total_engagement)*100
 
-    # print('neg: ', max_neg_engagement)
-    # print('pos: ', max_pos_engagement)
-    # print('total:', total_engagement)
-    # print('neg percent:', max_neg_percent)
-
     time_spans = ['daily', 'overall']
     engagement_splits = ["Postive Percent", "Negative Percent"]
 
     data = {
         'daily/overall': time_spans,
-        'Positive Percent': [1, max_pos_percent],
-        'Negative Percent': [2, max_neg_percent]
+        'Positive Percent': [today_pos_percent, max_pos_percent],
+        'Negative Percent': [today_neg_percent, max_neg_percent]
     }
 
     palette = ['#41b6c4', '#FD9F6C']
@@ -188,32 +191,30 @@ def candidate_detail(request, slug):
 
     # hover = HoverTool(
     #     tooltips = [
-    #     (),
-    #     (),
-    # ],
-    # mode = 'vline'
+    #         (),
+    #         (),
+    #     ],
+    #     mode = 'vline'
     # ) 
 
-    p = figure(x_range=FactorRange(*x), 
+    detail_engagement_bar_graph = figure(x_range=FactorRange(*x), 
                             plot_height=400,
                             plot_width=800, 
                             title="Daily/Overall Engagement Percentages",
                             sizing_mode="scale_both",
                             tools=['wheel_zoom', 'reset'])
             
-    p.vbar(x='x', top='counts', width=0.9, source=source, line_color="white",
+    detail_engagement_bar_graph.vbar(x='x', top='counts', width=0.9, source=source, line_color="white",
                             fill_color=factor_cmap('x', palette=palette, factors=engagement_splits, start=1, end=2))
     
-    p.y_range.start = 0
-    p.x_range.range_padding = 0.1
-    p.xaxis.major_label_orientation = 1
-    p.xgrid.grid_line_color = None
-
-
+    detail_engagement_bar_graph.y_range.start = 0
+    detail_engagement_bar_graph.x_range.range_padding = 0.1
+    detail_engagement_bar_graph.xaxis.major_label_orientation = 1
+    detail_engagement_bar_graph.xgrid.grid_line_color = None
 
     tab1 = Panel(child=detail_line_graph, title="line")
 
-    tab2 = Panel(child=p, title="bar")
+    tab2 = Panel(child=detail_engagement_bar_graph, title="bar")
 
     tabs = Tabs(tabs=[tab1, tab2])
 
