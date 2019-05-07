@@ -76,7 +76,7 @@ class CandidateMeanSentiment(models.Model):
     num_negative_tweets = models.IntegerField(default=0)    
 
     class Meta:
-        ordering = ['to_date_time']
+        ordering = ['to_date_time', '-created_at']
 
 class Developer(models.Model):
     '''

@@ -82,7 +82,8 @@ def candidate_detail(request, slug):
     agg_mean_sentiment_dates = []
     daily_mean_sentiments = []
     daily_mean_sentiment_dates = []
-    min_from_date_time_dict = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(min_from_date_time = Min('from_date_time'))
+    min_from_date_time_dict = CandidateMeanSentiment.objects.filter(
+        candidate = candidate).aggregate(min_from_date_time = Min('from_date_time'))
 
     # minimum from_date_time in CandidateMeanSentiment for candidate in database
     min_from_time = min_from_date_time_dict['min_from_date_time']
@@ -91,23 +92,36 @@ def candidate_detail(request, slug):
 
     day_delta = utcnow.replace(tzinfo=timezone.utc) - min_from_time
 
-    for day in range(day_delta.days):
+    for day in range(day_delta.days + 1): # add 1 to account for the current day
         daily_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
             from_date_time = min_from_time + timedelta(days=day),
             to_date_time = min_from_time + timedelta(days=day+1))
-
-        if daily_sentiment: # we should also order by created_at time in addition to to_date_time
+        # records ordered by to_date_time asc and created_at desc
+        if daily_sentiment: 
             daily_mean_sentiment_dates.append(daily_sentiment[0].to_date_time)
             daily_mean_sentiments.append(daily_sentiment[0].mean_sentiment)
+            print(daily_sentiment[0].to_date_time, daily_sentiment[0].mean_sentiment, daily_sentiment[0].pk)
+
+    # print('current day negative engagement', daily_sentiment.last().negative_engagement, daily_sentiment.last().pk)
 
     agg_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
         candidate = candidate,
         from_date_time = min_from_time)
+        
+    agg_data = {}
 
-    for mean_sentiment in agg_candidate_mean_sentiments:
-        agg_mean_sentiment_dates.append(mean_sentiment.to_date_time)
-        agg_mean_sentiments.append(mean_sentiment.mean_sentiment)
+    for sent_obj in agg_candidate_mean_sentiments:
+        key = sent_obj.to_date_time
+        if key not in agg_data:
+            # initialize empty list
+            agg_data[key] = []
+        agg_data[key].append(sent_obj.mean_sentiment)
+        print(sent_obj.pk, sent_obj.to_date_time, sent_obj.created_at, sent_obj.mean_sentiment)
+    
+    for date_time, mean_sent_list in agg_data.items():
+        agg_mean_sentiment_dates.append(date_time)
+        agg_mean_sentiments.append(mean_sent_list[0])
 
     detail_line_graph = figure(x_axis_label='Date of sentiment',
                             x_axis_type='datetime',
@@ -135,19 +149,25 @@ def candidate_detail(request, slug):
                             legend="Aggregate")
 
     # detail_line_graph.xaxis.major_label_orientation = pi/4
+        
+    # today_pos_engagement = daily_sentiment.last().negative_engagement
+    # today_neg_engagement = daily_sentiment.last().positive_engagement
+    # today_engagement = daily_sentiment.last().total_engagement
 
+    # today_pos_percent = (today_pos_engagement / today_engagement)*100
+    # today_neg_percent = (today_engagement / today_engagement)*100
+    
     max_pos_engagement = agg_candidate_mean_sentiments.last().positive_engagement
     max_neg_engagement = agg_candidate_mean_sentiments.last().negative_engagement
-
     total_engagement = agg_candidate_mean_sentiments.last().total_engagement
 
     max_pos_percent = (max_pos_engagement / total_engagement)*100
     max_neg_percent = (max_neg_engagement / total_engagement)*100
 
-    print('neg: ', max_neg_engagement)
-    print('pos: ', max_pos_engagement)
-    print('total:', total_engagement)
-    print('neg percent:', max_neg_percent)
+    # print('neg: ', max_neg_engagement)
+    # print('pos: ', max_pos_engagement)
+    # print('total:', total_engagement)
+    # print('neg percent:', max_neg_percent)
 
     time_spans = ['daily', 'overall']
     engagement_splits = ["Postive Percent", "Negative Percent"]
@@ -158,7 +178,7 @@ def candidate_detail(request, slug):
         'Negative Percent': [2, max_neg_percent]
     }
 
-    palette = ["red", "green"]
+    palette = ['#41b6c4', '#FD9F6C']
 
     # this creates [ ("daily", "Positive Percent"), ("daily", "Negative Percent"), ("overall", "Positive Percent"), ("overall", "Negative Percent") ]
     x = [ (time_span, engagement_split) for time_span in time_spans for engagement_split in engagement_splits ]
