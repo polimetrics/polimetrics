@@ -126,6 +126,7 @@ def candidate_detail(request, slug):
                             y_axis_label='Sentiment',
                             plot_width=800,
                             plot_height=400,
+                            toolbar_location=None,
                             tools=['wheel_zoom', 'reset'],
                             y_range=(-0.5, 0.5), 
                             sizing_mode="scale_both"
@@ -163,8 +164,8 @@ def candidate_detail(request, slug):
     overall_pos_percent = (overall_pos_engagement / total_engagement)
     overall_neg_percent = (overall_neg_engagement / total_engagement)
 
-    time_spans = ['Today', 'Overall']
-    engagement_splits = ["Postive", "Negative"]
+    time_spans = ['Mood TODAY', 'Mood OVERALL']
+    engagement_splits = ["Postive Tweet Reaction", "Negative Tweet Reaction"]
 
     data = {
         'daily/overall': time_spans,
@@ -184,8 +185,8 @@ def candidate_detail(request, slug):
 
     hover = HoverTool(
         tooltips = [
-            ("Number of Retweets/Favorites", "@engage"),
-            ("Engagement Percentage", "@counts{0%}")
+            ("Number of Retweets/Likes", "@engage"),
+            ("Pos/Neg Percent Split", "@counts{0%}")
         ],
         mode = 'vline'
     ) 
@@ -193,23 +194,23 @@ def candidate_detail(request, slug):
     detail_engagement_bar_graph = figure(x_range=FactorRange(*x), 
                             plot_height=400,
                             plot_width=800, 
-                            title="Daily/Overall Engagement Percentages",
+                            title="Community Reaction on Twitter to Negative and Positive Tweets about a Candidate(Reaction = amount of Retweets + Likes)",
                             sizing_mode="scale_both",
                             toolbar_location=None,
+                            y_range=(0,1),
                             tools=[hover])
             
     detail_engagement_bar_graph.vbar(x='x', top='counts', width=0.9, source=source, line_color="white", alpha=0.7,
                             fill_color=factor_cmap('x', palette=palette, factors=engagement_splits, start=1, end=2)
                             )
-    
-    detail_engagement_bar_graph.y_range.start = 0
+
     detail_engagement_bar_graph.x_range.range_padding = 0.1
     detail_engagement_bar_graph.xaxis.major_label_orientation = 1
     detail_engagement_bar_graph.xgrid.grid_line_color = None
     detail_engagement_bar_graph.yaxis[0].formatter = NumeralTickFormatter(format="0%")
 
-    tab1 = Panel(child=detail_line_graph, title="line")
-    tab2 = Panel(child=detail_engagement_bar_graph, title="bar")
+    tab1 = Panel(child=detail_line_graph, title="Sentiment trends over time")
+    tab2 = Panel(child=detail_engagement_bar_graph, title="Twitter reaction metrics")
     tabs = Tabs(tabs=[tab1, tab2])
     script, div = components(tabs)
     context = {'script': script, 'div': div, 'candidate': candidate, 'candidates': candidates}
