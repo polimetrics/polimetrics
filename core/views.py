@@ -8,6 +8,7 @@ from bokeh.embed import components
 from bokeh.models import ColumnDataSource, FactorRange, HoverTool
 from bokeh.models.widgets import Panel, Tabs
 from bokeh.transform import factor_cmap
+from bokeh.models import NumeralTickFormatter
 
 def index(request):
     color_list = []
@@ -74,7 +75,6 @@ def index(request):
     context = {'script': script, 'div': div, 'candidates': candidates, 'candidate_accordian_list': candidate_accordian_list}
     return render_to_response('index.html', context=context)
 
-
 def candidate_detail(request, slug):
     candidate = get_object_or_404(Candidate, slug=slug)
     candidates = Candidate.objects.all()
@@ -95,7 +95,7 @@ def candidate_detail(request, slug):
         daily_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
             from_date_time = min_from_time + timedelta(days=day),
-            to_date_time = min_from_time + timedelta(days=day+1))
+            to_date_time = min_from_time + timedelta(days=day+1)).order_by('-created_at')
         # records ordered by to_date_time asc and created_at desc
         if daily_sentiment: 
             daily_mean_sentiment_objs.append(daily_sentiment[0])
@@ -105,30 +105,21 @@ def candidate_detail(request, slug):
 
     agg_candidate_mean_sentiments = CandidateMeanSentiment.objects.filter(
         candidate = candidate,
-        from_date_time = min_from_time)
+        from_date_time = min_from_time).order_by('to_date_time', 'created_at')
 
     agg_data = {}
-
+    agg_list = []
     for sent_obj in agg_candidate_mean_sentiments:
+        agg_list.append(sent_obj)
         key = sent_obj.to_date_time
         if key not in agg_data:
             # initialize empty list
             agg_data[key] = []
         agg_data[key].append(sent_obj.mean_sentiment)
-        print(sent_obj.pk, sent_obj.to_date_time, sent_obj.created_at, sent_obj.mean_sentiment)
     
     for date_time, mean_sent_list in agg_data.items():
         agg_mean_sentiment_dates.append(date_time)
         agg_mean_sentiments.append(mean_sent_list[0])
-    
-
-    # hover = HoverTool(
-    #     tooltips = [
-    #         ('date', '@date_list'),
-    #         ('daily sentiment', '@sentiment_list')
-    #     ],
-    #     mode = 'vline'
-    # )
 
     detail_line_graph = figure(x_axis_label='Date of sentiment',
                             x_axis_type='datetime',
@@ -155,69 +146,71 @@ def candidate_detail(request, slug):
                             alpha=.9,
                             legend="Aggregate")
 
-
-    # detail_line_graph.xaxis.major_label_orientation = pi/4
     # daily_mean_sentiment_objs - the last element is the latest
     today_pos_engagement = daily_mean_sentiment_objs[-1].positive_engagement
     today_neg_engagement = daily_mean_sentiment_objs[-1].negative_engagement
     today_engagement = daily_mean_sentiment_objs[-1].total_engagement
 
-    today_pos_percent = (today_pos_engagement / today_engagement)*100
-    today_neg_percent = (today_neg_engagement / today_engagement)*100
-    
-    max_pos_engagement = agg_candidate_mean_sentiments.last().positive_engagement
-    max_neg_engagement = agg_candidate_mean_sentiments.last().negative_engagement
-    total_engagement = agg_candidate_mean_sentiments.last().total_engagement
+    today_pos_percent = (today_pos_engagement / today_engagement)
+    today_neg_percent = (today_neg_engagement / today_engagement)
 
-    max_pos_percent = (max_pos_engagement / total_engagement)*100
-    max_neg_percent = (max_neg_engagement / total_engagement)*100
+    overall_obj = agg_list[-1]
 
-    time_spans = ['daily', 'overall']
-    engagement_splits = ["Postive Percent", "Negative Percent"]
+    overall_pos_engagement = overall_obj.positive_engagement
+    overall_neg_engagement = overall_obj.negative_engagement
+    total_engagement = overall_obj.total_engagement
+
+    overall_pos_percent = (overall_pos_engagement / total_engagement)
+    overall_neg_percent = (overall_neg_engagement / total_engagement)
+
+    time_spans = ['Today', 'Overall']
+    engagement_splits = ["Postive", "Negative"]
 
     data = {
         'daily/overall': time_spans,
-        'Positive Percent': [today_pos_percent, max_pos_percent],
-        'Negative Percent': [today_neg_percent, max_neg_percent]
+        'Positive': [today_pos_percent, overall_pos_percent],
+        'Negative': [today_neg_percent, overall_neg_percent]
     }
 
-    palette = ['#41b6c4', '#FD9F6C']
+    palette = ['#b3d9ff', '#00264d']
 
     # this creates [ ("daily", "Positive Percent"), ("daily", "Negative Percent"), ("overall", "Positive Percent"), ("overall", "Negative Percent") ]
     x = [ (time_span, engagement_split) for time_span in time_spans for engagement_split in engagement_splits ]
-    counts = sum(zip(data['Positive Percent'], data['Negative Percent']), ()) # like an hstack
+    counts = sum(zip(data['Positive'], data['Negative']), ())
+    print(counts)
+    engage = [today_pos_engagement, today_neg_engagement, overall_pos_engagement, overall_neg_engagement]
 
-    source = ColumnDataSource(data=dict(x=x, counts=counts))
+    source = ColumnDataSource(data=dict(x=x, counts=counts, engage=engage))
 
-    # hover = HoverTool(
-    #     tooltips = [
-    #         (),
-    #         (),
-    #     ],
-    #     mode = 'vline'
-    # ) 
+    hover = HoverTool(
+        tooltips = [
+            ("Number of Retweets/Favorites", "@engage"),
+            ("Engagement Percentage", "@counts{0%}")
+        ],
+        mode = 'vline'
+    ) 
 
     detail_engagement_bar_graph = figure(x_range=FactorRange(*x), 
                             plot_height=400,
                             plot_width=800, 
                             title="Daily/Overall Engagement Percentages",
                             sizing_mode="scale_both",
-                            tools=['wheel_zoom', 'reset'])
+                            toolbar_location=None,
+                            tools=[hover])
             
-    detail_engagement_bar_graph.vbar(x='x', top='counts', width=0.9, source=source, line_color="white",
-                            fill_color=factor_cmap('x', palette=palette, factors=engagement_splits, start=1, end=2))
+    detail_engagement_bar_graph.vbar(x='x', top='counts', width=0.9, source=source, line_color="white", alpha=0.7,
+                            fill_color=factor_cmap('x', palette=palette, factors=engagement_splits, start=1, end=2)
+                            )
     
     detail_engagement_bar_graph.y_range.start = 0
     detail_engagement_bar_graph.x_range.range_padding = 0.1
     detail_engagement_bar_graph.xaxis.major_label_orientation = 1
     detail_engagement_bar_graph.xgrid.grid_line_color = None
+    detail_engagement_bar_graph.yaxis[0].formatter = NumeralTickFormatter(format="0%")
 
     tab1 = Panel(child=detail_line_graph, title="line")
-
     tab2 = Panel(child=detail_engagement_bar_graph, title="bar")
-
     tabs = Tabs(tabs=[tab1, tab2])
-
     script, div = components(tabs)
     context = {'script': script, 'div': div, 'candidate': candidate, 'candidates': candidates}
     return render_to_response('candidate_detail.html', context=context)
@@ -226,7 +219,6 @@ def methodology(request):
     candidates = Candidate.objects.all()
                   
     return render(request, "methodology.html", context={'candidates': candidates})
-
 
 def about(request):
     candidates = Candidate.objects.all()
