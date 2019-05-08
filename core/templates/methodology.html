@@ -4,67 +4,62 @@
 {% block content %}
 <div class="methcontainer ">
     <div class="methcolumn">
-    <div class="mh5">
+        <div class="mh5">
             <h1 class="mt6 methheaders" id="methpage">Methodology</h1>
             <div class=" methcontent body-structure projectmeth" id="methpage">Tweets + Sentiment Analysis = Polimetrics</div>
             <div class="methcontent body-structure projectmeth mb" id="methpage">
-            <p class="projectmeth" id="methpage">Our methodology is divided into 3 steps:</p>
-            <div class="projectmeth" id="methpage">1. Data collection</div>
-            <div class="projectmeth" id="methpage">2. Data cleaning</div>
-            <div class="projectmeth" id="methpage">3. Polarity and sentiment evaluation</div>
+                <p class="projectmeth" id="methpage">Our methodology is divided into 3 steps:</p>
+                <div class="projectmeth" id="methpage">1. Data collection</div>
+                <div class="projectmeth" id="methpage">2. Data cleaning</div>
+                <div class="projectmeth" id="methpage">3. Polarity and sentiment evaluation</div>
             </div>
-            </div>
+        </div>
         
         <div class="mt3 b mh5 methheaders2 projectmeth" id="methpage" >Data Weighting</div>
         <div class=" methcontent projectmeth" id="methpage">
-        <p class="mh5 projectmeth" id="methpage">In order to improve the accuracy of our results and take in to consideration a few of the many varaibles, we have weighted our data using the formula below.</p>
-        <div class="tc projectmeth" id="methpage">
-        <img src="{% static '/img/polimetrics-formula.png' %}" class="w-80 mh5 mb3" />
-        </div>
+            <p class="mh5 projectmeth" id="methpage">In order to improve the accuracy of our results and take in to consideration a few of the many varaibles, we have weighted our data using the formula below.</p>
+            <div class="tc projectmeth" id="methpage">
+                <img src="{% static '/img/polimetrics-formula.png' %}" class="w-80 mh5 mb3" />
+            </div>
         </div>
         
-        <span class="tl f4 content projectmeth pa3" id="methpage"><p><mark>Engagement = number of retweets + number of likes</mark> for each tweet. The engagement values are how we measure a tweets influence Twitter; the larger the engagement the greater role it plays in shaping political discourse. These engagement levels are used in the formula for weighing the data. A tweet's <i>engagement value</i> divided by the <i>total engagement value</i> for every tweet collected for each candidate is how we compute proportions to multiply with each sentiment evaluations which is summated into the daily and overall trend lines. This concept is known as <mark>weighted averaging</mark>, which is the method of computing an arithmetic mean of a set where some elements carry more importance (weight) than others.
-        </p>
-        <p>With this in mind, engagement helps us derive proportionality of a tweet's activity. Here we achieve two distinct evaluations: the <i>aggregate average</i>--computed by adding all the weighted averages together--and the <i>actual daily average</i>--where the proportion accounts only for the engagement total for that day, ignoring the engagement totals in previous days. </p>
+        <span class="tl f4 content projectmeth pa3" id="methpage">
+            <p><mark>Engagement = number of retweets + number of likes</mark> for each tweet. The engagement values are how we measure a tweets influence Twitter; the larger the engagement the greater role it plays in shaping political discourse. These engagement levels are used in the formula for weighing the data. A tweet's <i>engagement value</i> divided by the <i>total engagement value</i> for every tweet collected for each candidate is how we compute proportions to multiply with each sentiment evaluations which is summated into the daily and overall trend lines. This concept is known as <mark>weighted averaging</mark>, which is the method of computing an arithmetic mean of a set where some elements carry more importance (weight) than others.</p>
+            <p>With this in mind, engagement helps us derive proportionality of a tweet's activity. Here we achieve two distinct evaluations: the <i>aggregate average</i>--computed by adding all the weighted averages together--and the <i>actual daily average</i>--where the proportion accounts only for the engagement total for that day, ignoring the engagement totals in previous days.</p>
         </span>
-       
     </div> 
 
     <div class="methcolumn ml3 projectmeth2" id="methpage">
-    <div class="mt6 mr5"> 
-        <button class="collapsible f1 tl b"> Data Collection </button>
-        <div class="content f4 tl">
-            <p> We begin our process by collecting Tweets with Twitter's Standard search API. This allows us to specify, and therefore return Tweets about, each candidate. Results can be returned with various search parameters such as candidate's first and last name, last name, hastags, and mentions. Unfortunately the Standard search API does not return all Tweets that are about the searched candidate, instead the results are a sampling of random but relevant Tweets. Given that the relevance is at play we have assumed that results received are a truly random sampling
-            </p>
+        <div class="mt6 mr5"> 
+            <button class="collapsible f1 tl b"> Data Collection </button>
+            <div class="content f4 tl">
+                <p> We begin our process by collecting Tweets with Twitter's Standard search API. This allows us to specify, and therefore return Tweets about, each candidate. Results can be returned with various search parameters such as candidate's first and last name, last name, hastags, and mentions. Unfortunately the Standard search API does not return all Tweets that are about the searched candidate, instead the results are a sampling of random but relevant Tweets. Given that the relevance is at play we have assumed that results received are a truly random sampling</p>
+            </div>
         </div>
+        <div class="mr5"> 
+            <button class="collapsible f1 b tl">Data Cleaning</button>
+            <div class="content f4">
+                <p> As we collect Tweets, we use a regular expression to remove all parts that are not useful for calculating sentiment, i.e., links, emojis, and @ symbols. This step is essential to ensure that the evaluation of sentiment is not misguided by information that does not have explicit meaning.</p>
+            </div>
         </div>
-    <div class="mr5"> 
-        <button class="collapsible f1 b tl">Data Cleaning</button>
-        <div class="content f4">
-            <p> As we collect Tweets, we use a regular expression to remove all parts that are not useful for calculating sentiment, i.e., links, emojis, and @ symbols. This step is essential to ensure that the evaluation of sentiment is not misguided by information that does not have explicit meaning.
-            </p>
+        <div class="mt3 mr5"> 
+            <button class="collapsible b f1 mb0 tl"> Polarity and sentiment evaluation</button>
+            <div class="content f4">
+                <p><p>We then use <a class="black link hover-red dib pointer" href="https://textblob.readthedocs.io/en/dev/"><mark>TextBlob</mark>--a simple API for natural language processing (NLP)</a>--to evaluate the cleaned Tweets' sentiment. TextBlob uses two sentiment analysis implementations, PatternAnalyzer and NaiveBayesAnalyzer. The PatternAnalyzer is based on <a class="black link hover-red dib pointer" href="https://www.clips.uantwerpen.be/pattern">the <mark>pattern</mark> library</a>. While the NaiveBayesAnalyzer is an Natural Language Toolkit classifier trained on a corpus of movie reviews.</p>
+                <p>TextBlob returns two values when performing sentiment anaylsis on a text, polarity and and subjectivity. Polarity is a float between -1 (most negative sentiment) and 1 (most positive sentiment).
+                Polarity uses the wording of a text to determine whether it is positive or negative and returns a float between -1 and 1, with -1 being completely negative and 1 being completely positive. Subjectivity refers to how direct, and therfore how explicit, the text is, which also provides a metric for the accuracy of the polarity. The value returned is a float ranging from 0 (very objective) to 1 (very subjective).</p></p>
+            </div>
         </div>
-        </div>
-    <div class="mt3 mr5"> 
-        <button class="collapsible b f1 mb0 tl"> Polarity and sentiment evaluation</button>
-        <div class="content f4">
-            <p> <p>We then use <a class="black link hover-red dib pointer" href="https://textblob.readthedocs.io/en/dev/"><mark>TextBlob</mark>--a simple API for natural language processing (NLP)</a>--to evaluate the cleaned Tweets' sentiment. TextBlob uses two sentiment analysis implementations, PatternAnalyzer and NaiveBayesAnalyzer. The PatternAnalyzer is based on <a class="black link hover-red dib pointer" href="https://www.clips.uantwerpen.be/pattern">the <mark>pattern</mark> library</a>. While the NaiveBayesAnalyzer is an Natural Language Toolkit classifier trained on a corpus of movie reviews.</p>
-            <p>TextBlob returns two values when performing sentiment anaylsis on a text, polarity and and subjectivity. Polarity is a float between -1 (most negative sentiment) and 1 (most positive sentiment).
-            Polarity uses the wording of a text to determine whether it is positive or negative and returns a float between -1 and 1, with -1 being completely negative and 1 being completely positive. Subjectivity refers to how direct, and therfore how explicit, the text is, which also provides a metric for the accuracy of the polarity. The value returned is a float ranging from 0 (very objective) to 1 (very subjective).</p>
-            </p>
-        </div>
-    </div>
-    <div class="mt1 mr5"> 
-        <button class="collapsible f1 tl b mt1">Disclaimer</button>
-        <div class="content f4 tl">
-            <p> The mission of Polimetrics is not to debunk the insulur nature of politically active Twitter users and ignore the fact that social media is fraugh with homogenous communities segregated along partisan lines[1,2]. Polimetrics is an attempt at visualizing political discourse and gauging the political landscape of tomorrow.
-            </p>
-            <p class="f5">
-                Refences:
-                [1] Adamic, L., and Glance, N. 2005. The political blogosphere and the 2004 U.S. election: Divided they blog. In Proc. 3rd Intl. Workshop on Link Discovery (LinkKDD), 36–43.
-                [2] Hargittai, E.; Gallo, J.; and Kane, M. 2007. Cross-ideological discussions among 
-            </p>
-        </div>
+        <div class="mt1 mr5"> 
+            <button class="collapsible f1 tl b mt1">Disclaimer</button>
+            <div class="content f4 tl">
+                <p> The mission of Polimetrics is not to debunk the insulur nature of politically active Twitter users and ignore the fact that social media is fraugh with homogenous communities segregated along partisan lines[1,2]. Polimetrics is an attempt at visualizing political discourse and gauging the political landscape of tomorrow.</p>
+                <p class="f5">
+                    Refences:
+                    [1] Adamic, L., and Glance, N. 2005. The political blogosphere and the 2004 U.S. election: Divided they blog. In Proc. 3rd Intl. Workshop on Link Discovery (LinkKDD), 36–43.
+                    [2] Hargittai, E.; Gallo, J.; and Kane, M. 2007. Cross-ideological discussions among 
+                </p>
+            </div>
         </div>
     </div>
 </div>
