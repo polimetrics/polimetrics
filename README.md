@@ -18,4 +18,4 @@ Polimetrics is a web application that performs sentiment analysis on Tweets to g
 - [Dan Peterson](https://github.com/peterson-dev)
 
 ## License
-Polimetrics is licensed under the GNU Public License 3.0. See [LICENSE](LICENSE.md) for the full text of the license.
+Distributed under the GNU Public License 3.0. See [LICENSE](LICENSE.md) for more information.
