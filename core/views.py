@@ -56,7 +56,7 @@ def index(request):
     ) 
 
     index_bar_graph = figure(x_range=candidates_list, 
-                            y_range=(-0.4, .4),
+                            y_range=(-0.35, .35),
                             x_axis_label='Candidates', 
                             y_axis_label='Sentiment',
                             plot_height=600, 
@@ -127,7 +127,7 @@ def candidate_detail(request, slug):
                             x_axis_type='datetime',
                             y_axis_label='Sentiment',
                             plot_width=800,
-                            plot_height=400,
+                            plot_height=600,
                             toolbar_location=None,
                             tools=['wheel_zoom', 'reset'],
                             y_range=(-0.5, 0.5), 
@@ -194,7 +194,7 @@ def candidate_detail(request, slug):
     ) 
 
     detail_engagement_bar_graph = figure(x_range=FactorRange(*x), 
-                            plot_height=400,
+                            plot_height=600,
                             plot_width=800, 
                             title="Negative and Positive Engagement (Engagement = Retweets + Likes)",
                             sizing_mode="stretch_both",
