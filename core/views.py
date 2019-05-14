@@ -56,7 +56,7 @@ def index(request):
     ) 
 
     index_bar_graph = figure(x_range=candidates_list, 
-                            y_range=(-0.5, .5),
+                            y_range=(-0.4, .4),
                             x_axis_label='Candidates', 
                             y_axis_label='Sentiment',
                             plot_height=600, 
