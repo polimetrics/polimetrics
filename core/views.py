@@ -60,7 +60,6 @@ def index(request):
                             x_axis_label='Candidates', 
                             y_axis_label='Sentiment',
                             plot_height=600, 
-                            plot_width=950,
                             title="Average Sentiment Per Candidate",
                             tools=[hover],
                             toolbar_location=None,
