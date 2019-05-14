@@ -27,16 +27,17 @@ def index(request):
             to_date_time = max_to_date_time['to_date_time__max'],
         )
 
-        if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
-            candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]
-            if candidate.party == 'democrat':
-                candidates_sentiments_dict[str(candidate)].append('#415caa')
-            elif candidate.party == 'republican':
-                candidates_sentiments_dict[str(candidate)].append('#ed2024')
-            else:
-                candidates_sentiments_dict[str(candidate)].append('#696969')
-        if total_mean_sentiment[0].mean_sentiment > .125:
-            candidate_accordian_list.append(candidate)
+        if total_mean_sentiment:
+            if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
+                candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]
+                if candidate.party == 'democrat':
+                    candidates_sentiments_dict[str(candidate)].append('#415caa')
+                elif candidate.party == 'republican':
+                    candidates_sentiments_dict[str(candidate)].append('#ed2024')
+                else:
+                    candidates_sentiments_dict[str(candidate)].append('#696969')
+            if total_mean_sentiment[0].mean_sentiment > .125:
+                candidate_accordian_list.append(candidate)
 
     candidates_list = list(candidates_sentiments_dict.keys())
     sentiment_color_list = candidates_sentiments_dict.values()
