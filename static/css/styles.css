@@ -44,7 +44,6 @@ html {
 .sidenav {
     height: 100%;
     width: 100px;
-   
     position: fixed;
     z-index: 1;
     top: 0;
@@ -117,12 +116,9 @@ html {
     border-style: solid;
     border-color: white;
     width: 90%;
-    /* max-height: 5%; */
-    /* height:30%; */
     margin-left: 6rem;
     margin-bottom: 2rem;
     border-radius: 1rem;
-    /* z-index: 1; */
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -377,15 +373,25 @@ html {
     font-family: 'Century Gothic', sans-serif;
     border-style: solid;
     border-color: white;
-    width:100%;
-    margin-left: 0rem;
-    margin-bottom: 2rem;
+    width:50%;
     border-radius: 1rem;
-    display: flex;
-    flex-basis: auto;
     padding: 1%;
     text-align: right;
-    padding-right: 15%;
+    padding-right: 5%;
+    margin-top: 5.3rem;
+}
+
+.pictdetail {
+    max-width: 15rem;
+    border: all;
+    border-style: solid;
+    border-radius: 100%;
+    border-color: white;
+    border-width: .5rem;
+    margin-right: 2%;
+    /* z-index: 2; */
+    align-self: stretch;
+    float: left;
 }
 
 .textboxdetail {
@@ -394,24 +400,11 @@ html {
     text-decoration: none;
     font-size: 3rem;
     text-align: center;
+    /* padding-top: .5rem; */
 }
 
 .detail-graph {
     z-index: 10;
-}
-
-.pictdetail {
-    border: all;
-    border-style: solid;
-    border-radius: 100%;
-    border-color: white;
-    width: 30%;
-    height: 30%;
-    border-width: .5rem;
-    margin-right: 2%;
-    /* z-index: 2; */
-    align-self: stretch;
-    float: left;
 }
 
 .graphdetail {
