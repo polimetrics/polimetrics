@@ -3,7 +3,7 @@
 
 {% block content %}
 <body>
-<div class="index-header projectmeth" id="projectindex">
+<div class="index-header projectmeth pb4" id="projectindex">
     <div class="pl4 pr3 mh4    ">
         <div class="body-headersindex mt3">
             <strong>A modern opinion poll for modern politics.</strong>
@@ -11,14 +11,14 @@
         <p class="body-content body-structure-index">
         Polimetrics is a web application that performs sentiment analysis on Tweets to generate opinion polls for 2020 presidential primary candidates.
         </p>
-        <div class="tc">
-            <a class="header-font black link hover-red dib mb5 projectmeth " id="projectindex" href="{% url 'methodology' %}"><strong>Learn more</strong></a>
+        <div class="tl-l">
+            <a class="header-font black link hover-red dib mb3 projectmeth " id="projectindex" href="{% url 'methodology' %}"><strong><i><h3>Learn more</h3></i></strong></a>
         </div>
     </div>
     <div class="mh5 ">
         <div class="body-headers accordion pa3"><strong>Reference guide</strong></div>
-        <div class="panel ">
-            <div class="pa4">
+        <div class="panel">
+            <div class="pa2">
               <strong>Sentiment</strong> - Is a rating of tweets referencing a specific<br> 
               candidate on a scale from 1 to -1, 1 being extremely positive,<br> 
               and -1 being extremely negative. <br>
@@ -31,9 +31,9 @@
     </div>
 </div>
 <div class="projectmeth" id="projectindex">
-    <h3 class="body-headers mt4 pl4 ml5   ">Latest Poll</h3>
+    <h3 class="body-headers pl4 ml4 di">Latest Poll: </h3><i><p class="body-content di">April-May '19</p></i>
 </div>
-<div class="mw8 pr3">
+<div class="pr3">
   <div class="tc pl1 projectmeth" id="projectindex">
       {{ div | safe }}
   </div>
