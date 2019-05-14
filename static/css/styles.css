@@ -598,7 +598,7 @@ footer {
 
 /* if Candidate count exceeds 25, increase height to fit container in footer */
 .footer-candidates-container {
-    height: 240px;
+    height: 260px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
