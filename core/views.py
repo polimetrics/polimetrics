@@ -61,11 +61,12 @@ def index(request):
                             y_axis_label='Sentiment',
                             plot_height=600, 
                             plot_width=950,
-                            title="Average Sentiment Per Candidate for April 2019",
-                            tools=[hover, 'wheel_zoom', 'reset'],
+                            title="Average Sentiment Per Candidate",
+                            tools=[hover],
+                            toolbar_location=None,
                             sizing_mode="stretch_both"
                             )
-    index_bar_graph.title.text_font_size = "21px"
+    index_bar_graph.title.text_font_size = "1.18rem"
     index_bar_graph.xaxis.axis_label_text_font_size = "19px"
     index_bar_graph.yaxis.axis_label_text_font_size = "19px"
     index_bar_graph.vbar(x='candidates_list', top='sentiment_list', width=0.4, color='color', source=source)
@@ -166,8 +167,8 @@ def candidate_detail(request, slug):
     overall_pos_percent = (overall_pos_engagement / total_engagement)
     overall_neg_percent = (overall_neg_engagement / total_engagement)
 
-    time_spans = ['Mood TODAY', 'Mood OVERALL']
-    engagement_splits = ["Postive Tweet Reaction", "Negative Tweet Reaction"]
+    time_spans = ['TODAY', 'OVERALL']
+    engagement_splits = ["Postive Tweets", "Negative Tweets"]
 
     data = {
         'daily/overall': time_spans,
@@ -196,8 +197,8 @@ def candidate_detail(request, slug):
     detail_engagement_bar_graph = figure(x_range=FactorRange(*x), 
                             plot_height=400,
                             plot_width=800, 
-                            title="Community Reaction on Twitter to Negative and Positive Tweets about a Candidate(Reaction = amount of Retweets + Likes)",
-                            sizing_mode="scale_both",
+                            title="Negative and Positive Engagement (Engagement = Retweets + Likes)",
+                            sizing_mode="stretch_both",
                             toolbar_location=None,
                             y_range=(0,1),
                             tools=[hover])
@@ -211,8 +212,8 @@ def candidate_detail(request, slug):
     detail_engagement_bar_graph.xgrid.grid_line_color = None
     detail_engagement_bar_graph.yaxis[0].formatter = NumeralTickFormatter(format="0%")
 
-    tab1 = Panel(child=detail_line_graph, title="Sentiment trends over time")
-    tab2 = Panel(child=detail_engagement_bar_graph, title="Twitter reaction metrics")
+    tab1 = Panel(child=detail_line_graph, title="Sentiment trends")
+    tab2 = Panel(child=detail_engagement_bar_graph, title="Engagement metrics")
     tabs = Tabs(tabs=[tab1, tab2])
     script, div = components(tabs)
     context = {'script': script, 'div': div, 'candidate': candidate, 'candidates': candidates}
