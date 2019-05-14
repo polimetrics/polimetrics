@@ -43,9 +43,9 @@
             </div>
         </div>
         <div class="mt3 mr5"> 
-            <button class="collapsible b f1 mb0 tl"> Polarity and sentiment evaluation</button>
+            <button class="collapsible b f1 mb4 tl"> Polarity and sentiment evaluation</button>
             <div class="content f4">
-                <p><p>We then use <a class="black link hover-red dib pointer" href="https://textblob.readthedocs.io/en/dev/"><mark>TextBlob</mark>--a simple API for natural language processing (NLP)</a>--to evaluate the cleaned Tweets' sentiment. TextBlob uses two sentiment analysis implementations, PatternAnalyzer and NaiveBayesAnalyzer. The PatternAnalyzer is based on <a class="black link hover-red dib pointer" href="https://www.clips.uantwerpen.be/pattern">the <mark>pattern</mark> library</a>. While the NaiveBayesAnalyzer is an Natural Language Toolkit classifier trained on a corpus of movie reviews.</p>
+                <p><p>We then use <a class="black link hover-red dib pointer" href="https://textblob.readthedocs.io/en/dev/"><mark>TextBlob</mark> (an API for natural language processing)</a> to evaluate the cleaned Tweets' sentiment. TextBlob uses two sentiment analysis implementations, PatternAnalyzer and NaiveBayesAnalyzer. The PatternAnalyzer is based on the <a class="black link hover-red dib pointer" href="https://www.clips.uantwerpen.be/pattern"><mark>pattern</mark> library</a>. While the NaiveBayesAnalyzer is an Natural Language Toolkit classifier trained on a corpus of movie reviews.</p>
                 <p>TextBlob returns two values when performing sentiment anaylsis on a text, polarity and and subjectivity. Polarity is a float between -1 (most negative sentiment) and 1 (most positive sentiment).
                 Polarity uses the wording of a text to determine whether it is positive or negative and returns a float between -1 and 1, with -1 being completely negative and 1 being completely positive. Subjectivity refers to how direct, and therfore how explicit, the text is, which also provides a metric for the accuracy of the polarity. The value returned is a float ranging from 0 (very objective) to 1 (very subjective).</p></p>
             </div>
