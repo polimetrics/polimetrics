@@ -61,8 +61,7 @@ def index(request):
                             plot_height=600, 
                             plot_width=950,
                             title="Average Sentiment Per Candidate for April 2019",
-                            tools=[hover, 'wheel_zoom', 'reset'],
-                            sizing_mode="scale_both")
+                            tools=[hover, 'wheel_zoom', 'reset'])
     index_bar_graph.title.text_font_size = "21px"
     index_bar_graph.xaxis.axis_label_text_font_size = "19px"
     index_bar_graph.yaxis.axis_label_text_font_size = "19px"
@@ -128,9 +127,7 @@ def candidate_detail(request, slug):
                             plot_height=400,
                             toolbar_location=None,
                             tools=['wheel_zoom', 'reset'],
-                            y_range=(-0.5, 0.5), 
-                            sizing_mode="scale_both"
-                            )
+                            y_range=(-0.5, 0.5))
 
     detail_line_graph.line(date_list, 
                             sentiment_list,  
