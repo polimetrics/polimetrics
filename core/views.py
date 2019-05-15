@@ -168,7 +168,7 @@ def candidate_detail(request, slug):
         overall_neg_percent = (overall_neg_engagement / total_engagement)
 
         time_spans = ['TODAY', 'OVERALL']
-        engagement_splits = ["Postive Tweets", "Negative Tweets"]
+        engagement_splits = ["POSITIVE Tweets", "NEGATIVE Tweets"]
 
         data = {
             'daily/overall': time_spans,
@@ -189,7 +189,7 @@ def candidate_detail(request, slug):
         hover = HoverTool(
             tooltips = [
                 ("Number of Retweets/Likes", "@engage"),
-                ("Pos/Neg Percent Split", "@counts{0%}")
+                ("POS-NEG Percent Split", "@counts{0%}")
             ],
             mode = 'vline'
         ) 
@@ -208,12 +208,13 @@ def candidate_detail(request, slug):
                                 )
 
         detail_engagement_bar_graph.x_range.range_padding = 0.1
-        detail_engagement_bar_graph.xaxis.major_label_orientation = 1
+        detail_engagement_bar_graph.xaxis.major_label_orientation = 'horizontal'
+
         detail_engagement_bar_graph.xgrid.grid_line_color = None
         detail_engagement_bar_graph.yaxis[0].formatter = NumeralTickFormatter(format="0%")
 
-        tab1 = Panel(child=detail_line_graph, title="---Twitter Sentiment trends---")
-        tab2 = Panel(child=detail_engagement_bar_graph, title="---Twitter Engagement metrics---")
+        tab1 = Panel(child=detail_line_graph, title="---Twitter Sentiment Trends---")
+        tab2 = Panel(child=detail_engagement_bar_graph, title="---Twitter Engagement Metrics---")
         tabs = Tabs(tabs=[tab1, tab2])
         script, div = components(tabs)
         context = {'script': script, 'div': div, 'candidate': candidate, 'candidates': candidates}
