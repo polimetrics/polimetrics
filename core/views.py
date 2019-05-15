@@ -128,7 +128,7 @@ def candidate_detail(request, slug):
                                 x_axis_type='datetime',
                                 y_axis_label='Sentiment',
                                 plot_width=800,
-                                plot_height=400,
+                                plot_height=500,
                                 toolbar_location=None,
                                 tools=['wheel_zoom', 'reset'],
                                 y_range=(-0.5, 0.5), 
@@ -195,10 +195,10 @@ def candidate_detail(request, slug):
         ) 
 
         detail_engagement_bar_graph = figure(x_range=FactorRange(*x), 
-                                plot_height=400,
+                                plot_height=500,
                                 plot_width=800, 
                                 title="Community Reaction on Twitter to Negative and Positive Tweets about a Candidate(Reaction = amount of Retweets + Likes)",
-                                sizing_mode="scale_both",
+                                sizing_mode="stretch_both",
                                 toolbar_location=None,
                                 y_range=(0,1),
                                 tools=[hover])
