@@ -20,7 +20,7 @@
 <div class="pr4 pl2" style="max-width: 87rem;">
         {{ div | safe }}
     </div>
-    <p class="f3 graphdetail mt0">The blue line represents each day's sentiment activity and the dotted black line represents the historical sentiment trend based on an aggregation formula. Refer to the methodology for more detail.</p>
+    <p class="f3 graphdetail mt0 ml5 mr5">The <span style="color:rgb(104, 104, 247);">blue line</span> represents each day's sentiment activity and the <span style="text-decoration: underline; text-decoration-style:dashed;">dotted black line</span> represents the historical sentiment trend based on our aggregation formula. See <a style="text-decoration: none; color: rgb(252, 153, 153);" href="{% url 'methodology' %}">methodology</a> for more information.</p>
 
 <div class="ml5 mr5 methproject mb6">     
     {% if candidate.first_name == 'beto' %}
