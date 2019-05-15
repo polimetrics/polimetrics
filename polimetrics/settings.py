@@ -119,10 +119,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/'),
-]
-
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
@@ -136,6 +132,16 @@ AWS_LOCATION = 'static'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
+# STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/'),
+]
+
+STATICFILES_LOCATION = 'static'
+MEDIAFILES_LOCATION = 'media'
+
+STATICFILES_STORAGE = 'polimetrics.storage_backend.StaticStorage'
 DEFAULT_FILE_STORAGE = 'polimetrics.storage_backend.MediaStorage'  
 AWS_DEFAULT_ACL = None
 

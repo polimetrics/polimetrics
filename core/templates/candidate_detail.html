@@ -3,18 +3,19 @@
 {% block content %}
 
 <div class="pictcontainerdetail flex mr6">
+        <div class="textboxdetail">
+                {% if candidate.first_name == 'beto' %}
+                <text class="name mt4 f-headline b">Beto O'Rourke</text>
+                {% else %}
+                <text class="name mt4 f-headline b">{{ candidate }}</text>
+                {% endif %}
+                <br>
+                <div class="f2 graphdetail"> Sentiment Analysis </div>
+                
+            </div>
     <div>
     <img src="{{ candidate.image.url }}" class="pictdetail project mr1" id="project01"></div>
-    <div class="textboxdetail">
-            {% if candidate.first_name == 'beto' %}
-            <text class="name mt4 f-headline b">Beto O'Rourke</text>
-            {% else %}
-            <text class="name mt4 f-headline b">{{ candidate }}</text>
-            {% endif %}
-            <br>
-            <div class="f2 graphdetail"> Sentiment Analysis </div>
-            
-        </div>
+    
 </div>
 <div class="pr4 pl1" style="max-width: 87rem;">
         {{ div | safe }}
