@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: 'futura-pt-light';
-    src: url('/static/fonts/futura-pt-light.ttf') format("truetype"),
+    src: url("/static/fonts/futura-pt-light.21fa37e35708.ttf") format("truetype"),
         local('futura-pt-light');
 }
 
@@ -292,7 +292,7 @@ html {
 
 #particles-js {
     max-width: 100%;
-    background-image: url("white-house2.jpeg");
+    background-image: url("white-house2.4d726e608936.jpeg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
