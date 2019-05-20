@@ -131,7 +131,7 @@ def candidate_detail(request, slug):
                                 plot_height=500,
                                 toolbar_location=None,
                                 tools=['wheel_zoom', 'reset'],
-                                y_range=(-0.5, 0.5), 
+                                y_range=(-0.55, 0.55), 
                                 sizing_mode="stretch_both"
                                 )
 
