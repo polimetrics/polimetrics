@@ -50,15 +50,16 @@ class Command(BaseCommand):
 
         from_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc) - timedelta(days=1)
         if options['overall']:
-            tweet = Tweet.objects.earliest('created_at')
-            from_dt = datetime(tweet.created_at.year, tweet.created_at.month, tweet.created_at.day, tzinfo=timezone.utc)
+            tweet = Tweet.objects.earliest('created_at') 
+            from_dt = datetime(tweet.created_at.year, tweet.created_at.month, tweet.created_at.day, tzinfo=timezone.utc) # 6-22-2019 00:26:57 UTC
 
-        to_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc)
+        to_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc) # Today's date 8-17-2019
 
         for candidate in Candidate.objects.all():
             
             candidate_tweets = self.get_unique_tweets(candidate, from_dt, to_dt)
-
+            print("**************TWEEEEEEEEEEEEET COUNT:\n\n", candidate_tweets.count())
+            break
             positive_engagement = 0
             negative_engagement = 0
 
