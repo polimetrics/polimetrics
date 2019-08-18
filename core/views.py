@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, render_to_response
-from core.models import Candidate, CandidateMeanSentiment
+from core.models import Candidate, CandidateMeanSentiment, Tweet
 from math import pi
 from django.db.models import Min, Max
 from datetime import timedelta, datetime, timezone
@@ -18,15 +18,15 @@ def index(request):
     candidates = Candidate.objects.all()
     candidate_accordian_list = []
     for candidate in candidates:
-        min_from_date_time = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
+        tweets = Tweet.objects.filter(candidate = candidate)
+        tweet_from_dt = Tweet.objects.filter(candidate = candidate).aggregate(Min('created_at'))
+        from_dt = datetime(tweet_from_dt['created_at__min'].year, tweet_from_dt['created_at__min'].month, tweet_from_dt['created_at__min'].day, tzinfo=timezone.utc)
         max_to_date_time = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
-
         total_mean_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
-            from_date_time = min_from_date_time['from_date_time__min'],
+            from_date_time = from_dt,
             to_date_time = max_to_date_time['to_date_time__max'],
         )
-
         if total_mean_sentiment:
             if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
                 candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]

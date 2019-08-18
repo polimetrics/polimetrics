@@ -50,7 +50,7 @@ class Command(BaseCommand):
 
         from_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc) - timedelta(days=1)
         if options['overall']:
-            tweet = Tweet.objects.earliest('created_at') 
+            tweet = Tweet.objects.earliest('created_at')
             from_dt = datetime(tweet.created_at.year, tweet.created_at.month, tweet.created_at.day, tzinfo=timezone.utc) # 6-22-2019 00:26:57 UTC
 
         to_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc) # Today's date 8-17-2019
@@ -58,8 +58,6 @@ class Command(BaseCommand):
         for candidate in Candidate.objects.all():
             
             candidate_tweets = self.get_unique_tweets(candidate, from_dt, to_dt)
-            print("\n\n**************TWEEEEEEEEEEEEET COUNT:", candidate_tweets.count())
-            # break
             positive_engagement = 0
             negative_engagement = 0
 
@@ -77,17 +75,6 @@ class Command(BaseCommand):
                     negative_tweets.append(tweet)
                     negative_engagement += engagement
 
-            print(candidate)
-            print(self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement))
-            print(positive_engagement + negative_engagement)
-            print(from_dt)
-            print(to_dt)
-            print(negative_engagement)
-            print(self.calculate_weighted_sentiments(negative_tweets, negative_engagement))
-            print(positive_engagement)
-            print(self.calculate_weighted_sentiments(positive_tweets, positive_engagement))
-            print(len(negative_tweets))
-            print(len(positive_tweets))
             CandidateMeanSentiment.objects.create(
                 candidate = candidate,
                 mean_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement),
