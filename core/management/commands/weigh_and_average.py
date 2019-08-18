@@ -88,16 +88,16 @@ class Command(BaseCommand):
             print(self.calculate_weighted_sentiments(positive_tweets, positive_engagement))
             print(len(negative_tweets))
             print(len(positive_tweets))
-            # CandidateMeanSentiment.objects.create(
-            #     candidate = candidate,
-            #     mean_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement),
-            #     total_engagement = positive_engagement + negative_engagement,
-            #     from_date_time = from_dt,
-            #     to_date_time = to_dt,
-            #     negative_engagement = negative_engagement,
-            #     negative_mean_sentiment = self.calculate_weighted_sentiments(negative_tweets, negative_engagement),
-            #     positive_engagement = positive_engagement,
-            #     positive_mean_sentiment = self.calculate_weighted_sentiments(positive_tweets, positive_engagement),
-            #     num_negative_tweets = len(negative_tweets),
-            #     num_positive_tweets = len(positive_tweets)
-            # )
+            CandidateMeanSentiment.objects.create(
+                candidate = candidate,
+                mean_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement),
+                total_engagement = positive_engagement + negative_engagement,
+                from_date_time = from_dt,
+                to_date_time = to_dt,
+                negative_engagement = negative_engagement,
+                negative_mean_sentiment = self.calculate_weighted_sentiments(negative_tweets, negative_engagement),
+                positive_engagement = positive_engagement,
+                positive_mean_sentiment = self.calculate_weighted_sentiments(positive_tweets, positive_engagement),
+                num_negative_tweets = len(negative_tweets),
+                num_positive_tweets = len(positive_tweets)
+            )
