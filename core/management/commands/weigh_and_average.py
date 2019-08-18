@@ -58,7 +58,7 @@ class Command(BaseCommand):
         for candidate in Candidate.objects.all():
             
             candidate_tweets = self.get_unique_tweets(candidate, from_dt, to_dt)
-            print("**************TWEEEEEEEEEEEEET COUNT:\n\n", candidate_tweets.count())
+            print("\n\n**************TWEEEEEEEEEEEEET COUNT:", candidate_tweets.count())
             # break
             positive_engagement = 0
             negative_engagement = 0
@@ -79,6 +79,15 @@ class Command(BaseCommand):
 
             print(candidate)
             print(self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement))
+            print(positive_engagement + negative_engagement)
+            print(from_dt)
+            print(to_dt)
+            print(negative_engagement)
+            print(self.calculate_weighted_sentiments(negative_tweets, negative_engagement))
+            print(positive_engagement)
+            print(self.calculate_weighted_sentiments(positive_tweets, positive_engagement))
+            print(len(negative_tweets))
+            print(len(positive_tweets))
             # CandidateMeanSentiment.objects.create(
             #     candidate = candidate,
             #     mean_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement),
