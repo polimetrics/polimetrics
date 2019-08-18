@@ -59,7 +59,7 @@ class Command(BaseCommand):
             
             candidate_tweets = self.get_unique_tweets(candidate, from_dt, to_dt)
             print("**************TWEEEEEEEEEEEEET COUNT:\n\n", candidate_tweets.count())
-            break
+            # break
             positive_engagement = 0
             negative_engagement = 0
 
@@ -77,16 +77,18 @@ class Command(BaseCommand):
                     negative_tweets.append(tweet)
                     negative_engagement += engagement
 
-            CandidateMeanSentiment.objects.create(
-                candidate = candidate,
-                mean_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement),
-                total_engagement = positive_engagement + negative_engagement,
-                from_date_time = from_dt,
-                to_date_time = to_dt,
-                negative_engagement = negative_engagement,
-                negative_mean_sentiment = self.calculate_weighted_sentiments(negative_tweets, negative_engagement),
-                positive_engagement = positive_engagement,
-                positive_mean_sentiment = self.calculate_weighted_sentiments(positive_tweets, positive_engagement),
-                num_negative_tweets = len(negative_tweets),
-                num_positive_tweets = len(positive_tweets)
-            )
+            print(candidate)
+            print(self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement))
+            # CandidateMeanSentiment.objects.create(
+            #     candidate = candidate,
+            #     mean_sentiment = self.calculate_weighted_sentiments(positive_tweets + negative_tweets, positive_engagement + negative_engagement),
+            #     total_engagement = positive_engagement + negative_engagement,
+            #     from_date_time = from_dt,
+            #     to_date_time = to_dt,
+            #     negative_engagement = negative_engagement,
+            #     negative_mean_sentiment = self.calculate_weighted_sentiments(negative_tweets, negative_engagement),
+            #     positive_engagement = positive_engagement,
+            #     positive_mean_sentiment = self.calculate_weighted_sentiments(positive_tweets, positive_engagement),
+            #     num_negative_tweets = len(negative_tweets),
+            #     num_positive_tweets = len(positive_tweets)
+            # )
