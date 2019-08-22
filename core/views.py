@@ -18,7 +18,6 @@ def index(request):
     candidates = Candidate.objects.all()
     candidate_accordian_list = []
     for candidate in candidates:
-        tweets = Tweet.objects.filter(candidate = candidate)
         tweet_from_dt = Tweet.objects.filter(candidate = candidate).aggregate(Min('created_at'))
         from_dt = datetime(tweet_from_dt['created_at__min'].year, tweet_from_dt['created_at__min'].month, tweet_from_dt['created_at__min'].day, tzinfo=timezone.utc)
         max_to_date_time = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
