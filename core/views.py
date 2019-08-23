@@ -18,14 +18,19 @@ def index(request):
     candidates = Candidate.objects.all()
     candidate_accordian_list = []
     for candidate in candidates:
-        tweet_from_dt = Tweet.objects.filter(candidate = candidate).aggregate(Min('created_at'))
-        from_dt = datetime(tweet_from_dt['created_at__min'].year, tweet_from_dt['created_at__min'].month, tweet_from_dt['created_at__min'].day, tzinfo=timezone.utc)
+        # min_from_date_time = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Min('from_date_time'))
+
+        # tweet_from_dt = Tweet.objects.filter(candidate = candidate).aggregate(Min('created_at'))
+        # from_dt = datetime(tweet_from_dt['created_at__min'].year, tweet_from_dt['created_at__min'].month, tweet_from_dt['created_at__min'].day, tzinfo=timezone.utc)
+        from_dt = datetime(2019, 7, 15)
         max_to_date_time = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
         total_mean_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
-            from_date_time = from_dt,
+            from_date_time__gte = from_dt,
             to_date_time = max_to_date_time['to_date_time__max'],
         )
+        print('TOTOL MEAN', total_mean_sentiment)
+        print('MAX DATE TIME***********', max_to_date_time['to_date_time__max'])
         if total_mean_sentiment:
             if total_mean_sentiment[0].mean_sentiment > 0.009 or total_mean_sentiment[0].mean_sentiment < -.009:
                 candidates_sentiments_dict[str(candidate)] = [total_mean_sentiment[0].mean_sentiment]

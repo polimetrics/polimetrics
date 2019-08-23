@@ -50,6 +50,7 @@ class Command(BaseCommand):
 
         from_dt = datetime(options['date'].year, options['date'].month, options['date'].day, tzinfo=timezone.utc) - timedelta(days=1)
         if options['overall']:
+          # make 'overall' find last thirty days
             tweet = Tweet.objects.earliest('created_at')
             from_dt = datetime(tweet.created_at.year, tweet.created_at.month, tweet.created_at.day, tzinfo=timezone.utc) # 6-22-2019 00:26:57 UTC
 
