@@ -22,7 +22,9 @@ def index(request):
 
         # tweet_from_dt = Tweet.objects.filter(candidate = candidate).aggregate(Min('created_at'))
         # from_dt = datetime(tweet_from_dt['created_at__min'].year, tweet_from_dt['created_at__min'].month, tweet_from_dt['created_at__min'].day, tzinfo=timezone.utc)
-        from_dt = datetime(2019, 7, 15)
+
+        #### HARD CODED from_dt ####
+        from_dt = datetime(2019, 8, 1)
         max_to_date_time = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
         total_mean_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
