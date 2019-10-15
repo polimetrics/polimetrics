@@ -24,7 +24,7 @@ def index(request):
         # from_dt = datetime(tweet_from_dt['created_at__min'].year, tweet_from_dt['created_at__min'].month, tweet_from_dt['created_at__min'].day, tzinfo=timezone.utc)
 
         #### HARD CODED from_dt ####
-        from_dt = datetime(2019, 9, 1)
+        from_dt = datetime(2019, 9, 20)
         max_to_date_time = CandidateMeanSentiment.objects.filter(candidate = candidate).aggregate(Max('to_date_time'))
         total_mean_sentiment = CandidateMeanSentiment.objects.filter(
             candidate = candidate,
