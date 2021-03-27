@@ -13,16 +13,16 @@
   <h3 align="center">polimetrics.io</h3>
 
   <p align="center">
-    Personal/Project website hosted on Heroku.
+    : : : Website currently under maintenance : : :
     <br />
-    <a href="http://www.polimetrics.io/">View Demo</a>
+    <a href="">View Demo</a>
     ·
     <a href="https://github.com/polimetrics/polimetrics">Report Bug</a>
   </p>
 </p>
 
 # Polimetrics
-Polimetrics is a web application that performs sentiment analysis on Tweets to generate opinion polls for 2020 presidential primary candidates.
+Polimetrics is a web application that performs sentiment analysis on Tweets to generate opinion polls for presidential candidates.
 
 ## Built With
 - [Django](https://www.djangoproject.com/) - Web framework
